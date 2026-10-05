@@ -14,3 +14,14 @@ h2, .subtitulo { font-size: 24px; font-weight: 500; }
 h3, .encabezado { font-size: 20px; font-weight: 500; }
 p, .texto-normal { font-size: 16px; font-weight: 400; }
 .texto-secundario { font-size: 14px; font-weight: 400; }
+.btn-primary {
+    background-color: var(--color-botones);
+    border-color: var(--color-botones);
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #c0506e; 
+    border-color: #c0506e;
+}
