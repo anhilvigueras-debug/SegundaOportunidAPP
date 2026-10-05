@@ -1,0 +1,251 @@
+/* =========================================
+   SegundaOportunidAPP
+   Footer común
+   Bootstrap 5 + Guía de estilo
+   ========================================= */
+
+
+/* =========================================
+   VARIABLES DE COLOR
+   ========================================= */
+
+:root {
+
+    /* Botones y acciones */
+    --color-accion: #D96281;
+
+    /* Menús interactivos */
+    --color-menu: #499EBF;
+
+    /* Fondo general */
+    --color-fondo: #F2E8D5;
+
+    /* Iconografía */
+    --color-iconos: #A4A66A;
+
+    /* Bordes */
+    --color-bordes: #6ACED9;
+
+}
+
+
+/* =========================================
+   ESTILOS GENERALES
+   ========================================= */
+
+body {
+
+    margin: 0;
+
+    font-family: 'Roboto', sans-serif;
+
+    background-color: var(--color-fondo);
+
+    color: #212529;
+
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.footer {
+
+    width: 100%;
+
+    background-color: var(--color-menu);
+
+    color: #FFFFFF;
+
+    font-family: 'Roboto', sans-serif;
+
+    /* Detalle con el color de acción */
+    border-top: 6px solid var(--color-accion);
+
+}
+
+
+/* =========================================
+   NOMBRE DE LA APLICACIÓN
+   ========================================= */
+
+.footer .footer-logo {
+
+    margin: 0;
+
+    color: #FFFFFF;
+
+    font-size: 24px;
+
+    font-weight: 500;
+
+}
+
+
+/* =========================================
+   DESCRIPCIÓN
+   ========================================= */
+
+.footer .footer-descripcion {
+
+    margin: 0;
+
+    max-width: 360px;
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   TÍTULOS DE LAS SECCIONES
+   ========================================= */
+
+.footer .footer-titulo {
+
+    margin: 0;
+
+    color: #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+}
+
+
+/* =========================================
+   ENLACES
+   ========================================= */
+
+.footer .footer-link {
+
+    display: block;
+
+    width: fit-content;
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    text-decoration: none;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+/* -------------------------
+   EFECTO HOVER
+   ------------------------- */
+
+.footer .footer-link:hover {
+
+    color: #FFFFFF;
+
+    opacity: 0.8;
+
+    transform: translateX(4px);
+
+}
+
+
+/* -------------------------
+   NAVEGACIÓN CON TECLADO
+   ------------------------- */
+
+.footer .footer-link:focus {
+
+    color: #FFFFFF;
+
+    text-decoration: underline;
+
+    outline: none;
+
+}
+
+
+/* =========================================
+   COPYRIGHT
+   ========================================= */
+
+.footer-copyright {
+
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+
+}
+
+
+.footer-copyright p {
+
+    margin: 0;
+
+    color: #FFFFFF;
+
+    font-size: 12px;
+
+    font-weight: 400;
+
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+   ========================================= */
+
+@media (max-width: 991.98px) {
+
+    .footer .footer-logo {
+
+        font-size: 24px;
+
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE - CELULAR
+   ========================================= */
+
+@media (max-width: 576px) {
+
+    .footer .footer-logo {
+
+        font-size: 22px;
+
+    }
+
+
+    .footer .footer-descripcion {
+
+        font-size: 14px;
+
+    }
+
+
+    .footer .footer-titulo {
+
+        font-size: 16px;
+
+    }
+
+
+    .footer .footer-link {
+
+        font-size: 14px;
+
+    }
+
+}
