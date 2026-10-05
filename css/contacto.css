@@ -1,0 +1,91 @@
+:root {
+    --color-accion: #D96281;
+    --color-menu: #499EBF;
+    --color-fondo: #F2E8D5;
+    --color-iconos: #A4A66A;
+    --color-bordes: #6ACED9;
+}
+/*GENERAL*/
+body {
+    margin: 0;
+    background-color: var(--color-fondo);
+    font-family: 'Roboto', sans-serif;
+    color: #212529;
+}
+/*NAVBAR*/
+.navbar-principal {
+    background-color: var(--color-menu);
+}
+.navbar-principal .navbar-brand {
+    font-size: 20px;
+}
+.navbar-principal .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+}
+/*ENCABEZADO*/
+.titulo-contacto {
+    color: var(--color-accion);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.texto-secundario {
+    color: #5f6368;
+    font-size: 16px;
+}
+/*FORMULARIO*/
+.formulario-contacto {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-bordes);
+    border-radius: 8px;
+}
+.form-label {
+    font-size: 16px;
+    font-weight: 500;
+}
+.form-control {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    border-color: var(--color-bordes);
+}
+.form-control:focus {
+    border-color: var(--color-menu);
+    box-shadow:
+        0 0 0 0.2rem rgba(73, 158, 191, 0.20);
+}
+/*BOTÓN*/
+.boton-enviar {
+    padding: 8px 24px;
+
+    background-color: var(--color-accion);
+    border-color: var(--color-accion);
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.boton-enviar:hover,
+.boton-enviar:focus {
+    background-color: #C45170;
+    border-color: #C45170;
+
+    color: #FFFFFF;
+}
+
+
+/*RESPONSIVE*/
+
+@media (max-width: 576px) {
+
+    .titulo-contacto {
+        font-size: 28px;
+    }
+
+    .boton-enviar {
+        width: 100%;
+    }
+
+}
