@@ -96,7 +96,7 @@
                             <span class="badge text-bg-info">Donación</span>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-primary btn-sm">Ver detalle</a>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalLibros">Ver detalle</button>
                         </div>
                     </div>
                 </div>
@@ -153,6 +153,26 @@
                         <li>Teléfono: <a href="tel:7721234567">772 123 4567</a></li>
                         <li>Correo: <a href="mailto:alexander@gmail.com">alexander@gmail.com</a></li>
                     </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalLibros" tabindex="-1" aria-labelledby="tituloModalLibros" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloModalLibros">Colección de libros</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="img/libros2.jpg" class="img-fluid rounded mb-3" alt="Colección de libros">
+                    <p>10 libros de literatura variada.</p>
+                    <span class="badge text-bg-info">Donación</span>
+                    <p class="fw-bold mt-2 mb-0">Gratis</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
