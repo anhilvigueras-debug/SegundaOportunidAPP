@@ -1,0 +1,8 @@
+:root {
+    --color-botones: #D96281;
+    --color-menu: #499BBF;
+    --color-fondo: #F2E8D5;
+    --color-iconos: #A4AA6A;
+    --color-bordes: #6ACEE9;
+}
+body { background-color: var(--color-fondo); }
