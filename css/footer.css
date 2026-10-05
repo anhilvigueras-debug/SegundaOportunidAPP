@@ -1,14 +1,5 @@
-/* =========================================
-   SegundaOportunidAPP
-   Footer común
-   Bootstrap 5 + Guía de estilo
-   ========================================= */
 
-
-/* =========================================
-   VARIABLES DE COLOR
-   ========================================= */
-
+/*VARIABLES DE COLOR*/
 :root {
 
     /* Botones y acciones */
@@ -27,12 +18,7 @@
     --color-bordes: #6ACED9;
 
 }
-
-
-/* =========================================
-   ESTILOS GENERALES
-   ========================================= */
-
+/*ESTILOS GENERALES*/
 body {
 
     margin: 0;
@@ -44,12 +30,7 @@ body {
     color: #212529;
 
 }
-
-
-/* =========================================
-   FOOTER
-   ========================================= */
-
+/*FOOTER*/
 .footer {
 
     width: 100%;
@@ -66,9 +47,7 @@ body {
 }
 
 
-/* =========================================
-   NOMBRE DE LA APLICACIÓN
-   ========================================= */
+/*NOMBRE DE LA APLICACIÓN*/
 
 .footer .footer-logo {
 
@@ -81,12 +60,7 @@ body {
     font-weight: 500;
 
 }
-
-
-/* =========================================
-   DESCRIPCIÓN
-   ========================================= */
-
+/*DESCRIPCIÓN*/
 .footer .footer-descripcion {
 
     margin: 0;
@@ -104,9 +78,7 @@ body {
 }
 
 
-/* =========================================
-   TÍTULOS DE LAS SECCIONES
-   ========================================= */
+/*TÍTULOS DE LAS SECCIONES*/
 
 .footer .footer-titulo {
 
@@ -121,9 +93,7 @@ body {
 }
 
 
-/* =========================================
-   ENLACES
-   ========================================= */
+/*ENLACES*/
 
 .footer .footer-link {
 
@@ -146,9 +116,7 @@ body {
 }
 
 
-/* -------------------------
-   EFECTO HOVER
-   ------------------------- */
+/*EFECTO HOVER*/
 
 .footer .footer-link:hover {
 
@@ -161,9 +129,7 @@ body {
 }
 
 
-/* -------------------------
-   NAVEGACIÓN CON TECLADO
-   ------------------------- */
+/*NAVEGACIÓN CON TECLADO*/
 
 .footer .footer-link:focus {
 
@@ -174,18 +140,12 @@ body {
     outline: none;
 
 }
-
-
-/* =========================================
-   COPYRIGHT
-   ========================================= */
-
+/*COPYRIGHT*/
 .footer-copyright {
 
     border-top: 1px solid rgba(255, 255, 255, 0.25);
 
 }
-
 
 .footer-copyright p {
 
@@ -200,9 +160,7 @@ body {
 }
 
 
-/* =========================================
-   RESPONSIVE - TABLET
-   ========================================= */
+/*RESPONSIVE - TABLET*/
 
 @media (max-width: 991.98px) {
 
@@ -215,12 +173,8 @@ body {
 }
 
 
-/* =========================================
-   RESPONSIVE - CELULAR
-   ========================================= */
-
+/*RESPONSIVE - CELULAR*/
 @media (max-width: 576px) {
-
     .footer .footer-logo {
 
         font-size: 22px;
