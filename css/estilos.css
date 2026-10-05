@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+:root {
+    --color-botones: #D96281;
+    --color-menu: #499BBF;
+    --color-fondo: #F2E8D5;
+    --color-iconos: #A4AA6A;
+    --color-bordes: #6ACEE9;
+}
+body { background-color: var(--color-fondo);
+font-family: 'Roboto', sans-serif;
+ }
+h1, .titulo-principal { font-size: 32px; font-weight: 700; }
+h2, .subtitulo { font-size: 24px; font-weight: 500; }
+h3, .encabezado { font-size: 20px; font-weight: 500; }
+p, .texto-normal { font-size: 16px; font-weight: 400; }
+.texto-secundario { font-size: 14px; font-weight: 400; }
+.btn-primary {
+    background-color: var(--color-botones);
+    border-color: var(--color-botones);
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #c0506e; 
+    border-color: #c0506e;
+}
