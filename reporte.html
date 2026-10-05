@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Ayuda</title>
+</head>
+
+<body>    
+    <h1>Formulario de Ayuda y Reportes</h1>
+    <p>Completa los siguientes datos:</p>
+
+    <form>
+        <p>
+            <label>Nombre:</label><br>
+            <input type="text" name="nombre" placeholder="Escribe tu nombre">
+        </p>
+
+        <p>
+            <label>Correo:</label><br>
+            <input type="text" name="correo" placeholder="Escribe tu correo">
+        </p>
+
+        <p>
+            <label>Tipo de reporte:</label><br>
+            <select name="asunto">
+                <option>Fallo en la página</option>
+                <option>Duda sobre una donación</option>
+                <option>Otro motivo</option>
+            </select>
+        </p>
+
+        <p>
+            <label>Detalle del problema:</label><br>
+            <textarea name="mensaje" rows="4" cols="30" placeholder="Explica qué sucedió"></textarea>
+        </p>
+
+        <button type="submit">Enviar Reporte</button>
+    </form>
+
+</body>
+</html>
