@@ -1,8 +1,3 @@
-/* =========================================
-   SegundaOportunidAPP
-   RF10 - Validaciones de formularios
-   ========================================= */
-
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -12,29 +7,14 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     const formularios =
         document.querySelectorAll(".form-validado");
-
-
-    /*
-     * Se configura cada formulario encontrado.
-     */
+    /* Se configura cada formulario encontrado.*/
     formularios.forEach(function (formulario) {
-
         formulario.addEventListener(
             "submit",
             function (event) {
-
-                /*
-                 * Evita el envío real del formulario.
-                 *
-                 * Por el momento la interfaz es estática.
-                 */
+                /*Evita el envío real del formulario. Por el momento la interfaz es estática.*/
                 event.preventDefault();
-
-
-                /* =====================================
-                   ELEMENTOS DEL ALERT
-                   ===================================== */
-
+                /*ELEMENTOS DEL ALERT*/
                 const alerta =
                     formulario.querySelector(
                         ".alerta-validacion"
@@ -49,63 +29,30 @@ document.addEventListener("DOMContentLoaded", function () {
                     formulario.querySelector(
                         ".lista-campos"
                     );
-
-
-                /* =====================================
-                   CAMPOS OBLIGATORIOS
-                   ===================================== */
-
+                /*CAMPOS OBLIGATORIOS*/
                 const campos =
                     formulario.querySelectorAll(
                         "input[required], " +
                         "textarea[required], " +
                         "select[required]"
                     );
-
-
-                /*
-                 * Aquí guardaremos los nombres
-                 * de los campos incorrectos.
-                 */
+                /*Aquí guardaremos los nombres de los campos incorrectos.*/
                 const camposIncorrectos = [];
-
-
-                /* =====================================
-                   VALIDAR CAMPOS
-                   ===================================== */
-
+                /*VALIDAR CAMPOS*/
                 campos.forEach(function (campo) {
-
-                    /*
-                     * checkValidity() revisa las reglas
-                     * HTML5 del campo:
-                     *
-                     * required
-                     * type
-                     * pattern
-                     * minlength
-                     * maxlength
-                     */
+                    /*checkValidity() revisa las reglas HTML5 del campo: required, type, pattern, minlength, maxlength                     */
                     if (!campo.checkValidity()) {
-
-                        /*
-                         * Obtiene un nombre amigable
-                         * para mostrar en la alerta.
-                         */
                         const nombreCampo =
                             campo.dataset.nombre ||
                             campo.name ||
                             campo.id;
-
 
                         camposIncorrectos.push(
                             nombreCampo
                         );
 
 
-                        /*
-                         * Bootstrap mostrará visualmente
-                         * que el campo es incorrecto.
+                        /*Bootstrap mostrará visualmente que el campo es incorrecto.
                          */
                         campo.classList.add(
                             "is-invalid"
@@ -117,9 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     } else {
 
-                        /*
-                         * El campo es correcto.
-                         */
+                        /*El campo es correcto.*/
                         campo.classList.remove(
                             "is-invalid"
                         );
@@ -131,81 +76,47 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
                 });
-
-
-                /* =====================================
-                   SI HAY CAMPOS INCORRECTOS
-                   ===================================== */
-
+                /*SI HAY CAMPOS INCORRECTOS*/
                 if (camposIncorrectos.length > 0) {
 
-                    /*
-                     * Limpiar la lista anterior.
-                     */
+                    /*Limpiar la lista anterior.*/
                     listaCampos.innerHTML = "";
-
-
-                    /*
-                     * Crear un <li> por cada campo
-                     * pendiente o incorrecto.
-                     */
+                    /*Crear un <li> por cada campo pendiente o incorrecto.*/
                     camposIncorrectos.forEach(
                         function (nombre) {
-
                             const elemento =
                                 document.createElement(
                                     "li"
                                 );
-
                             elemento.textContent =
                                 nombre;
-
                             listaCampos.appendChild(
                                 elemento
                             );
 
                         }
                     );
-
-
-                    /*
-                     * Configurar Bootstrap Alert
-                     * como alerta de error.
-                     */
+                    /*Configurar Bootstrap Alert como alerta de error. */
                     alerta.classList.remove(
                         "d-none",
                         "alert-success"
                     );
-
                     alerta.classList.add(
                         "alert-danger"
                     );
-
-
                     mensajeAlerta.textContent =
                         "Completa correctamente los siguientes campos:";
-
-
-                    /*
-                     * Llevar al usuario hacia
-                     * la alerta.
-                     */
+                    /*Llevar al usuario hacia la alerta.*/
                     alerta.scrollIntoView({
                         behavior: "smooth",
                         block: "center"
                     });
-
-
-                    /*
-                     * Detener aquí.
-                     */
+                    /*Detener aquí.*/
                     return;
                 }
 
 
-                /* =====================================
-                   FORMULARIO CORRECTO
-                   ===================================== */
+                /*FORMULARIO CORRECTO*/
 
                 listaCampos.innerHTML = "";
 
@@ -224,10 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Formulario completado correctamente.";
 
 
-                /*
-                 * Llevar al usuario hacia
-                 * el mensaje de confirmación.
-                 */
+                /*Llevar al usuario hacia el mensaje de confirmación.*/
                 alerta.scrollIntoView({
                     behavior: "smooth",
                     block: "center"
@@ -235,28 +143,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
         );
-
-
-        /* =========================================
-           QUITAR ERROR AL CORREGIR EL CAMPO
-           ========================================= */
+        /*QUITAR ERROR AL CORREGIR EL CAMPO */
 
         const camposFormulario =
             formulario.querySelectorAll(
                 "input, textarea, select"
             );
-
-
         camposFormulario.forEach(function (campo) {
 
             campo.addEventListener(
                 "input",
                 function () {
 
-                    /*
-                     * Si el usuario corrige el campo,
-                     * actualizamos su estado visual.
-                     */
+                    /*Si el usuario corrige el campo, actualizamos su estado visual.*/
                     if (campo.checkValidity()) {
 
                         campo.classList.remove(
