@@ -33,321 +33,189 @@
 
 <body>
 
-    <!-- =========================================
-         CONTENIDO PRINCIPAL
-         RF4 - CENTRO DE MENSAJES
-         ========================================= -->
+    <!--CONTENIDO PRINCIPAL RF4 - CENTRO DE MENSAJES-->
 
     <main class="container py-5">
-
-        <!-- ENCABEZADO -->
-
         <div class="mb-4">
-
             <h1>
                 Centro de mensajes
             </h1>
-
             <p class="descripcion-pagina mb-0">
                 Consulta tus conversaciones con compradores,
                 vendedores y donadores relacionadas a tus publicaciones.
             </p>
-
         </div>
-
-
-        <!-- =====================================
-             CENTRO DE MENSAJES
-             ===================================== -->
-
         <div class="row g-4">
-
-
-            <!-- =================================
-                 LISTA DE CONVERSACIONES
-                 ================================= -->
-
+            <!--LISTA DE CONVERSACIONES-->
             <div class="col-12 col-lg-4">
-
                 <section class="card conversaciones-card h-100">
-
                     <div class="card-body p-0">
-
                         <div class="encabezado-conversaciones p-3">
-
                             <h2 class="mb-0">
                                 Conversaciones
                             </h2>
-
                         </div>
-
-
                         <div class="list-group list-group-flush">
-
-
-                            <!-- JUAN - COMPRADOR -->
-
                             <button
                                 type="button"
                                 class="list-group-item list-group-item-action conversacion activa p-3"
                             >
-
                                 <div
                                     class="d-flex justify-content-between align-items-start gap-2"
                                 >
-
                                     <div>
-
                                         <h3 class="nombre-usuario mb-1">
                                             Juan Pérez
                                         </h3>
-
                                         <span class="badge badge-comprador">
                                             Comprador
                                         </span>
-
                                     </div>
-
                                     <small class="hora">
                                         10:32
                                     </small>
-
                                 </div>
-
                                 <p class="publicacion mb-1 mt-2">
                                     Bicicleta usada
                                 </p>
-
                                 <p class="ultimo-mensaje mb-0">
                                     ¿Dónde podemos acordar la entrega?
                                 </p>
-
                             </button>
-
-
-                            <!-- MARÍA - VENDEDORA -->
-
+                            
                             <button
                                 type="button"
-                                class="list-group-item list-group-item-action conversacion p-3"
-                            >
-
+                                class="list-group-item list-group-item-action conversacion p-3">
                                 <div
                                     class="d-flex justify-content-between align-items-start gap-2"
                                 >
-
                                     <div>
-
                                         <h3 class="nombre-usuario mb-1">
                                             María López
                                         </h3>
-
                                         <span class="badge badge-vendedora">
                                             Vendedora
                                         </span>
-
                                     </div>
-
                                     <small class="hora">
                                         Ayer
                                     </small>
-
                                 </div>
-
                                 <p class="publicacion mb-1 mt-2">
                                     Laptop
                                 </p>
-
                                 <p class="ultimo-mensaje mb-0">
                                     La laptop todavía está disponible.
                                 </p>
-
                             </button>
-
-
-                            <!-- CARLOS - DONADOR -->
 
                             <button
                                 type="button"
                                 class="list-group-item list-group-item-action conversacion p-3"
                             >
-
                                 <div
                                     class="d-flex justify-content-between align-items-start gap-2"
                                 >
-
                                     <div>
-
                                         <h3 class="nombre-usuario mb-1">
                                             Carlos Ruiz
                                         </h3>
-
                                         <span class="badge badge-donador">
                                             Donador
                                         </span>
-
                                     </div>
-
                                     <small class="hora">
                                         Lun.
                                     </small>
-
                                 </div>
-
                                 <p class="publicacion mb-1 mt-2">
                                     Ropa en buen estado
                                 </p>
-
                                 <p class="ultimo-mensaje mb-0">
                                     Puedo entregar la ropa esta semana.
                                 </p>
-
                             </button>
-
                         </div>
-
                     </div>
-
                 </section>
-
             </div>
-
-
-            <!-- =================================
-                 CHAT
-                 ================================= -->
-
+            <!--CHAT-->
             <div class="col-12 col-lg-8">
-
                 <section class="card chat-card">
-
-                    <!-- ENCABEZADO DEL CHAT -->
-
                     <div class="card-header chat-header p-3 p-md-4">
-
                         <div
                             class="d-flex flex-column flex-sm-row
                                    justify-content-between
                                    align-items-sm-center gap-2"
                         >
-
                             <div>
-
                                 <h2 class="mb-1">
                                     Juan Pérez
                                 </h2>
-
                                 <span class="badge badge-comprador">
                                     Comprador
                                 </span>
-
                             </div>
-
                             <div class="text-sm-end">
-
                                 <p class="chat-publicacion-label mb-0">
                                     Publicación relacionada
                                 </p>
-
                                 <p class="chat-publicacion mb-0">
                                     Bicicleta usada
                                 </p>
-
                             </div>
-
                         </div>
-
                     </div>
-
-
-                    <!-- HISTORIAL DE MENSAJES -->
-
                     <div class="card-body area-mensajes p-3 p-md-4">
-
                         <!-- MENSAJE RECIBIDO -->
-
                         <div class="mensaje-recibido mb-3">
-
                             <p class="mensaje-autor mb-1">
                                 Juan
                             </p>
-
                             <div class="burbuja burbuja-recibida">
-
                                 Hola, ¿todavía está disponible
                                 la bicicleta?
-
                             </div>
-
                             <small class="mensaje-hora">
                                 10:25
                             </small>
-
                         </div>
-
-
                         <!-- MENSAJE ENVIADO -->
-
                         <div class="mensaje-enviado mb-3">
-
                             <p class="mensaje-autor mb-1">
                                 Tú
                             </p>
-
                             <div class="burbuja burbuja-enviada">
-
                                 Sí, todavía está disponible.
-
                             </div>
-
                             <small class="mensaje-hora">
                                 10:28
                             </small>
-
                         </div>
-
-
                         <!-- MENSAJE RECIBIDO -->
-
                         <div class="mensaje-recibido mb-3">
-
                             <p class="mensaje-autor mb-1">
                                 Juan
                             </p>
-
                             <div class="burbuja burbuja-recibida">
-
                                 Perfecto. ¿Dónde podemos acordar
                                 la entrega?
-
                             </div>
-
                             <small class="mensaje-hora">
                                 10:32
                             </small>
-
                         </div>
-
                     </div>
-
-
-                    <!-- =================================
-                         CUADRO PARA ESCRIBIR
-                         ================================= -->
-
+                    <!--CUADRO PARA ESCRIBIR-->
                     <div class="card-footer chat-footer p-3 p-md-4">
-
                         <form>
-
                             <label
                                 for="mensaje"
                                 class="form-label"
                             >
                                 Escribe un mensaje
                             </label>
-
                             <div class="d-flex flex-column flex-md-row gap-2">
-
                                 <textarea
                                     id="mensaje"
                                     name="mensaje"
@@ -357,128 +225,83 @@
                                     placeholder="Escribe tu mensaje aquí..."
                                     required
                                 ></textarea>
-
                                 <button
                                     type="submit"
                                     class="btn send-button text-white px-4"
                                 >
                                     Enviar
                                 </button>
-
                             </div>
-
                             <div class="form-text">
                                 Máximo 500 caracteres.
                             </div>
-
                         </form>
-
                     </div>
-
                 </section>
-
             </div>
-
         </div>
-
     </main>
-    <!-- =========================================
-     FOOTER
-     ========================================= -->
-
+    <!--FOOTER-->
 <footer class="footer">
-
     <div class="container py-5">
-
         <div class="row g-4">
-
-            <!-- MARCA -->
             <div class="col-12 col-md-6 col-lg-4">
-
                 <h2 class="footer-logo mb-3">
                     SegundaOportunidAPP
                 </h2>
-
                 <p class="footer-descripcion mb-0">
                     Compra, vende y dona artículos de segunda mano.
                     <br>
                     Dales una nueva oportunidad.
                 </p>
-
             </div>
-
-            <!-- EXPLORAR -->
             <div class="col-6 col-md-6 col-lg-2">
-
                 <h3 class="footer-titulo mb-3">
                     Explorar
                 </h3>
-
                 <nav class="d-flex flex-column gap-2">
                     <a class="footer-link" href="index.html">Inicio</a>
                     <a class="footer-link" href="comprar.html">Comprar</a>
                     <a class="footer-link" href="publicar.html">Vender</a>
                     <a class="footer-link" href="donaciones.html">Donaciones</a>
                 </nav>
-
             </div>
-
-            <!-- AYUDA -->
             <div class="col-6 col-md-6 col-lg-3">
-
                 <h3 class="footer-titulo mb-3">
                     Ayuda
                 </h3>
-
                 <nav class="d-flex flex-column gap-2">
                     <a class="footer-link" href="contacto.html">Contacto</a>
                     <a class="footer-link" href="preguntas.html">Preguntas frecuentes</a>
                     <a class="footer-link" href="seguridad.html">Seguridad</a>
                 </nav>
-
             </div>
-
-            <!-- INFORMACIÓN -->
             <div class="col-12 col-md-6 col-lg-3">
-
                 <h3 class="footer-titulo mb-3">
                     Información
                 </h3>
-
                 <nav class="d-flex flex-column gap-2">
                     <a class="footer-link" href="terminos.html">Términos y condiciones</a>
                     <a class="footer-link" href="privacidad.html">Aviso de privacidad</a>
                     <a class="footer-link" href="nosotros.html">Acerca de nosotros</a>
                 </nav>
-
             </div>
-
         </div>
-
     </div>
-
-    <!-- COPYRIGHT -->
     <div class="footer-copyright">
-
         <div class="container py-3">
-
             <p class="text-center mb-0">
                 &copy; 2026 SegundaOportunidAPP · Todos los derechos reservados.
             </p>
-
         </div>
-
     </div>
-
 </footer>
     <!-- Bootstrap JS -->
-
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous">
     </script>
-
 </body>
 
-</html>
+</htm
