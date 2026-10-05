@@ -1,8 +1,3 @@
-/* =========================================
-   SegundaOportunidAPP
-   Página de contacto
-   ========================================= */
-
 :root {
     --color-accion: #D96281;
     --color-menu: #499EBF;
@@ -10,42 +5,25 @@
     --color-iconos: #A4A66A;
     --color-bordes: #6ACED9;
 }
-
-
-/* =========================================
-   GENERAL
-   ========================================= */
-
+/*GENERAL*/
 body {
     margin: 0;
     background-color: var(--color-fondo);
     font-family: 'Roboto', sans-serif;
     color: #212529;
 }
-
-
-/* =========================================
-   NAVBAR
-   ========================================= */
-
+/*NAVBAR*/
 .navbar-principal {
     background-color: var(--color-menu);
 }
-
 .navbar-principal .navbar-brand {
     font-size: 20px;
 }
-
 .navbar-principal .nav-link {
     font-size: 14px;
     font-weight: 500;
 }
-
-
-/* =========================================
-   ENCABEZADO
-   ========================================= */
-
+/*ENCABEZADO*/
 .titulo-contacto {
     color: var(--color-accion);
     font-size: 32px;
@@ -56,42 +34,27 @@ body {
     color: #5f6368;
     font-size: 16px;
 }
-
-
-/* =========================================
-   FORMULARIO
-   ========================================= */
-
+/*FORMULARIO*/
 .formulario-contacto {
     background-color: #FFFFFF;
     border: 1px solid var(--color-bordes);
     border-radius: 8px;
 }
-
 .form-label {
     font-size: 16px;
     font-weight: 500;
 }
-
 .form-control {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-
     border-color: var(--color-bordes);
 }
-
 .form-control:focus {
     border-color: var(--color-menu);
-
     box-shadow:
         0 0 0 0.2rem rgba(73, 158, 191, 0.20);
 }
-
-
-/* =========================================
-   BOTÓN
-   ========================================= */
-
+/*BOTÓN*/
 .boton-enviar {
     padding: 8px 24px;
 
@@ -113,9 +76,7 @@ body {
 }
 
 
-/* =========================================
-   RESPONSIVE
-   ========================================= */
+/*RESPONSIVE*/
 
 @media (max-width: 576px) {
 
