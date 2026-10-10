@@ -1,27 +1,316 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* 
+   PALETA DE COLORES
+  */
 :root {
-    --color-botones: #D96281;
-    --color-menu: #499BBF;
-    --color-fondo: #F2E8D5;
-    --color-iconos: #A4AA6A;
-    --color-bordes: #6ACEE9;
+    --color-accion: #D96281;     /* Rosa Primario (Botones de acción) */
+    --color-menu: #499EBF;       /* Azul Interactivo (Menús e Encabezados) */
+    --color-fondo: #F2E8D5;      /* Crema (Fondo de la página web) */
+    --color-iconos: #A4A66A;     /* Verde Oliva (Iconografía) */
+    --color-bordes: #6ACED9;     /* Cian (Bordes y fondos secundarios) */
 }
-body { background-color: var(--color-fondo);
-font-family: 'Roboto', sans-serif;
- }
-h1, .titulo-principal { font-size: 32px; font-weight: 700; }
-h2, .subtitulo { font-size: 24px; font-weight: 500; }
-h3, .encabezado { font-size: 20px; font-weight: 500; }
-p, .texto-normal { font-size: 16px; font-weight: 400; }
-.texto-secundario { font-size: 14px; font-weight: 400; }
-.btn-primary {
-    background-color: var(--color-botones);
-    border-color: var(--color-botones);
+
+/* 
+   2. ESTILOS BASE Y ESCALA TIPOGRÁFICA (ROBOTO)
+   */
+body {
+    margin: 0;
+    background-color: var(--color-fondo);
+    font-family: 'Roboto', sans-serif;
+    color: #212529;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Título principal (32px Bold) */
+h1, .titulo-principal, .titulo-contacto {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #212529;
+    margin-bottom: 8px;
+}
+
+/* Subtítulos (24px Medium) */
+h2, h3, .subtitulo {
+    font-size: 24px !important;
+    font-weight: 500 !important;
+}
+
+/* Encabezados de Sección y Tarjetas (20px Medium) */
+h4, h5, .encabezado {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+}
+
+/* Texto Normal (16px Regular) */
+p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
+    font-size: 16px !important;
+    font-weight: 400;
+}
+
+/* Texto Secundario (14px Regular) */
+.texto-secundario, .ultimo-mensaje, .chat-publicacion {
+    font-size: 14px !important;
+    font-weight: 400;
+    color: #5F6368;
+}
+
+/* 
+   3. BOTONES Y COMPONENTES REUTILIZABLES
+  */
+.btn-primary, .boton-enviar, .send-button {
+    background-color: var(--color-accion) !important;
+    border-color: var(--color-accion) !important;
+    color: #FFFFFF !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    border-radius: 20px;
+    padding: 8px 24px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover, .btn-primary:focus,
+.boton-enviar:hover, .boton-enviar:focus,
+.send-button:hover, .send-button:focus {
+    background-color: #C45170 !important;
+    border-color: #C45170 !important;
+    color: #FFFFFF !important;
+}
+
+/* Badges / Etiquetas de Roles */
+.badge-comprador {
+    background-color: var(--color-accion);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-vendedora {
+    background-color: var(--color-menu);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-donador {
+    background-color: var(--color-iconos);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/*
+   4. NAVBAR Y NAVEGACIÓN
+  */
+.navbar-principal {
+    background-color: var(--color-menu);
+}
+
+.navbar-principal .navbar-brand {
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.navbar-principal .nav-link {
     font-size: 14px;
     font-weight: 500;
-    color: white;
+    color: #FFFFFF;
 }
-.btn-primary:hover {
-    background-color: #c0506e; 
-    border-color: #c0506e;
+
+/*
+   5. FORMULARIOS (CONTACTO / REPORTES / LOGIN / PUBLICAR)
+ */
+.formulario-contacto, .card-formulario, .conversaciones-card, .chat-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-bordes);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.form-control, .message-input {
+    font-family: 'Roboto', sans-serif;
+    border-color: var(--color-bordes);
+}
+
+.message-input {
+    resize: none;
+}
+
+.form-control:focus, .message-input:focus {
+    border-color: var(--color-menu);
+    box-shadow: 0 0 0 0.2rem rgba(73, 158, 191, 0.20);
+}
+
+/* 
+   6. CENTRO DE MENSAJES Y CHAT (RF4)
+  */
+.encabezado-conversaciones, .chat-header {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid var(--color-bordes);
+}
+
+.encabezado-conversaciones h2, .chat-header h2 {
+    color: var(--color-menu);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.conversacion {
+    background-color: #FFFFFF;
+    border-left: 4px solid transparent;
+}
+
+.conversacion:hover {
+    background-color: #F8F9FA;
+    border-left-color: var(--color-bordes);
+}
+
+.conversacion.activa {
+    background-color: rgba(73, 158, 191, 0.08);
+    border-left-color: var(--color-menu);
+}
+
+.nombre-usuario {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.publicacion {
+    color: var(--color-menu);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ultimo-mensaje {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hora, .chat-publicacion-label, .mensaje-hora {
+    color: #6C757D;
+    font-size: 12px;
+}
+
+.area-mensajes {
+    min-height: 390px;
+    background-color: #FFFFFF;
+}
+
+.mensaje-recibido {
+    max-width: 75%;
+}
+
+.mensaje-enviado {
+    max-width: 75%;
+    margin-left: auto;
+    text-align: right;
+}
+
+.burbuja {
+    display: inline-block;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.burbuja-recibida {
+    background-color: #F2F2F2;
+    border: 1px solid #E1E1E1;
+}
+
+.burbuja-enviada {
+    background-color: rgba(73, 158, 191, 0.15);
+    border: 1px solid var(--color-bordes);
+}
+
+.chat-footer {
+    background-color: #FFFFFF;
+    border-top: 1px solid var(--color-bordes);
+}
+
+/* 7. FOOTER (PIE DE PÁGINA) */
+.footer {
+    width: 100%;
+    background-color: var(--color-menu);
+    color: #FFFFFF;
+    border-top: 6px solid var(--color-accion);
+}
+
+.footer .footer-logo {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.footer .footer-descripcion {
+    margin: 0;
+    max-width: 360px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.footer .footer-titulo {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.footer .footer-link {
+    display: block;
+    width: fit-content;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer .footer-link:hover {
+    color: #FFFFFF;
+    opacity: 0.8;
+    transform: translateX(4px);
+}
+
+.footer .footer-link:focus {
+    color: #FFFFFF;
+    text-decoration: underline;
+    outline: none;
+}
+
+.footer-copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.footer-copyright p {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* 
+   8. ADAPTABILIDAD RESPONSIVA
+   */
+@media (max-width: 991.98px) {
+    .footer .footer-logo { font-size: 24px; }
+    .area-mensajes { min-height: 320px; }
+}
+
+@media (max-width: 576px) {
+    h1, .titulo-contacto { font-size: 28px !important; }
+    .boton-enviar, .send-button { width: 100%; }
+    .area-mensajes { min-height: 280px; }
+    .mensaje-recibido, .mensaje-enviado { max-width: 90%; }
+    .footer .footer-logo { font-size: 22px; }
+    .footer .footer-descripcion { font-size: 14px; }
+    .footer .footer-titulo { font-size: 16px; }
+    .footer .footer-link { font-size: 14px; }
 }
