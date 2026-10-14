@@ -1,5 +1,3 @@
-// Justificación de selectores: se usa querySelector para obtener un solo elemento por su id, querySelectorAll para recorrer todas las filas al calcular los totales y closest para encontrar el botón o la fila desde el elemento donde se hizo clic.
-
 const PORCENTAJE_REGALIA = 10;
 
 function crearCelda(contenido) {
@@ -184,9 +182,17 @@ function iniciarAdmin() {
     document.querySelector('#listaVentas').addEventListener('click', eliminarVenta);
 }
 
+function crearBotonEliminarMensaje() {
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'btn btn-link btn-sm text-danger p-0 btn-eliminar';
+    boton.textContent = 'Eliminar';
+    return boton;
+}
+
 function crearMensajeEnviado(texto) {
     const contenedor = document.createElement('div');
-    contenedor.className = 'align-self-end text-end';
+    contenedor.className = 'align-self-end text-end mensaje-enviado';
     contenedor.style.maxWidth = '80%';
 
     const autor = document.createElement('p');
@@ -205,6 +211,7 @@ function crearMensajeEnviado(texto) {
     contenedor.appendChild(autor);
     contenedor.appendChild(burbuja);
     contenedor.appendChild(hora);
+    contenedor.appendChild(crearBotonEliminarMensaje());
 
     return contenedor;
 }
@@ -226,11 +233,22 @@ function agregarMensaje(evento) {
     campo.focus();
 }
 
+function eliminarMensaje(evento) {
+    const boton = evento.target.closest('.btn-eliminar');
+    if (!boton) return;
+
+    const mensaje = boton.closest('.mensaje-enviado');
+    if (mensaje) {
+        mensaje.remove();
+    }
+}
+
 function iniciarMensajes() {
     const formulario = document.querySelector('#formMensaje');
     if (!formulario) return;
 
     formulario.addEventListener('submit', agregarMensaje);
+    document.querySelector('#listaMensajes').addEventListener('click', eliminarMensaje);
 }
 
 document.addEventListener('DOMContentLoaded', iniciarPerfil);
