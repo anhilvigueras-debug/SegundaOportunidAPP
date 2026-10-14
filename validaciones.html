@@ -7,6 +7,121 @@
 
     <title>Validaciones - SegundaOportunidAPP</title>
 
+<<<<<<< HEAD
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        :root {
+            --color-accion: #D96281;
+            --color-menu: #499EBF;
+            --color-fondo: #F2E8D5;
+            --color-iconos: #A4A66A;
+            --color-bordes: #6ACED9;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--color-fondo);
+            font-family: 'Roboto', sans-serif;
+            color: #212529;
+        }
+
+        .navbar-principal {
+            background-color: var(--color-menu);
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .titulo-principal {
+            color: var(--color-accion);
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .texto-secundario {
+            color: #5F6368;
+            font-size: 16px;
+        }
+
+        .formulario-card {
+            background-color: #FFFFFF;
+            border: 1px solid var(--color-bordes);
+            border-radius: 8px;
+        }
+
+        .form-label {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            border-color: var(--color-bordes);
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            border-color: var(--color-menu);
+            box-shadow: 0 0 0 0.2rem rgba(73, 158, 191, 0.20);
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .boton-enviar {
+            padding: 8px 24px;
+            background-color: var(--color-accion);
+            border-color: var(--color-accion);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .boton-enviar:hover,
+        .boton-enviar:focus {
+            background-color: #C45170;
+            border-color: #C45170;
+            color: #FFFFFF;
+        }
+
+        @media (max-width: 576px) {
+            .titulo-principal {
+                font-size: 28px;
+            }
+
+            .boton-enviar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-principal">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                SegundaOportunidAPP
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+                <ul class="navbar-nav ms-auto">
+=======
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/estilos.css">
@@ -26,10 +141,41 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarPrincipal">
                 <ul class="navbar-nav align-items-lg-center gap-1 mt-3 mt-lg-0">
+>>>>>>> main
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Inicio</a>
                     </li>
                     <li class="nav-item">
+<<<<<<< HEAD
+                        <a class="nav-link" href="servicios.html">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+
+                <div class="text-center mb-5">
+                    <h1 class="titulo-principal">
+                        Formulario de contacto
+                    </h1>
+                    <p class="texto-secundario mb-0">
+                        Completa correctamente todos los campos
+                        para enviar tu mensaje.
+                    </p>
+                </div>
+
+                <div class="card formulario-card shadow-sm">
+=======
                         <a class="nav-link" href="nosotros.html">Nosotros</a>
                     </li>
                     <li class="nav-item">
@@ -61,10 +207,34 @@
 
                 <!-- FORMULARIO CON VALIDACIONES -->
                 <div class="card border-0 shadow-sm rounded-4 bg-white">
+>>>>>>> main
                     <div class="card-body p-4 p-md-5">
 
                         <form id="formularioContacto" class="form-validado" novalidate>
 
+<<<<<<< HEAD
+                            <div class="alert alert-danger alerta-validacion d-none" role="alert" aria-live="polite">
+                                <strong class="mensaje-alerta">
+                                    Completa correctamente los siguientes campos:
+                                </strong>
+                                <ul class="lista-campos mb-0 mt-2"></ul>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="nombre" class="form-label">
+                                    Nombre
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="nombre"
+                                    name="nombre"
+                                    data-nombre="Nombre"
+                                    placeholder="Escribe tu nombre"
+                                    pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{3,60}"
+                                    required
+                                >
+=======
                             <!-- ALERTA DE ERRORES -->
                             <div class="alert alert-danger alerta-validacion d-none rounded-3" role="alert" aria-live="polite">
                                 <strong class="mensaje-alerta">Completa correctamente los siguientes campos:</strong>
@@ -75,6 +245,7 @@
                             <div class="mb-4">
                                 <label for="nombre" class="form-label texto-normal fw-bold">Nombre</label>
                                 <input type="text" class="form-control rounded-3 p-2" id="nombre" name="nombre" data-nombre="Nombre" placeholder="Escribe tu nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{3,60}" required>
+>>>>>>> main
                                 <div class="invalid-feedback">
                                     Ingresa un nombre válido de al menos 3 caracteres y utiliza solamente letras.
                                 </div>
@@ -82,8 +253,23 @@
 
                             <!-- CAMPO CORREO -->
                             <div class="mb-4">
+<<<<<<< HEAD
+                                <label for="correo" class="form-label">
+                                    Correo electrónico
+                                </label>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="correo"
+                                    name="correo"
+                                    data-nombre="Correo electrónico"
+                                    placeholder="ejemplo@correo.com"
+                                    required
+                                >
+=======
                                 <label for="correo" class="form-label texto-normal fw-bold">Correo electrónico</label>
                                 <input type="email" class="form-control rounded-3 p-2" id="correo" name="correo" data-nombre="Correo electrónico" placeholder="ejemplo@correo.com" required>
+>>>>>>> main
                                 <div class="invalid-feedback">
                                     Ingresa un correo electrónico válido.
                                 </div>
@@ -91,39 +277,139 @@
 
                             <!-- CAMPO ASUNTO -->
                             <div class="mb-4">
+<<<<<<< HEAD
+                                <label for="asunto" class="form-label">
+                                    Asunto
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="asunto"
+                                    name="asunto"
+                                    data-nombre="Asunto"
+                                    placeholder="Escribe el asunto"
+                                    pattern=".{3,100}"
+                                    required
+                                >
+                                <div class="invalid-feedback">
+                                    El asunto debe contener entre 3 y 100 caracteres.
+=======
                                 <label for="asunto" class="form-label texto-normal fw-bold">Asunto</label>
                                 <input type="text" class="form-control rounded-3 p-2" id="asunto" name="asunto" data-nombre="Asunto" placeholder="Escribe el asunto" pattern=".{3,100}" required>
                                 <div class="invalid-feedback">
                                     El asunto debe contener al menos 3 caracteres.
+>>>>>>> main
                                 </div>
                             </div>
 
                             <!-- CAMPO MENSAJE -->
                             <div class="mb-4">
+<<<<<<< HEAD
+                                <label for="mensaje" class="form-label">
+                                    Mensaje
+                                </label>
+                                <textarea
+                                    class="form-control"
+                                    id="mensaje"
+                                    name="mensaje"
+                                    data-nombre="Mensaje"
+                                    rows="6"
+                                    minlength="10"
+                                    maxlength="500"
+                                    placeholder="Escribe tu mensaje..."
+                                    required
+                                ></textarea>
+                                <div class="invalid-feedback">
+                                    El mensaje debe contener al menos 10 caracteres.
+                                </div>
+                                <div class="form-text">
+=======
                                 <label for="mensaje" class="form-label texto-normal fw-bold">Mensaje</label>
                                 <textarea class="form-control rounded-3 p-2" id="mensaje" name="mensaje" data-nombre="Mensaje" rows="5" minlength="10" maxlength="500" placeholder="Escribe tu mensaje..." required></textarea>
                                 <div class="invalid-feedback">
                                     El mensaje debe contener al menos 10 caracteres.
                                 </div>
                                 <div class="form-text texto-secundario">
+>>>>>>> main
                                     Máximo 500 caracteres.
                                 </div>
                             </div>
 
                             <!-- BOTÓN DE ENVÍO -->
                             <div class="text-end">
+<<<<<<< HEAD
+                                <button type="submit" class="btn boton-enviar">
+=======
                                 <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill texto-normal">
+>>>>>>> main
                                     Enviar mensaje
                                 </button>
                             </div>
 
                         </form>
-
                     </div>
+<<<<<<< HEAD
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container py-5">
+            <div class="row g-4">
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <h2 class="footer-logo mb-3">
+                        SegundaOportunidAPP
+                    </h2>
+                    <p class="footer-descripcion mb-0">
+                        Compra, vende y dona artículos de segunda mano.
+                        <br>
+                        Dales una nueva oportunidad.
+                    </p>
+                </div>
+
+                <div class="col-6 col-md-6 col-lg-2">
+                    <h3 class="footer-titulo mb-3">Explorar</h3>
+                    <nav class="d-flex flex-column gap-2">
+                        <a class="footer-link" href="index.html">Inicio</a>
+                        <a class="footer-link" href="comprar.html">Comprar</a>
+                        <a class="footer-link" href="publicar.html">Vender</a>
+                        <a class="footer-link" href="donaciones.html">Donaciones</a>
+                    </nav>
+                </div>
+
+                <div class="col-6 col-md-6 col-lg-3">
+                    <h3 class="footer-titulo mb-3">Ayuda</h3>
+                    <nav class="d-flex flex-column gap-2">
+                        <a class="footer-link" href="contacto.html">Contacto</a>
+                        <a class="footer-link" href="preguntas.html">Preguntas frecuentes</a>
+                        <a class="footer-link" href="seguridad.html">Seguridad</a>
+                    </nav>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h3 class="footer-titulo mb-3">Información</h3>
+                    <nav class="d-flex flex-column gap-2">
+                        <a class="footer-link" href="terminos.html">Términos y condiciones</a>
+                        <a class="footer-link" href="privacidad.html">Aviso de privacidad</a>
+                        <a class="footer-link" href="nosotros.html">Acerca de nosotros</a>
+                    </nav>
+=======
+>>>>>>> main
                 </div>
 
             </div>
         </div>
+<<<<<<< HEAD
+
+        <div class="footer-copyright">
+            <div class="container py-3">
+                <p class="text-center mb-0">
+                    &copy; 2026 SegundaOportunidAPP ·
+                    Todos los derechos reservados.
+                </p>
+=======
     </main>
 
     <!-- FOOTER -->
@@ -137,14 +423,23 @@
                 <div class="col-md-6 text-md-end">
                     <p class="texto-secundario text-white mb-0">&copy; 2026 SegundaOportunidAPP. Todos los derechos reservados.</p>
                 </div>
+>>>>>>> main
             </div>
         </div>
     </footer>
 
+<<<<<<< HEAD
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+=======
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+>>>>>>> main
 
     <script src="js/validaciones.js"></script>
 
 </body>
+<<<<<<< HEAD
+</html>
+=======
 
 </html>
+>>>>>>> main
