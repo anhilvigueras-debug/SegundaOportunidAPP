@@ -1,5 +1,3 @@
-// Justificación de selectores: se usa querySelector para obtener un solo elemento por su id, querySelectorAll para recorrer todas las filas al calcular los totales y closest para encontrar el botón o la fila desde el elemento donde se hizo clic.
-
 const PORCENTAJE_REGALIA = 10;
 
 function crearCelda(contenido) {
@@ -38,6 +36,14 @@ function obtenerFechaHoy() {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric'
+    });
+}
+
+function obtenerHoraActual() {
+    return new Date().toLocaleTimeString('es-MX', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
     });
 }
 
@@ -176,5 +182,75 @@ function iniciarAdmin() {
     document.querySelector('#listaVentas').addEventListener('click', eliminarVenta);
 }
 
+function crearBotonEliminarMensaje() {
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'btn btn-link btn-sm text-danger p-0 btn-eliminar';
+    boton.textContent = 'Eliminar';
+    return boton;
+}
+
+function crearMensajeEnviado(texto) {
+    const contenedor = document.createElement('div');
+    contenedor.className = 'align-self-end text-end mensaje-enviado';
+    contenedor.style.maxWidth = '80%';
+
+    const autor = document.createElement('p');
+    autor.className = 'texto-secundario fw-bold mb-1 text-muted';
+    autor.textContent = 'Tú';
+
+    const burbuja = document.createElement('div');
+    burbuja.className = 'p-3 text-white rounded-3 shadow-sm';
+    burbuja.style.backgroundColor = 'var(--color-menu)';
+    burbuja.textContent = texto;
+
+    const hora = document.createElement('small');
+    hora.className = 'texto-secundario text-muted d-block mt-1';
+    hora.textContent = obtenerHoraActual();
+
+    contenedor.appendChild(autor);
+    contenedor.appendChild(burbuja);
+    contenedor.appendChild(hora);
+    contenedor.appendChild(crearBotonEliminarMensaje());
+
+    return contenedor;
+}
+
+function agregarMensaje(evento) {
+    evento.preventDefault();
+
+    const formulario = document.querySelector('#formMensaje');
+    const campo = document.querySelector('#mensaje');
+    const lista = document.querySelector('#listaMensajes');
+    const texto = campo.value.trim();
+
+    if (texto === '') return;
+
+    lista.appendChild(crearMensajeEnviado(texto));
+    lista.scrollTop = lista.scrollHeight;
+
+    formulario.reset();
+    campo.focus();
+}
+
+function eliminarMensaje(evento) {
+    const boton = evento.target.closest('.btn-eliminar');
+    if (!boton) return;
+
+    const mensaje = boton.closest('.mensaje-enviado');
+    if (mensaje) {
+        mensaje.remove();
+    }
+}
+
+function iniciarMensajes() {
+    const formulario = document.querySelector('#formMensaje');
+    if (!formulario) return;
+
+    formulario.addEventListener('submit', agregarMensaje);
+    document.querySelector('#listaMensajes').addEventListener('click', eliminarMensaje);
+}
+
 document.addEventListener('DOMContentLoaded', iniciarPerfil);
 document.addEventListener('DOMContentLoaded', iniciarAdmin);
+document.addEventListener('DOMContentLoaded', iniciarMensajes);
