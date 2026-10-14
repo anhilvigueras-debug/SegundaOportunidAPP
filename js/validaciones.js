@@ -1,184 +1,387 @@
 
-document.addEventListener("DOMContentLoaded", function () {
+"use strict";
 
-    /*
-     * Busca todos los formularios que tengan
-     * la clase "form-validado".
-     */
-    const formularios =
-        document.querySelectorAll(".form-validado");
-    /* Se configura cada formulario encontrado.*/
-    formularios.forEach(function (formulario) {
-        formulario.addEventListener(
-            "submit",
-            function (event) {
-                /*Evita el envío real del formulario. Por el momento la interfaz es estática.*/
-                event.preventDefault();
-                /*ELEMENTOS DEL ALERT*/
-                const alerta =
-                    formulario.querySelector(
-                        ".alerta-validacion"
-                    );
+/*
+ SegundaOportunidAPP
+ Validación de formularios en tiempo real
+ 
+Formularios:
+ - contacto.html
+ - login.html
+ - reporte.html
 
-                const mensajeAlerta =
-                    formulario.querySelector(
-                        ".mensaje-alerta"
-                    );
+ Se utiliza getElementById() porque los formularios
+ y las alertas tienen identificadores únicos.
+ Esto permite acceder directamente a cada elemento
+ sin depender de selectores CSS.
 
-                const listaCampos =
-                    formulario.querySelector(
-                        ".lista-campos"
-                    );
-                /*CAMPOS OBLIGATORIOS*/
-                const campos =
-                    formulario.querySelectorAll(
-                        "input[required], " +
-                        "textarea[required], " +
-                        "select[required]"
-                    );
-                /*Aquí guardaremos los nombres de los campos incorrectos.*/
-                const camposIncorrectos = [];
-                /*VALIDAR CAMPOS*/
-                campos.forEach(function (campo) {
-                    /*checkValidity() revisa las reglas HTML5 del campo: required, type, pattern, minlength, maxlength                     */
-                    if (!campo.checkValidity()) {
-                        const nombreCampo =
-                            campo.dataset.nombre ||
-                            campo.name ||
-                            campo.id;
+ Se utiliza addEventListener() con funciones con nombre.
+ No se utiliza onclick ni onsubmit en HTML.
+ */
 
-                        camposIncorrectos.push(
-                            nombreCampo
-                        );
+document.addEventListener(
+    "DOMContentLoaded",
+    iniciarValidaciones
+);
 
+/* INICIAR VALIDACIONES */
 
-                        /*Bootstrap mostrará visualmente que el campo es incorrecto.
-                         */
-                        campo.classList.add(
-                            "is-invalid"
-                        );
+function iniciarValidaciones() {
 
-                        campo.classList.remove(
-                            "is-valid"
-                        );
+    const formularios = [
+        "formularioContacto",
+        "formularioLogin",
+        "formReporte"
+    ];
 
-                    } else {
+    formularios.forEach(configurarFormulario);
+}
 
-                        /*El campo es correcto.*/
-                        campo.classList.remove(
-                            "is-invalid"
-                        );
+/* CONFIGURAR FORMULARIO */
 
-                        campo.classList.add(
-                            "is-valid"
-                        );
+function configurarFormulario(idFormulario) {
 
-                    }
+    const formulario = document.getElementById(idFormulario);
 
-                });
-                /*SI HAY CAMPOS INCORRECTOS*/
-                if (camposIncorrectos.length > 0) {
+    if (formulario === null) {
+        return;
+    }
 
-                    /*Limpiar la lista anterior.*/
-                    listaCampos.innerHTML = "";
-                    /*Crear un <li> por cada campo pendiente o incorrecto.*/
-                    camposIncorrectos.forEach(
-                        function (nombre) {
-                            const elemento =
-                                document.createElement(
-                                    "li"
-                                );
-                            elemento.textContent =
-                                nombre;
-                            listaCampos.appendChild(
-                                elemento
-                            );
+    const campos = obtenerCampos(formulario);
 
-                        }
-                    );
-                    /*Configurar Bootstrap Alert como alerta de error. */
-                    alerta.classList.remove(
-                        "d-none",
-                        "alert-success"
-                    );
-                    alerta.classList.add(
-                        "alert-danger"
-                    );
-                    mensajeAlerta.textContent =
-                        "Completa correctamente los siguientes campos:";
-                    /*Llevar al usuario hacia la alerta.*/
-                    alerta.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center"
-                    });
-                    /*Detener aquí.*/
-                    return;
-                }
+    campos.forEach(configurarCampo);
 
+    formulario.addEventListener(
+        "submit",
+        validarFormulario
+    );
+}
 
-                /*FORMULARIO CORRECTO*/
+/* OBTENER CAMPOS */
 
-                listaCampos.innerHTML = "";
+function obtenerCampos(formulario) {
 
+    return Array.from(formulario.elements).filter(
+        esCampoValidable
+    );
+}
 
-                alerta.classList.remove(
-                    "d-none",
-                    "alert-danger"
-                );
+function esCampoValidable(campo) {
 
-                alerta.classList.add(
-                    "alert-success"
-                );
+    const etiquetas = [
+        "INPUT",
+        "TEXTAREA",
+        "SELECT"
+    ];
 
+    const tiposExcluidos = [
+        "hidden",
+        "submit",
+        "button",
+        "reset"
+    ];
 
-                mensajeAlerta.textContent =
-                    "Formulario completado correctamente.";
+    return etiquetas.includes(campo.tagName)
+        && !tiposExcluidos.includes(campo.type)
+        && !campo.disabled;
+}
 
+/* CONFIGURAR EVENTOS */
 
-                /*Llevar al usuario hacia el mensaje de confirmación.*/
-                alerta.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
+function configurarCampo(campo) {
 
-            }
-        );
-        /*QUITAR ERROR AL CORREGIR EL CAMPO */
+    campo.addEventListener(
+        "input",
+        validarAlEscribir
+    );
 
-        const camposFormulario =
-            formulario.querySelectorAll(
-                "input, textarea, select"
-            );
-        camposFormulario.forEach(function (campo) {
+    campo.addEventListener(
+        "blur",
+        validarAlSalir
+    );
 
-            campo.addEventListener(
-                "input",
-                function () {
+    // change permite validar selects al elegir una opción.
+    campo.addEventListener(
+        "change",
+        validarAlCambiar
+    );
+}
 
-                    /*Si el usuario corrige el campo, actualizamos su estado visual.*/
-                    if (campo.checkValidity()) {
+/* EVENTO INPUT */
 
-                        campo.classList.remove(
-                            "is-invalid"
-                        );
+function validarAlEscribir(evento) {
 
-                        campo.classList.add(
-                            "is-valid"
-                        );
+    const campo = evento.currentTarget;
 
-                    } else {
+    validarCampo(campo);
 
-                        campo.classList.remove(
-                            "is-valid"
-                        );
+    ocultarAlerta(campo.form);
+}
 
-                    }
+/* EVENTO BLUR */
 
-                }
-            );
+function validarAlSalir(evento) {
 
-        });
+    const campo = evento.currentTarget;
 
+    validarCampo(campo);
+}
+
+/* EVENTO CHANGE */
+
+function validarAlCambiar(evento) {
+
+    const campo = evento.currentTarget;
+
+    validarCampo(campo);
+
+    ocultarAlerta(campo.form);
+}
+
+/* VALIDACIÓN INDIVIDUAL */
+
+function validarCampo(campo) {
+
+    const valor = campo.value.trim();
+
+    let esValido = true;
+
+    // Validar campos obligatorios.
+    if (campo.required && valor === "") {
+
+        esValido = false;
+
+    }
+
+    // Validar formato del correo.
+    else if (campo.type === "email" && valor !== "") {
+
+        const expresionCorreo =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!expresionCorreo.test(valor)) {
+            esValido = false;
+        }
+    }
+
+    // Validar restricciones HTML5.
+    if (!campo.checkValidity()) {
+        esValido = false;
+    }
+
+    // Validar longitud sin espacios exteriores.
+    if (valor !== "") {
+
+        const minimo = campo.minLength;
+        const maximo = campo.maxLength;
+
+        if (minimo >= 0 && valor.length < minimo) {
+            esValido = false;
+        }
+
+        if (maximo >= 0 && valor.length > maximo) {
+            esValido = false;
+        }
+    }
+
+    // Mostrar validación verde o roja.
+    campo.classList.toggle(
+        "is-valid",
+        esValido && valor !== ""
+    );
+
+    campo.classList.toggle(
+        "is-invalid",
+        !esValido
+    );
+
+    campo.setAttribute(
+        "aria-invalid",
+        String(!esValido)
+    );
+
+    return esValido;
+}
+
+/* VALIDAR AL ENVIAR */
+
+function validarFormulario(evento) {
+
+    const formulario = evento.currentTarget;
+
+    const campos = obtenerCampos(formulario);
+
+    const camposIncorrectos = [];
+
+    campos.forEach(function (campo) {
+
+        if (!validarCampo(campo)) {
+
+            const nombre =
+                campo.dataset.nombre ||
+                campo.name ||
+                campo.id;
+
+            camposIncorrectos.push(nombre);
+        }
     });
 
-});
+    // Prevenir envío si existen errores.
+    if (camposIncorrectos.length > 0) {
+
+        evento.preventDefault();
+
+        mostrarAlerta(
+            formulario,
+            camposIncorrectos,
+            false
+        );
+
+        return;
+    }
+
+    /*
+     * Demostración frontend:
+     * evitar el envío real hasta conectar un backend.
+     */
+    evento.preventDefault();
+
+    mostrarAlerta(
+        formulario,
+        [],
+        true
+    );
+}
+
+/* OBTENER ELEMENTOS DE ALERTA */
+
+function obtenerElementosAlerta(formulario) {
+
+    let idAlerta = "";
+    let idMensaje = "";
+    let idLista = "";
+
+    switch (formulario.id) {
+
+        case "formularioContacto":
+
+            idAlerta = "alertaContacto";
+            idMensaje = "mensajeAlertaContacto";
+            idLista = "listaCamposContacto";
+
+            break;
+
+        case "formularioLogin":
+
+            idAlerta = "alertaLogin";
+            idMensaje = "mensajeAlertaLogin";
+            idLista = "listaCamposLogin";
+
+            break;
+
+        case "formReporte":
+
+            idAlerta = "alertaReporte";
+            idMensaje = "mensajeAlertaReporte";
+            idLista = "listaCamposReporte";
+
+            break;
+
+        default:
+            return null;
+    }
+
+    // Seleccionar elementos por identificador único.
+    const alerta = document.getElementById(idAlerta);
+    const mensaje = document.getElementById(idMensaje);
+    const lista = document.getElementById(idLista);
+
+    if (!alerta || !mensaje || !lista) {
+        return null;
+    }
+
+    return {
+        alerta: alerta,
+        mensaje: mensaje,
+        lista: lista
+    };
+}
+
+/* MOSTRAR ALERTAS */
+
+function mostrarAlerta(
+    formulario,
+    camposIncorrectos,
+    correcto
+) {
+
+    const elementos = obtenerElementosAlerta(formulario);
+
+    if (elementos === null) {
+        return;
+    }
+
+    const alerta = elementos.alerta;
+    const mensaje = elementos.mensaje;
+    const lista = elementos.lista;
+
+    // Limpiar mensajes anteriores.
+    lista.replaceChildren();
+
+    if (correcto) {
+
+        alerta.classList.remove(
+            "d-none",
+            "alert-danger"
+        );
+
+        alerta.classList.add("alert-success");
+
+        mensaje.textContent =
+            "Formulario validado correctamente. " +
+            "Los datos no se han enviado todavía.";
+
+    } else {
+
+        alerta.classList.remove(
+            "d-none",
+            "alert-success"
+        );
+
+        alerta.classList.add("alert-danger");
+
+        mensaje.textContent =
+            "Completa correctamente los siguientes campos:";
+
+        camposIncorrectos.forEach(function (nombre) {
+
+            const elemento = document.createElement("li");
+
+            elemento.textContent = nombre;
+
+            lista.appendChild(elemento);
+        });
+    }
+
+    alerta.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+/* OCULTAR ALERTA AL CORREGIR */
+
+function ocultarAlerta(formulario) {
+
+    if (!formulario) {
+        return;
+    }
+
+    const elementos = obtenerElementosAlerta(formulario);
+
+    if (elementos === null) {
+        return;
+    }
+
+    elementos.alerta.classList.add("d-none");
+}
