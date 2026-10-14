@@ -314,3 +314,21 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
     .footer .footer-titulo { font-size: 16px; }
     .footer .footer-link { font-size: 14px; }
 }
+
+[data-bs-theme="dark"] body,
+html[data-bs-theme="dark"] body {
+    background-color: #212529 !important;
+}
+
+[data-bs-theme="dark"] .bg-white, 
+[data-bs-theme="dark"] .card,
+html[data-bs-theme="dark"] .card {
+    background-color: #2b3035 !important;
+    color: #f8f9fa !important;
+    border-color: #495057 !important;
+}
+
+[data-bs-theme="dark"] .text-dark,
+[data-bs-theme="dark"] .encabezado {
+    color: #f8f9fa !important;
+}
