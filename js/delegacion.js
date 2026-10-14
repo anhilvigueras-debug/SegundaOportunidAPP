@@ -1,3 +1,5 @@
+// Justificación de selectores: se usa querySelector para obtener un solo elemento por su id y closest para encontrar el botón o la fila desde el elemento donde se hizo clic.
+
 function crearCelda(contenido) {
     const celda = document.createElement('td');
     celda.textContent = contenido;
@@ -10,6 +12,16 @@ function crearCeldaBadge(texto, claseBadge) {
     badge.className = 'badge ' + claseBadge;
     badge.textContent = texto;
     celda.appendChild(badge);
+    return celda;
+}
+
+function crearCeldaAcciones() {
+    const celda = document.createElement('td');
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'btn btn-outline-danger btn-sm btn-eliminar';
+    boton.textContent = 'Eliminar';
+    celda.appendChild(boton);
     return celda;
 }
 
@@ -33,6 +45,7 @@ function crearFilaPublicacion(articulo, tipo, precio) {
     fila.appendChild(crearCelda(textoPrecio));
     fila.appendChild(crearCelda(obtenerFechaHoy()));
     fila.appendChild(crearCeldaBadge('Activa', 'text-bg-primary'));
+    fila.appendChild(crearCeldaAcciones());
 
     return fila;
 }
@@ -68,12 +81,23 @@ function agregarPublicacion(evento) {
     ajustarPrecioPublicacion();
 }
 
+function eliminarPublicacion(evento) {
+    const boton = evento.target.closest('.btn-eliminar');
+    if (!boton) return;
+
+    const fila = boton.closest('tr');
+    if (fila) {
+        fila.remove();
+    }
+}
+
 function iniciarPerfil() {
     const formulario = document.querySelector('#formPublicacion');
     if (!formulario) return;
 
     formulario.addEventListener('submit', agregarPublicacion);
     document.querySelector('#tipoPublicacion').addEventListener('change', ajustarPrecioPublicacion);
+    document.querySelector('#listaPublicaciones').addEventListener('click', eliminarPublicacion);
 }
 
 document.addEventListener('DOMContentLoaded', iniciarPerfil);
