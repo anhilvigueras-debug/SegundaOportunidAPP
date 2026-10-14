@@ -1,4 +1,4 @@
-// Justificación de selectores: se usa querySelector para obtener un solo elemento por su id y querySelectorAll para recorrer todas las filas de la tabla al calcular los totales.
+// Justificación de selectores: se usa querySelector para obtener un solo elemento por su id, querySelectorAll para recorrer todas las filas al calcular los totales y closest para encontrar el botón o la fila desde el elemento donde se hizo clic.
 
 const PORCENTAJE_REGALIA = 10;
 
@@ -122,6 +122,7 @@ function crearFilaVenta(articulo, precio) {
     fila.appendChild(crearCelda(formatearMoneda(precio)));
     fila.appendChild(crearCeldaBadge(PORCENTAJE_REGALIA + ' %', 'bg-light text-dark border'));
     fila.appendChild(crearCeldaConClase(formatearMoneda(monto), 'fw-bold text-success'));
+    fila.appendChild(crearCeldaAcciones());
 
     return fila;
 }
@@ -156,11 +157,23 @@ function agregarVenta(evento) {
     formulario.reset();
 }
 
+function eliminarVenta(evento) {
+    const boton = evento.target.closest('.btn-eliminar');
+    if (!boton) return;
+
+    const fila = boton.closest('tr');
+    if (fila) {
+        fila.remove();
+        recalcularTotales();
+    }
+}
+
 function iniciarAdmin() {
     const formulario = document.querySelector('#formVenta');
     if (!formulario) return;
 
     formulario.addEventListener('submit', agregarVenta);
+    document.querySelector('#listaVentas').addEventListener('click', eliminarVenta);
 }
 
 document.addEventListener('DOMContentLoaded', iniciarPerfil);
