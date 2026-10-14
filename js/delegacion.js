@@ -41,6 +41,14 @@ function obtenerFechaHoy() {
     });
 }
 
+function obtenerHoraActual() {
+    return new Date().toLocaleTimeString('es-MX', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
+}
+
 function formatearMoneda(valor) {
     return Number(valor).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
 }
@@ -176,5 +184,55 @@ function iniciarAdmin() {
     document.querySelector('#listaVentas').addEventListener('click', eliminarVenta);
 }
 
+function crearMensajeEnviado(texto) {
+    const contenedor = document.createElement('div');
+    contenedor.className = 'align-self-end text-end';
+    contenedor.style.maxWidth = '80%';
+
+    const autor = document.createElement('p');
+    autor.className = 'texto-secundario fw-bold mb-1 text-muted';
+    autor.textContent = 'Tú';
+
+    const burbuja = document.createElement('div');
+    burbuja.className = 'p-3 text-white rounded-3 shadow-sm';
+    burbuja.style.backgroundColor = 'var(--color-menu)';
+    burbuja.textContent = texto;
+
+    const hora = document.createElement('small');
+    hora.className = 'texto-secundario text-muted d-block mt-1';
+    hora.textContent = obtenerHoraActual();
+
+    contenedor.appendChild(autor);
+    contenedor.appendChild(burbuja);
+    contenedor.appendChild(hora);
+
+    return contenedor;
+}
+
+function agregarMensaje(evento) {
+    evento.preventDefault();
+
+    const formulario = document.querySelector('#formMensaje');
+    const campo = document.querySelector('#mensaje');
+    const lista = document.querySelector('#listaMensajes');
+    const texto = campo.value.trim();
+
+    if (texto === '') return;
+
+    lista.appendChild(crearMensajeEnviado(texto));
+    lista.scrollTop = lista.scrollHeight;
+
+    formulario.reset();
+    campo.focus();
+}
+
+function iniciarMensajes() {
+    const formulario = document.querySelector('#formMensaje');
+    if (!formulario) return;
+
+    formulario.addEventListener('submit', agregarMensaje);
+}
+
 document.addEventListener('DOMContentLoaded', iniciarPerfil);
 document.addEventListener('DOMContentLoaded', iniciarAdmin);
+document.addEventListener('DOMContentLoaded', iniciarMensajes);
