@@ -1,8 +1,16 @@
-// Justificación de selectores: se usa querySelector para obtener un solo elemento por su id y closest para encontrar el botón o la fila desde el elemento donde se hizo clic.
+// Justificación de selectores: se usa querySelector para obtener un solo elemento por su id y querySelectorAll para recorrer todas las filas de la tabla al calcular los totales.
+
+const PORCENTAJE_REGALIA = 10;
 
 function crearCelda(contenido) {
     const celda = document.createElement('td');
     celda.textContent = contenido;
+    return celda;
+}
+
+function crearCeldaConClase(contenido, clases) {
+    const celda = crearCelda(contenido);
+    celda.className = clases;
     return celda;
 }
 
@@ -33,12 +41,14 @@ function obtenerFechaHoy() {
     });
 }
 
+function formatearMoneda(valor) {
+    return Number(valor).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+}
+
 function crearFilaPublicacion(articulo, tipo, precio) {
     const fila = document.createElement('tr');
     const claseTipo = tipo === 'Venta' ? 'text-bg-success' : 'text-bg-info';
-    const textoPrecio = tipo === 'Venta'
-        ? Number(precio).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })
-        : 'Gratis';
+    const textoPrecio = tipo === 'Venta' ? formatearMoneda(precio) : 'Gratis';
 
     fila.appendChild(crearCelda(articulo));
     fila.appendChild(crearCeldaBadge(tipo, claseTipo));
@@ -100,4 +110,58 @@ function iniciarPerfil() {
     document.querySelector('#listaPublicaciones').addEventListener('click', eliminarPublicacion);
 }
 
+function crearFilaVenta(articulo, precio) {
+    const fila = document.createElement('tr');
+    const monto = Math.round(precio * PORCENTAJE_REGALIA) / 100;
+
+    fila.dataset.precio = precio;
+    fila.dataset.regalia = monto;
+
+    fila.appendChild(crearCeldaConClase(articulo, 'fw-semibold'));
+    fila.appendChild(crearCelda(obtenerFechaHoy()));
+    fila.appendChild(crearCelda(formatearMoneda(precio)));
+    fila.appendChild(crearCeldaBadge(PORCENTAJE_REGALIA + ' %', 'bg-light text-dark border'));
+    fila.appendChild(crearCeldaConClase(formatearMoneda(monto), 'fw-bold text-success'));
+
+    return fila;
+}
+
+function recalcularTotales() {
+    const filas = document.querySelectorAll('#listaVentas tr');
+    let totalVentas = 0;
+    let totalRegalias = 0;
+
+    filas.forEach(function (fila) {
+        totalVentas += Number(fila.dataset.precio);
+        totalRegalias += Number(fila.dataset.regalia);
+    });
+
+    document.querySelector('#totalVentas').textContent = formatearMoneda(totalVentas);
+    document.querySelector('#totalRegalias').textContent = formatearMoneda(totalRegalias);
+}
+
+function agregarVenta(evento) {
+    evento.preventDefault();
+
+    const formulario = document.querySelector('#formVenta');
+    const articulo = document.querySelector('#articuloVenta').value.trim();
+    const precio = Number(document.querySelector('#precioVenta').value);
+    const lista = document.querySelector('#listaVentas');
+
+    if (articulo === '' || precio <= 0) return;
+
+    lista.appendChild(crearFilaVenta(articulo, precio));
+    recalcularTotales();
+
+    formulario.reset();
+}
+
+function iniciarAdmin() {
+    const formulario = document.querySelector('#formVenta');
+    if (!formulario) return;
+
+    formulario.addEventListener('submit', agregarVenta);
+}
+
 document.addEventListener('DOMContentLoaded', iniciarPerfil);
+document.addEventListener('DOMContentLoaded', iniciarAdmin);
