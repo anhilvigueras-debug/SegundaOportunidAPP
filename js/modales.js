@@ -1,11 +1,9 @@
-// Justificación de selectores: Se usa querySelector y querySelectorAll para capturar de forma eficiente los botones del catálogo y modificar dinámicamente los elementos dentro del modal unificado.
-
-// 1. Función con nombre para extraer datos con dataset e inyectarlos al modal
+// 1. Extraer datos del dataset e inyectarlos en el modal dinámico
 function cargarDatosModal(evento) {
     const boton = evento.target.closest('.btn-modal-detalle');
     if (!boton) return;
 
-    // Lectura de los atributos dataset del elemento cliqueado
+    // Lectura de los atributos dataset del botón cliqueado
     const titulo = boton.dataset.titulo;
     const descripcion = boton.dataset.descripcion;
     const imagen = boton.dataset.imagen;
@@ -15,14 +13,21 @@ function cargarDatosModal(evento) {
     const telefono = boton.dataset.telefono;
     const correo = boton.dataset.correo;
 
-    // Inyección dinámica al DOM usando querySelector
-    document.querySelector('#modalTitulo').textContent = titulo || 'Detalle del Producto';
-    document.querySelector('#modalDescripcion').textContent = descripcion || '';
-    document.querySelector('#modalImagen').src = imagen || '';
-    document.querySelector('#modalPrecio').textContent = precio || '';
-    document.querySelector('#modalUbicacion').textContent = ubicacion || '';
-    document.querySelector('#modalVendedor').textContent = vendedor || '';
-    
+    const elTitulo = document.querySelector('#modalTitulo');
+    const elDescripcion = document.querySelector('#modalDescripcion');
+    const elImagen = document.querySelector('#modalImagen');
+    const elPrecio = document.querySelector('#modalPrecio');
+    const elUbicacion = document.querySelector('#modalUbicacion');
+    const elVendedor = document.querySelector('#modalVendedor');
+
+    if (elTitulo) elTitulo.textContent = titulo || 'Detalle del Producto';
+    if (elDescripcion) elDescripcion.textContent = descripcion || '';
+    if (elImagen) elImagen.src = imagen || '';
+    if (elPrecio) elPrecio.textContent = precio || '';
+    if (elUbicacion) elUbicacion.textContent = ubicacion || '';
+    if (elVendedor) elVendedor.textContent = vendedor || '';
+
+    // Actualización de enlaces de contacto 
     const elTelefono = document.querySelector('#modalTelefono');
     if (elTelefono) {
         elTelefono.textContent = telefono || '';
@@ -35,7 +40,7 @@ function cargarDatosModal(evento) {
         elCorreo.href = `mailto:${correo || ''}`;
     }
 
-    // Instancia e invocación del modal usando Bootstrap JS
+    // Instancia y apertura del modal dinámico de Bootstrap 
     const elModal = document.querySelector('#modalDinamico');
     if (elModal) {
         const modalBootstrap = bootstrap.Modal.getOrCreateInstance(elModal);
@@ -43,13 +48,13 @@ function cargarDatosModal(evento) {
     }
 }
 
-// 2. Función con nombre para registrar eventos ( SIN onclick inline)
+//  Registrar eventos de clic 
 function inicializarModalesDinamicos() {
     const botonesDetalle = document.querySelectorAll('.btn-modal-detalle');
-    botonesDetalle.forEach(function(boton) {
+    botonesDetalle.forEach(function (boton) {
         boton.addEventListener('click', cargarDatosModal);
     });
 }
 
-// 3. Inicialización cuando el DOM esté listo
+//  Inicialización tras la carga del DOM
 document.addEventListener('DOMContentLoaded', inicializarModalesDinamicos);

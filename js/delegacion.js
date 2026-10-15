@@ -1,4 +1,9 @@
+
+
 const PORCENTAJE_REGALIA = 10;
+
+
+// FUNCIONES DE CREACIÓN DE ELEMENTOS
 
 function crearCelda(contenido) {
     const celda = document.createElement('td');
@@ -51,6 +56,10 @@ function formatearMoneda(valor) {
     return Number(valor).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
 }
 
+
+//  MÓDULO PERFIL (Publicaciones)
+
+
 function crearFilaPublicacion(articulo, tipo, precio) {
     const fila = document.createElement('tr');
     const claseTipo = tipo === 'Venta' ? 'text-bg-success' : 'text-bg-info';
@@ -69,6 +78,8 @@ function crearFilaPublicacion(articulo, tipo, precio) {
 function ajustarPrecioPublicacion() {
     const tipo = document.querySelector('#tipoPublicacion');
     const precio = document.querySelector('#precioPublicacion');
+
+    if (!tipo || !precio) return;
 
     if (tipo.value === 'Donación') {
         precio.value = '';
@@ -112,9 +123,21 @@ function iniciarPerfil() {
     if (!formulario) return;
 
     formulario.addEventListener('submit', agregarPublicacion);
-    document.querySelector('#tipoPublicacion').addEventListener('change', ajustarPrecioPublicacion);
-    document.querySelector('#listaPublicaciones').addEventListener('click', eliminarPublicacion);
+    
+    const selectorTipo = document.querySelector('#tipoPublicacion');
+    if (selectorTipo) {
+        selectorTipo.addEventListener('change', ajustarPrecioPublicacion);
+    }
+
+    const listaPub = document.querySelector('#listaPublicaciones');
+    if (listaPub) {
+        listaPub.addEventListener('click', eliminarPublicacion);
+    }
 }
+
+// ==========================================
+// 2. MÓDULO ADMINISTRACIÓN (Ventas y Regalías)
+// ==========================================
 
 function crearFilaVenta(articulo, precio) {
     const fila = document.createElement('tr');
@@ -139,12 +162,15 @@ function recalcularTotales() {
     let totalRegalias = 0;
 
     filas.forEach(function (fila) {
-        totalVentas += Number(fila.dataset.precio);
-        totalRegalias += Number(fila.dataset.regalia);
+        totalVentas += Number(fila.dataset.precio || 0);
+        totalRegalias += Number(fila.dataset.regalia || 0);
     });
 
-    document.querySelector('#totalVentas').textContent = formatearMoneda(totalVentas);
-    document.querySelector('#totalRegalias').textContent = formatearMoneda(totalRegalias);
+    const totalVentasEl = document.querySelector('#totalVentas');
+    const totalRegaliasEl = document.querySelector('#totalRegalias');
+
+    if (totalVentasEl) totalVentasEl.textContent = formatearMoneda(totalVentas);
+    if (totalRegaliasEl) totalRegaliasEl.textContent = formatearMoneda(totalRegalias);
 }
 
 function agregarVenta(evento) {
@@ -179,8 +205,16 @@ function iniciarAdmin() {
     if (!formulario) return;
 
     formulario.addEventListener('submit', agregarVenta);
-    document.querySelector('#listaVentas').addEventListener('click', eliminarVenta);
+    
+    const listaVentas = document.querySelector('#listaVentas');
+    if (listaVentas) {
+        listaVentas.addEventListener('click', eliminarVenta);
+    }
 }
+
+
+//  MÓDULO MENSAJES (Chat en vivo)
+
 
 function crearBotonEliminarMensaje() {
     const boton = document.createElement('button');
@@ -248,9 +282,19 @@ function iniciarMensajes() {
     if (!formulario) return;
 
     formulario.addEventListener('submit', agregarMensaje);
-    document.querySelector('#listaMensajes').addEventListener('click', eliminarMensaje);
+    
+    const listaMensajes = document.querySelector('#listaMensajes');
+    if (listaMensajes) {
+        listaMensajes.addEventListener('click', eliminarMensaje);
+    }
 }
 
-document.addEventListener('DOMContentLoaded', iniciarPerfil);
-document.addEventListener('DOMContentLoaded', iniciarAdmin);
-document.addEventListener('DOMContentLoaded', iniciarMensajes);
+
+// INICIALIZACIÓN GLOBAL
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    iniciarPerfil();
+    iniciarAdmin();
+    iniciarMensajes();
+});
