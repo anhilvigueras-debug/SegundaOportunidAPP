@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios - SegundaOportunidAPP</title>
     
-    <!-- Bootstrap 5 -->
+    <!-- Bootstrap 5.3 CSS & Estilos Personalizados -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- NAVEGACIÓN PRINCIPAL LIMPIA -->
+    <!-- BARRA DE NAVEGACIÓN PRINCIPAL -->
     <header class="sticky-top shadow-sm" style="background-color: var(--color-menu);">
         <nav class="navbar navbar-expand-lg navbar-dark container py-2">
             <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html">
@@ -19,8 +19,8 @@
                 <span>SegundaOportunidAPP</span>
             </a>
             
-            <!-- BOTÓN DE MODO OSCURO -->
-            <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3">
+            <!-- BOTÓN DE CAMBIO DE TEMA -->
+            <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3" type="button">
                 🌙 Cambiar Tema
             </button>
             
@@ -38,6 +38,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active fw-bold" aria-current="page" href="servicios.html">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donaciones.html">Donaciones</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contacto.html">Contacto</a>
@@ -98,8 +101,97 @@
                         <img src="img/silla1.png" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Restauración de Muebles">
                         <div class="card-body d-flex flex-column p-3">
                             <h3 class="encabezado mb-2">Restauración de Muebles</h3>
-                            <p class="texto-secundario text-muted flex-grow-1 mb-3">Servicio de lijado, barnizado y tapicería básica.</p>
+                            <p class="texto-secundario text-muted flex-grow-1 mb-3">Servicio de lijado, barnizado y tapicería básica para renovar tu mobiliario.</p>
                             <button type="button" 
                                     class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
                                     data-titulo="Restauración de Muebles"
-                                    data-descripcion="Ayudamos a
+                                    data-descripcion="Ayudamos a reacondicionar sillas, mesas y estantes de madera para alargar su vida útil."
+                                    data-imagen="img/silla1.png"
+                                    data-precio="Costo de materiales"
+                                    data-ubicacion="Mineral de la Reforma, Hidalgo"
+                                    data-vendedor="Colectivo Madera Viva"
+                                    data-telefono="7719876543"
+                                    data-correo="maderaviva@example.com">
+                                Ver detalle del servicio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SERVICIO 3 -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
+                        <img src="img/libros1.jpg" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Recolección a domicilio">
+                        <div class="card-body d-flex flex-column p-3">
+                            <h3 class="encabezado mb-2">Recolección a Domicilio</h3>
+                            <p class="texto-secundario text-muted flex-grow-1 mb-3">Apoyo logístico para recoger donaciones pesadas o de gran volumen.</p>
+                            <button type="button" 
+                                    class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
+                                    data-titulo="Recolección a Domicilio"
+                                    data-descripcion="Programa de apoyo para el traslado seguro de donaciones de gran tamaño."
+                                    data-imagen="img/libros1.jpg"
+                                    data-precio="Gratuito"
+                                    data-ubicacion="Pachuca de Soto y Mineral de la Reforma"
+                                    data-vendedor="Equipo SegundaOportunidAPP"
+                                    data-telefono="7714567890"
+                                    data-correo="soporte@segundaoportunidad.com">
+                                Ver detalle del servicio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-white py-4 mt-auto shadow-sm" style="background-color: var(--color-menu);">
+        <div class="container text-center text-md-start">
+            <div class="row gy-3 align-items-center">
+                <div class="col-md-6">
+                    <h5 class="encabezado text-white mb-1">SegundaOportunidAPP</h5>
+                    <p class="texto-secundario text-white-50 mb-0">Dándole una segunda vida a los objetos y apoyando a la comunidad.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="texto-secundario text-white mb-0">&copy; 2026 SegundaOportunidAPP. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DINÁMICO ÚNICO DE DETALLES -->
+    <div class="modal fade" id="modalDinamico" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h3 class="modal-title encabezado" id="modalTitulo">Detalle del Servicio</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <img id="modalImagen" src="" class="img-fluid rounded-3 mb-3 w-100" style="max-height: 250px; object-fit: cover;" alt="Imagen del servicio">
+                    <p id="modalDescripcion" class="texto-normal"></p>
+                    <p id="modalPrecio" class="fw-bold fs-5 text-primary"></p>
+                    <hr>
+                    <h5 class="encabezado">Ubicación</h5>
+                    <p id="modalUbicacion" class="texto-secundario text-muted mb-3"></p>
+                    <h5 class="encabezado">Contacto</h5>
+                    <ul class="list-unstyled mb-0 texto-secundario text-muted">
+                        <li><strong>Organizador:</strong> <span id="modalVendedor"></span></li>
+                        <li><strong>Teléfono:</strong> <a id="modalTelefono" href="" class="text-decoration-none"></a></li>
+                        <li><strong>Correo:</strong> <a id="modalCorreo" href="" class="text-decoration-none"></a></li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4 texto-secundario" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS PROPIOS Y BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/modales.js"></script>
+    <script src="js/busqueda.js"></script>
+</body>
+</html>
