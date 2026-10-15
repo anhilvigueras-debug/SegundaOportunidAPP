@@ -1,7 +1,9 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // BUSQUEDA DEL CATALOGO DE INICIO
+  
+    // BÚSQUEDA EN EL CATÁLOGO DE INICIO
+   
     const buscarArticulo = document.getElementById("buscarArticulo");
 
     if (buscarArticulo) {
@@ -14,17 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             articulos.forEach(function (articulo) {
                 const contenido = articulo.textContent.toLowerCase();
-
-                if (contenido.includes(texto)) {
-                    articulo.style.display = "";
-                } else {
-                    articulo.style.display = "none";
-                }
+                articulo.style.display = contenido.includes(texto) ? "" : "none";
             });
         });
     }
 
-    // BUSQUEDA DE CONVERSACIONES
+   
+    //  BÚSQUEDA EN LISTA DE CONVERSACIONES (CHAT)
+ 
     const campoMensajes = document.getElementById("campoBusqueda");
 
     if (campoMensajes) {
@@ -38,21 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 conversaciones.forEach(function (conversacion) {
                     const contenido = conversacion.textContent.toLowerCase();
-
-                    if (contenido.includes(texto)) {
-                        conversacion.style.display = "";
-                    } else {
-                        conversacion.style.display = "none";
-                    }
+                    conversacion.style.display = contenido.includes(texto) ? "" : "none";
                 });
             });
         }
     }
 
-    // BUSQUEDA DE SERVICIOS
-    const buscarServicio = document.querySelector(
-        'main input#campoBusqueda'
-    );
+    
+    //  BÚSQUEDA EN CATÁLOGO DE SERVICIOS
+  
+    const buscarServicio = document.querySelector("main input#campoBusqueda");
 
     if (buscarServicio && !document.getElementById("buscarArticulo")) {
         const servicios = document.querySelectorAll(
@@ -64,12 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             servicios.forEach(function (servicio) {
                 const contenido = servicio.textContent.toLowerCase();
-
-                if (contenido.includes(texto)) {
-                    servicio.style.display = "";
-                } else {
-                    servicio.style.display = "none";
-                }
+                servicio.style.display = contenido.includes(texto) ? "" : "none";
             });
         });
     }

@@ -1,27 +1,44 @@
-function mostrarToastContacto(mensaje) {
-    const toastElemento = document.querySelector("#toastContacto");
-    const mensajeElemento = document.querySelector("#mensajeToastContacto");
+/**
+ * SegundaOportunidAPP - Notificaciones Toast (toad.js / toasts.js)
+ * Responsable: Diego Cervantes Pérez
+ * Descripción: Maneja el despliegue de mensajes flotantes (Toast) tras el envío 
+ * exitoso de formularios (contacto, donaciones, reportes).
+ */
 
-    if (!toastElemento || !mensajeElemento) return;
+document.addEventListener("DOMContentLoaded", function () {
 
-    mensajeElemento.textContent = mensaje;
+    /**
+     * Muestra la notificación Toast con el mensaje especificado
+     * @param {string} mensaje - Texto a mostrar dentro de la alerta Toast
+     */
+    function mostrarToastContacto(mensaje) {
+        const toastElemento = document.querySelector("#toastContacto");
+        const mensajeElemento = document.querySelector("#mensajeToastContacto");
 
-    const toast = bootstrap.Toast.getOrCreateInstance(toastElemento);
-    toast.show();
-}
+        if (!toastElemento || !mensajeElemento) return;
 
-const formularioContacto = document.querySelector("#formularioContacto");
+        mensajeElemento.textContent = mensaje;
 
-if (formularioContacto) {
-    formularioContacto.addEventListener("submit", function (evento) {
-        evento.preventDefault();
+        const toast = bootstrap.Toast.getOrCreateInstance(toastElemento);
+        toast.show();
+    }
 
-        if (!formularioContacto.checkValidity()) {
-            formularioContacto.reportValidity();
-            return;
-        }
+    // Vinculación con el formulario de contacto
+    const formularioContacto = document.querySelector("#formularioContacto");
 
-        mostrarToastContacto("Tu mensaje se ha enviado correctamente.");
-        formularioContacto.reset();
-    });
-}
+    if (formularioContacto) {
+        formularioContacto.addEventListener("submit", function (evento) {
+            evento.preventDefault();
+
+            // Verificación previa antes de mostrar el toast
+            if (!formularioContacto.checkValidity()) {
+                formularioContacto.reportValidity();
+                return;
+            }
+
+            mostrarToastContacto("Tu mensaje se ha enviado correctamente.");
+            formularioContacto.reset();
+        });
+    }
+
+});

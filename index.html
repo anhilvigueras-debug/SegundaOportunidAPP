@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SegundaOportunidAPP - Inicio</title>
     
+    <!-- CSS Bootstrap 5.3 & Estilos Personalizados -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- NAVEGACIÓN PRINCIPAL  -->
+    <!-- NAVEGACIÓN PRINCIPAL -->
     <header class="sticky-top shadow-sm" style="background-color: var(--color-menu);">
         <nav class="navbar navbar-expand-lg navbar-dark container py-2">
             <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html">
@@ -18,19 +19,21 @@
                 <span>SegundaOportunidAPP</span>
             </a>
 
-            <!-- BOTÓN DE MODO OSCURO RESCATADO -->
-            <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3">
+            <!-- BOTÓN DE CAMBIO DE TEMA -->
+            <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3" type="button">
                 🌙 Cambiar Tema
             </button>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-lg-center gap-1 mt-3 mt-lg-0">
-                    <li class="nav-item"><a class="nav-link active fw-bold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold" aria-current="page" href="index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
                     <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="donaciones.html">Donaciones</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
                     <li class="nav-item"><a class="nav-link" href="reporte.html">Reportar problema</a></li>
                     <li class="nav-item ms-lg-2"><a class="btn btn-outline-light btn-sm px-3 rounded-pill texto-secundario" href="login.html">Iniciar sesión</a></li>
@@ -93,152 +96,148 @@
             </div>
         </section>
 
-      <!-- CATÁLOGO DE ARTÍCULOS -->
-<section class="container mb-5" aria-label="Catálogo de artículos">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-2">
-        
-        <div class="mb-4">
-        <h2 class="subtitulo mb-0">Catálogo</h2>
-        <label for="Buscar Articulo" class="form-label mb-2 texto-secundario fw-bold">
-        </label>
-    </div>
+        <!-- CATÁLOGO DE ARTÍCULOS -->
+        <section class="container mb-5" aria-label="Catálogo de artículos">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-2">
+                <div>
+                    <h2 class="subtitulo mb-0">Catálogo</h2>
+                </div>
 
-        <div class="d-flex align-items-center gap-2" style="max-width: 250px;">
-            <label for="estado" class="form-label mb-0 texto-secundario fw-bold">Estado:</label>
-            <select id="estado" class="form-select rounded-3 shadow-sm border-0">
-                <option value="finalizado">Finalizado</option>
-                <option value="entregado">Entregado</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="mb-4">
-        <label for="Buscar Articulo" class="form-label mb-2 texto-secundario fw-bold">
-            Buscar artículo:
-        </label>
-        <input type="text" 
-        id="buscarArticulo"
-        class="form-control rounded-3 shadow-sm"
-        placeholder="Escribe el nombre del artículo que deseas buscar...">
-    </div>
-
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-        <!-- TARJETA 1 -->
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
-                <img src="img/bici2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Bicicleta de montaña" loading="lazy">
-                <div class="card-body d-flex flex-column p-3">
-                    <h3 class="encabezado mb-2">Bicicleta de montaña</h3>
-                    <p class="texto-secundario text-muted flex-grow-1 mb-2">Rodada 26, en buen estado.</p>
-                    <div class="d-flex gap-1 mb-3">
-                        <span class="badge bg-secondary">Finalizado</span>
-                        <span class="badge bg-success">Venta</span>
-                    </div>
-                    <button type="button" 
-                            class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
-                            data-titulo="Bicicleta de montaña"
-                            data-descripcion="Rodada 26, en buen estado."
-                            data-imagen="img/bici2.jpg"
-                            data-precio="$1,500.00"
-                            data-ubicacion="Pachuca de Soto y Mineral de la Reforma, Hidalgo."
-                            data-vendedor="Alexander"
-                            data-telefono="772 123 4567"
-                            data-correo="alexander@gmail.com">
-                        Ver detalle
-                    </button>
+                <div class="d-flex align-items-center gap-2" style="max-width: 250px;">
+                    <label for="estado" class="form-label mb-0 texto-secundario fw-bold">Estado:</label>
+                    <select id="estado" class="form-select rounded-3 shadow-sm border-0">
+                        <option value="finalizado">Finalizado</option>
+                        <option value="entregado">Entregado</option>
+                    </select>
                 </div>
             </div>
-        </div>
 
-        <!-- TARJETA 2 -->
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
-                <img src="img/libros2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Colección de libros" loading="lazy">
-                <div class="card-body d-flex flex-column p-3">
-                    <h3 class="encabezado mb-2">Colección de libros</h3>
-                    <p class="texto-secundario text-muted flex-grow-1 mb-2">10 libros de literatura variada.</p>
-                    <div class="d-flex gap-1 mb-3">
-                        <span class="badge bg-info text-dark">Donación</span>
-                        <span class="badge bg-secondary">Finalizado</span>
+            <div class="mb-4">
+                <label for="buscarArticulo" class="form-label mb-2 texto-secundario fw-bold">
+                    Buscar artículo:
+                </label>
+                <input type="text" 
+                       id="buscarArticulo"
+                       class="form-control rounded-3 shadow-sm"
+                       placeholder="Escribe el nombre del artículo que deseas buscar...">
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+                <!-- TARJETA 1 -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
+                        <img src="img/bici2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Bicicleta de montaña" loading="lazy">
+                        <div class="card-body d-flex flex-column p-3">
+                            <h3 class="encabezado mb-2">Bicicleta de montaña</h3>
+                            <p class="texto-secundario text-muted flex-grow-1 mb-2">Rodada 26, en buen estado.</p>
+                            <div class="d-flex gap-1 mb-3">
+                                <span class="badge bg-secondary">Finalizado</span>
+                                <span class="badge bg-success">Venta</span>
+                            </div>
+                            <button type="button" 
+                                    class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
+                                    data-titulo="Bicicleta de montaña"
+                                    data-descripcion="Rodada 26, en buen estado."
+                                    data-imagen="img/bici2.jpg"
+                                    data-precio="$1,500.00"
+                                    data-ubicacion="Pachuca de Soto y Mineral de la Reforma, Hidalgo."
+                                    data-vendedor="Alexander"
+                                    data-telefono="772 123 4567"
+                                    data-correo="alexander@gmail.com">
+                                Ver detalle
+                            </button>
+                        </div>
                     </div>
-                    <button type="button" 
-                            class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
-                            data-titulo="Colección de libros"
-                            data-descripcion="10 libros de literatura variada."
-                            data-imagen="img/libros2.jpg"
-                            data-precio="Gratis"
-                            data-ubicacion="Colonia Centro, Pachuca de Soto, Hidalgo."
-                            data-vendedor="Mariana"
-                            data-telefono="771 765 4321"
-                            data-correo="mariana.lopez@example.com">
-                        Ver detalle
-                    </button>
+                </div>
+
+                <!-- TARJETA 2 -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
+                        <img src="img/libros2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Colección de libros" loading="lazy">
+                        <div class="card-body d-flex flex-column p-3">
+                            <h3 class="encabezado mb-2">Colección de libros</h3>
+                            <p class="texto-secundario text-muted flex-grow-1 mb-2">10 libros de literatura variada.</p>
+                            <div class="d-flex gap-1 mb-3">
+                                <span class="badge bg-info text-dark">Donación</span>
+                                <span class="badge bg-secondary">Finalizado</span>
+                            </div>
+                            <button type="button" 
+                                    class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
+                                    data-titulo="Colección de libros"
+                                    data-descripcion="10 libros de literatura variada."
+                                    data-imagen="img/libros2.jpg"
+                                    data-precio="Gratis"
+                                    data-ubicacion="Colonia Centro, Pachuca de Soto, Hidalgo."
+                                    data-vendedor="Mariana"
+                                    data-telefono="771 765 4321"
+                                    data-correo="mariana.lopez@example.com">
+                                Ver detalle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TARJETA 3 -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
+                        <img src="img/silla2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Silla de oficina" loading="lazy">
+                        <div class="card-body d-flex flex-column p-3">
+                            <h3 class="encabezado mb-2">Silla de oficina</h3>
+                            <p class="texto-secundario text-muted flex-grow-1 mb-2">Ergonómica, con ruedas.</p>
+                            <div class="d-flex gap-1 mb-3">
+                                <span class="badge bg-success">Venta</span>
+                                <span class="badge bg-secondary">Finalizado</span>
+                            </div>
+                            <button type="button" 
+                                    class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
+                                    data-titulo="Silla de oficina"
+                                    data-descripcion="Ergonómica, con ruedas."
+                                    data-imagen="img/silla2.jpg"
+                                    data-precio="$800.00"
+                                    data-ubicacion="Colonia Doctores, Pachuca de Soto, Hidalgo."
+                                    data-vendedor="Carlos"
+                                    data-telefono="771 987 6543"
+                                    data-correo="carlos.ramirez@example.com">
+                                Ver detalle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TARJETA 4 -->
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
+                        <img src="img/lamp1.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Lámpara de escritorio" loading="lazy">
+                        <div class="card-body d-flex flex-column p-3">
+                            <h3 class="encabezado mb-2">Lámpara de escritorio</h3>
+                            <p class="texto-secundario text-muted flex-grow-1 mb-2">Funciona perfecto, luz cálida.</p>
+                            <div class="d-flex gap-1 mb-3">
+                                <span class="badge bg-info text-dark">Donación</span>
+                                <span class="badge bg-secondary">Finalizado</span>
+                            </div>
+                            <button type="button" 
+                                    class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
+                                    data-titulo="Lámpara de escritorio"
+                                    data-descripcion="Funciona perfecto, luz cálida."
+                                    data-imagen="img/lamp1.jpg"
+                                    data-precio="Gratis"
+                                    data-ubicacion="Colonia Periodistas, Pachuca de Soto, Hidalgo."
+                                    data-vendedor="Fernanda"
+                                    data-telefono="771 456 7890"
+                                    data-correo="fernanda.torres@example.com">
+                                Ver detalle
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- TARJETA 3 -->
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
-                <img src="img/silla2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Silla de oficina" loading="lazy">
-                <div class="card-body d-flex flex-column p-3">
-                    <h3 class="encabezado mb-2">Silla de oficina</h3>
-                    <p class="texto-secundario text-muted flex-grow-1 mb-2">Ergonómica, con ruedas.</p>
-                    <div class="d-flex gap-1 mb-3">
-                        <span class="badge bg-success">Venta</span>
-                        <span class="badge bg-secondary">Finalizado</span>
-                    </div>
-                    <button type="button" 
-                            class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
-                            data-titulo="Silla de oficina"
-                            data-descripcion="Ergonómica, con ruedas."
-                            data-imagen="img/silla2.jpg"
-                            data-precio="$800.00"
-                            data-ubicacion="Colonia Doctores, Pachuca de Soto, Hidalgo."
-                            data-vendedor="Carlos"
-                            data-telefono="771 987 6543"
-                            data-correo="carlos.ramirez@example.com">
-                        Ver detalle
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- TARJETA 4 -->
-        <div class="col">
-            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
-                <img src="img/lamp1.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Lámpara de escritorio" loading="lazy">
-                <div class="card-body d-flex flex-column p-3">
-                    <h3 class="encabezado mb-2">Lámpara de escritorio</h3>
-                    <p class="texto-secundario text-muted flex-grow-1 mb-2">Funciona perfecto, luz cálida.</p>
-                    <div class="d-flex gap-1 mb-3">
-                        <span class="badge bg-info text-dark">Donación</span>
-                        <span class="badge bg-secondary">Finalizado</span>
-                    </div>
-                    <button type="button" 
-                            class="btn btn-primary w-100 rounded-pill texto-secundario btn-modal-detalle" 
-                            data-titulo="Lámpara de escritorio"
-                            data-descripcion="Funciona perfecto, luz cálida."
-                            data-imagen="img/lamp1.jpg"
-                            data-precio="Gratis"
-                            data-ubicacion="Colonia Periodistas, Pachuca de Soto, Hidalgo."
-                            data-vendedor="Fernanda"
-                            data-telefono="771 456 7890"
-                            data-correo="fernanda.torres@example.com">
-                        Ver detalle
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- FORMULARIO DE DONACIÓN -->
         <section id="donaciones" class="container mb-5">
             <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
                 <h2 class="subtitulo mb-3">Realizar una Donación</h2>
-                <form id="formDonacion" onsubmit="event.preventDefault();">
+                <form id="formDonacion">
                     <div class="mb-3">
                         <label for="nombreObjeto" class="form-label texto-normal fw-bold">Objeto a donar:</label>
                         <input type="text" class="form-control rounded-3 p-2" id="nombreObjeto" placeholder="Ej. Lámpara de mesa" required>
@@ -271,33 +270,33 @@
     </footer>
 
     <!-- MODAL DINÁMICO ÚNICO DE DETALLES -->
-<div class="modal fade" id="modalDinamico" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 border-0 shadow">
-            <div class="modal-header border-0 pb-0">
-                <h3 class="modal-title encabezado" id="modalTitulo">Detalle del Producto</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body p-4">
-                <img id="modalImagen" src="" class="img-fluid rounded-3 mb-3 w-100" style="max-height: 250px; object-fit: cover;" alt="Imagen del producto">
-                <p id="modalDescripcion" class="texto-normal"></p>
-                <p id="modalPrecio" class="fw-bold fs-5 text-primary"></p>
-                <hr>
-                <h5 class="encabezado">Ubicación</h5>
-                <p id="modalUbicacion" class="texto-secundario text-muted mb-3"></p>
-                <h5 class="encabezado">Contacto</h5>
-                <ul class="list-unstyled mb-0 texto-secundario text-muted">
-                    <li><strong>Contacto:</strong> <span id="modalVendedor"></span></li>
-                    <li><strong>Teléfono:</strong> <a id="modalTelefono" href="" class="text-decoration-none"></a></li>
-                    <li><strong>Correo:</strong> <a id="modalCorreo" href="" class="text-decoration-none"></a></li>
-                </ul>
-            </div>
-            <div class="modal-footer border-0 pt-0">
-                <button type="button" class="btn btn-secondary rounded-pill px-4 texto-secundario" data-bs-dismiss="modal">Cerrar</button>
+    <div class="modal fade" id="modalDinamico" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h3 class="modal-title encabezado" id="modalTitulo">Detalle del Producto</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <img id="modalImagen" src="" class="img-fluid rounded-3 mb-3 w-100" style="max-height: 250px; object-fit: cover;" alt="Imagen del producto">
+                    <p id="modalDescripcion" class="texto-normal"></p>
+                    <p id="modalPrecio" class="fw-bold fs-5 text-primary"></p>
+                    <hr>
+                    <h5 class="encabezado">Ubicación</h5>
+                    <p id="modalUbicacion" class="texto-secundario text-muted mb-3"></p>
+                    <h5 class="encabezado">Contacto</h5>
+                    <ul class="list-unstyled mb-0 texto-secundario text-muted">
+                        <li><strong>Contacto:</strong> <span id="modalVendedor"></span></li>
+                        <li><strong>Teléfono:</strong> <a id="modalTelefono" href="" class="text-decoration-none"></a></li>
+                        <li><strong>Correo:</strong> <a id="modalCorreo" href="" class="text-decoration-none"></a></li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4 texto-secundario" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- MODAL DE CONFIRMACIÓN -->
     <div class="modal fade" id="modalConfirmacionDonacion" tabindex="-1" aria-labelledby="tituloModalDonacion" aria-hidden="true">
@@ -317,10 +316,11 @@
         </div>
     </div>
 
-    <!-- SCRIPTS CON AMBOS ARCHIVOS -->
+    <!-- SCRIPTS PROPIOS Y BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/modales.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/toasts.js"></script>
+    <script src="js/modales.js"></script>
+    <script src="js/busqueda.js"></script>
+    <script src="js/validaciones.js"></script>
 </body>
 </html>
