@@ -1,64 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/* 
-   PALETA DE COLORES
-  */
 :root {
-    --color-accion: #D96281;     /* Rosa Primario (Botones de acción) */
-    --color-menu: #499EBF;       /* Azul Interactivo (Menús e Encabezados) */
-    --color-fondo: #F2E8D5;      /* Crema (Fondo de la página web) */
-    --color-iconos: #A4A66A;     /* Verde Oliva (Iconografía) */
-    --color-bordes: #6ACED9;     /* Cian (Bordes y fondos secundarios) */
+    --color-accion: #D96281;
+    --color-menu: #499EBF;
+    --color-fondo: #F2E8D5;
+    --color-iconos: #A4A66A;
+    --color-bordes: #6ACED9;
+    --texto-principal: #212529;
+    --texto-secundario: #5F6368;
+    --texto-hora: #6C757D;
+    --superficie: #FFFFFF;
+    --superficie-hover: #F8F9FA;
+    --burbuja-recibida: #F2F2F2;
+    --burbuja-borde: #E1E1E1;
 }
 
-/* 
-   2. ESTILOS BASE Y ESCALA TIPOGRÁFICA (ROBOTO)
-   */
 body {
     margin: 0;
     background-color: var(--color-fondo);
     font-family: 'Roboto', sans-serif;
-    color: #212529;
+    color: var(--texto-principal);
     font-size: 16px;
     font-weight: 400;
 }
 
-/* Título principal (32px Bold) */
 h1, .titulo-principal, .titulo-contacto {
     font-size: 32px !important;
     font-weight: 700 !important;
-    color: #212529;
+    color: var(--texto-principal);
     margin-bottom: 8px;
 }
 
-/* Subtítulos (24px Medium) */
 h2, h3, .subtitulo {
     font-size: 24px !important;
     font-weight: 500 !important;
 }
 
-/* Encabezados de Sección y Tarjetas (20px Medium) */
 h4, h5, .encabezado {
     font-size: 20px !important;
     font-weight: 500 !important;
 }
 
-/* Texto Normal (16px Regular) */
 p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
     font-size: 16px !important;
     font-weight: 400;
 }
 
-/* Texto Secundario (14px Regular) */
 .texto-secundario, .ultimo-mensaje, .chat-publicacion {
     font-size: 14px !important;
     font-weight: 400;
-    color: #5F6368;
+    color: var(--texto-secundario);
 }
 
-/* 
-   3. BOTONES Y COMPONENTES REUTILIZABLES
-  */
 .btn-primary, .boton-enviar, .send-button {
     background-color: var(--color-accion) !important;
     border-color: var(--color-accion) !important;
@@ -78,7 +71,6 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
     color: #FFFFFF !important;
 }
 
-/* Badges / Etiquetas de Roles */
 .badge-comprador {
     background-color: var(--color-accion);
     color: #FFFFFF;
@@ -100,9 +92,6 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
     font-weight: 500;
 }
 
-/*
-   4. NAVBAR Y NAVEGACIÓN
-  */
 .navbar-principal {
     background-color: var(--color-menu);
 }
@@ -118,11 +107,8 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
     color: #FFFFFF;
 }
 
-/*
-   5. FORMULARIOS (CONTACTO / REPORTES / LOGIN / PUBLICAR)
- */
 .formulario-contacto, .card-formulario, .conversaciones-card, .chat-card {
-    background-color: #FFFFFF;
+    background-color: var(--superficie);
     border: 1px solid var(--color-bordes);
     border-radius: 12px;
     overflow: hidden;
@@ -142,11 +128,8 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
     box-shadow: 0 0 0 0.2rem rgba(73, 158, 191, 0.20);
 }
 
-/* 
-   6. CENTRO DE MENSAJES Y CHAT (RF4)
-  */
 .encabezado-conversaciones, .chat-header {
-    background-color: #FFFFFF;
+    background-color: var(--superficie);
     border-bottom: 1px solid var(--color-bordes);
 }
 
@@ -157,12 +140,12 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
 }
 
 .conversacion {
-    background-color: #FFFFFF;
+    background-color: var(--superficie);
     border-left: 4px solid transparent;
 }
 
 .conversacion:hover {
-    background-color: #F8F9FA;
+    background-color: var(--superficie-hover);
     border-left-color: var(--color-bordes);
 }
 
@@ -189,13 +172,13 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
 }
 
 .hora, .chat-publicacion-label, .mensaje-hora {
-    color: #6C757D;
+    color: var(--texto-hora);
     font-size: 12px;
 }
 
 .area-mensajes {
     min-height: 390px;
-    background-color: #FFFFFF;
+    background-color: var(--superficie);
 }
 
 .mensaje-recibido {
@@ -218,8 +201,8 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
 }
 
 .burbuja-recibida {
-    background-color: #F2F2F2;
-    border: 1px solid #E1E1E1;
+    background-color: var(--burbuja-recibida);
+    border: 1px solid var(--burbuja-borde);
 }
 
 .burbuja-enviada {
@@ -228,11 +211,10 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
 }
 
 .chat-footer {
-    background-color: #FFFFFF;
+    background-color: var(--superficie);
     border-top: 1px solid var(--color-bordes);
 }
 
-/* 7. FOOTER (PIE DE PÁGINA) */
 .footer {
     width: 100%;
     background-color: var(--color-menu);
@@ -296,9 +278,6 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
     font-weight: 400;
 }
 
-/* 
-   8. ADAPTABILIDAD RESPONSIVA
-   */
 @media (max-width: 991.98px) {
     .footer .footer-logo { font-size: 24px; }
     .area-mensajes { min-height: 320px; }
@@ -315,20 +294,60 @@ p, .texto-normal, .descripcion-pagina, .form-label, .form-control {
     .footer .footer-link { font-size: 14px; }
 }
 
-[data-bs-theme="dark"] body,
-html[data-bs-theme="dark"] body {
-    background-color: #212529 !important;
+[data-bs-theme="dark"] {
+    --color-fondo: #1a1d20;
+    --texto-principal: #f1f3f5;
+    --texto-secundario: #b8bec5;
+    --texto-hora: #9aa1a8;
+    --superficie: #2b3035;
+    --superficie-hover: #343a40;
+    --burbuja-recibida: #3a4046;
+    --burbuja-borde: #4a5158;
 }
 
-[data-bs-theme="dark"] .bg-white, 
-[data-bs-theme="dark"] .card,
-html[data-bs-theme="dark"] .card {
-    background-color: #2b3035 !important;
-    color: #f8f9fa !important;
+[data-bs-theme="dark"] body {
+    background-color: var(--color-fondo);
+    color: var(--texto-principal);
+}
+
+[data-bs-theme="dark"] .bg-white,
+[data-bs-theme="dark"] .bg-light,
+[data-bs-theme="dark"] .card {
+    background-color: var(--superficie) !important;
+    color: var(--texto-principal) !important;
     border-color: #495057 !important;
 }
 
+[data-bs-theme="dark"] .text-muted,
 [data-bs-theme="dark"] .text-dark,
-[data-bs-theme="dark"] .encabezado {
-    color: #f8f9fa !important;
+[data-bs-theme="dark"] .encabezado,
+[data-bs-theme="dark"] .subtitulo,
+[data-bs-theme="dark"] .form-label,
+[data-bs-theme="dark"] .modal-content,
+[data-bs-theme="dark"] .nombre-usuario {
+    color: var(--texto-principal) !important;
+}
+
+[data-bs-theme="dark"] .modal-content {
+    background-color: var(--superficie);
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select,
+[data-bs-theme="dark"] .message-input {
+    background-color: #343a40;
+    color: var(--texto-principal);
+    border-color: #495057;
+}
+
+[data-bs-theme="dark"] .form-control::placeholder {
+    color: #9aa1a8;
+}
+
+[data-bs-theme="dark"] .table {
+    color: var(--texto-principal);
+}
+
+[data-bs-theme="dark"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
 }

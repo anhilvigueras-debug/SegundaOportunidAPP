@@ -1,60 +1,42 @@
-/**
- *  Toggle de Tema Claro/Oscuro (Dark/Light mode)
- *  Manejo de envío de formulario de contacto con notificación Toast
- */
+const CLAVE_TEMA = "tema-segunda-oportunidad";
+
+function obtenerTemaGuardado() {
+    try {
+        return localStorage.getItem(CLAVE_TEMA) || "light";
+    } catch (error) {
+        return "light";
+    }
+}
+
+function guardarTema(tema) {
+    try {
+        localStorage.setItem(CLAVE_TEMA, tema);
+    } catch (error) {
+    }
+}
+
+function aplicarTema(tema) {
+    document.documentElement.setAttribute("data-bs-theme", tema);
+    const botonTema = document.querySelector("#btn-tema");
+    if (botonTema) {
+        botonTema.textContent = tema === "dark" ? "☀️ Tema Claro" : "🌙 Tema Oscuro";
+    }
+}
+
+function alternarTema() {
+    const temaActual = document.documentElement.getAttribute("data-bs-theme") || "light";
+    const nuevoTema = temaActual === "dark" ? "light" : "dark";
+    guardarTema(nuevoTema);
+    aplicarTema(nuevoTema);
+}
+
+document.documentElement.setAttribute("data-bs-theme", obtenerTemaGuardado());
 
 document.addEventListener("DOMContentLoaded", function () {
-    
-    
-    // 1. CAMBIO DE TEMA CLARO / OSCURO
- 
-    const elementoRaiz = document.querySelector('html');
-    const botonTema = document.querySelector('#btn-tema');
+    aplicarTema(obtenerTemaGuardado());
 
-    function alternarTema() {
-        const temaActual = elementoRaiz.getAttribute('data-bs-theme') || 'light';
-        
-        if (temaActual === 'light') {
-            elementoRaiz.setAttribute('data-bs-theme', 'dark');
-            botonTema.textContent = ' Tema Claro';
-        } else {
-            elementoRaiz.setAttribute('data-bs-theme', 'light');
-            botonTema.textContent = ' Cambiar Tema';
-        }
-    }
-
+    const botonTema = document.querySelector("#btn-tema");
     if (botonTema) {
-        botonTema.addEventListener('click', alternarTema);
+        botonTema.addEventListener("click", alternarTema);
     }
-
-    //  MOSTRAR TOAST EN FORMULARIO DE CONTACTO
-   
-    function mostrarToastContacto(mensaje) {
-        const toastElemento = document.querySelector("#toastContacto");
-        const mensajeElemento = document.querySelector("#mensajeToastContacto");
-
-        if (!toastElemento || !mensajeElemento) return;
-
-        mensajeElemento.textContent = mensaje;
-
-        const toast = bootstrap.Toast.getOrCreateInstance(toastElemento);
-        toast.show();
-    }
-
-    const formularioContacto = document.querySelector("#formularioContacto");
-
-    if (formularioContacto) {
-        formularioContacto.addEventListener("submit", function (evento) {
-            evento.preventDefault();
-
-            if (!formularioContacto.checkValidity()) {
-                formularioContacto.reportValidity();
-                return;
-            }
-
-            mostrarToastContacto("Tu mensaje se ha enviado correctamente.");
-            formularioContacto.reset();
-        });
-    }
-
 });
