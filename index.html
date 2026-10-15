@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SegundaOportunidAPP - Inicio</title>
     
-    <!-- CSS Bootstrap 5.3 & Estilos Personalizados -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/app.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- NAVEGACIÓN PRINCIPAL -->
     <header class="sticky-top shadow-sm" style="background-color: var(--color-menu);">
         <nav class="navbar navbar-expand-lg navbar-dark container py-2">
             <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html">
@@ -19,10 +18,7 @@
                 <span>SegundaOportunidAPP</span>
             </a>
 
-            <!-- BOTÓN DE CAMBIO DE TEMA -->
-            <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3" type="button">
-                🌙 Cambiar Tema
-            </button>
+            <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3" type="button">🌙 Tema Oscuro</button>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -43,7 +39,6 @@
     </header>
 
     <main class="py-4 flex-grow-1">
-        <!-- SECCIÓN HERO DE BIENVENIDA -->
         <section class="container mb-5">
             <div class="p-4 p-md-5 bg-white border-0 rounded-4 shadow-sm text-center text-md-start">
                 <h1 class="titulo-principal mb-2">Bienvenido a SegundaOportunidAPP</h1>
@@ -51,7 +46,6 @@
             </div>
         </section>
 
-        <!-- CARRUSEL DE ARTÍCULOS DESTACADOS -->
         <section class="container mb-5" aria-label="Artículos destacados">
             <h2 class="subtitulo mb-3">Artículos destacados</h2>
             <div class="card border-0 shadow-sm overflow-hidden rounded-4">
@@ -96,7 +90,6 @@
             </div>
         </section>
 
-        <!-- CATÁLOGO DE ARTÍCULOS -->
         <section class="container mb-5" aria-label="Catálogo de artículos">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-2">
                 <div>
@@ -123,7 +116,6 @@
             </div>
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-                <!-- TARJETA 1 -->
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
                         <img src="img/bici2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Bicicleta de montaña" loading="lazy">
@@ -150,7 +142,6 @@
                     </div>
                 </div>
 
-                <!-- TARJETA 2 -->
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
                         <img src="img/libros2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Colección de libros" loading="lazy">
@@ -177,7 +168,6 @@
                     </div>
                 </div>
 
-                <!-- TARJETA 3 -->
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
                         <img src="img/silla2.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Silla de oficina" loading="lazy">
@@ -204,7 +194,6 @@
                     </div>
                 </div>
 
-                <!-- TARJETA 4 -->
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden bg-white">
                         <img src="img/lamp1.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Lámpara de escritorio" loading="lazy">
@@ -233,28 +222,8 @@
             </div>
         </section>
 
-        <!-- FORMULARIO DE DONACIÓN -->
-        <section id="donaciones" class="container mb-5">
-            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
-                <h2 class="subtitulo mb-3">Realizar una Donación</h2>
-                <form id="formDonacion">
-                    <div class="mb-3">
-                        <label for="nombreObjeto" class="form-label texto-normal fw-bold">Objeto a donar:</label>
-                        <input type="text" class="form-control rounded-3 p-2" id="nombreObjeto" placeholder="Ej. Lámpara de mesa" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="descripcionDonacion" class="form-label texto-normal fw-bold">Descripción:</label>
-                        <textarea class="form-control rounded-3 p-2" id="descripcionDonacion" rows="3" placeholder="Detalles sobre el estado del artículo" required></textarea>
-                    </div>
-                    <button type="button" class="btn btn-success px-4 py-2 rounded-pill texto-normal" data-bs-toggle="modal" data-bs-target="#modalConfirmacionDonacion">
-                        Enviar Donación
-                    </button>
-                </form>
-            </div>
-        </section>
     </main>
 
-    <!-- FOOTER -->
     <footer class="text-white py-4 mt-auto shadow-sm" style="background-color: var(--color-menu);">
         <div class="container text-center text-md-start">
             <div class="row gy-3 align-items-center">
@@ -269,7 +238,6 @@
         </div>
     </footer>
 
-    <!-- MODAL DINÁMICO ÚNICO DE DETALLES -->
     <div class="modal fade" id="modalDinamico" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
@@ -298,7 +266,6 @@
         </div>
     </div>
 
-    <!-- MODAL DE CONFIRMACIÓN -->
     <div class="modal fade" id="modalConfirmacionDonacion" tabindex="-1" aria-labelledby="tituloModalDonacion" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
@@ -316,9 +283,7 @@
         </div>
     </div>
 
-    <!-- SCRIPTS PROPIOS Y BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app.js"></script>
     <script src="js/modales.js"></script>
     <script src="js/busqueda.js"></script>
     <script src="js/validaciones.js"></script>
