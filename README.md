@@ -43,6 +43,7 @@ El sitio web se encuentra desplegado en GitHub Pages:
    ![modal3](modal3.png)
 
 3. **Notificaciones Toast:**
+   ![notif1](notif1.png)
 
 4. **Filtrado / Búsqueda:**
    ![fil1](fil1.png)
@@ -86,6 +87,19 @@ El sitio web se encuentra desplegado en GitHub Pages:
 > Se corrigieron los buscadores duplicados y se unificó su funcionamiento mediante un archivo JavaScript.
 > Esto facilitó las búsquedas en las páginas de inicio (`index.html`) y servicios (`servicios.html`).
 > Aprendí a actualizar el proyecto y subir los cambios a Git correctamente para mantener un buen trabajo colaborativo.
+
+### Diego Cervantes
+
+> En conclusión, SegundaOportunidAPP mejoró gracias a las nuevas funcionalidades implementadas.
+> En la página de contacto, agregamos mensajes Toast para confirmar las acciones del usuario.
+> En la página de reporte, facilitamos el envío de información sobre problemas encontrados.
+> En la página de validaciones, implementamos comprobaciones para evitar errores en los formularios.
+> Estas funciones ayudan a que la aplicación sea más clara y fácil de utilizar.
+> También permiten que los usuarios reciban mensajes útiles al completar los campos.
+> Para lograrlo, utilizamos HTML, Bootstrap y JavaScript.
+> Además, usamos Git para guardar y organizar los cambios realizados.
+> Este proyecto nos ayudó a reforzar nuestros conocimientos de desarrollo web.
+> Finalmente, aprendimos la importancia de trabajar en equipo y mejorar la experiencia del usuario.
 
 ### Marco Antonio
 
