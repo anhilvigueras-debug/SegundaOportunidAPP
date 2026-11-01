@@ -7,59 +7,39 @@ use Illuminate\Http\Request;
 
 class PublicacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $publicaciones = Publicacion::latest()->get();
+        return view('publicaciones.index', compact('publicaciones'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('publicaciones.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        // Se programará en la tarea del formulario
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Publicacion $publicacion)
     {
-        //
+        return view('publicaciones.show', compact('publicacion'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Publicacion $publicacion)
     {
-        //
+        return view('publicaciones.edit', compact('publicacion'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Publicacion $publicacion)
     {
-        //
+        // Se programará en la tarea de edición
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Publicacion $publicacion)
     {
-        //
+        // Se programará en la tarea de eliminación
     }
 }
