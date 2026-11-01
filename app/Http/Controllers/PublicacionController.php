@@ -20,7 +20,17 @@ class PublicacionController extends Controller
 
     public function store(Request $request)
     {
-        // Se programará en la tarea del formulario
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'tipo' => 'required|in:Donacion,Venta',
+            'precio' => 'nullable|numeric|min:0',
+            'estado_articulo' => 'required|string|max:100',
+        ]);
+
+        Publicacion::create($request->all());
+
+        return redirect()->route('publicaciones.index')->with('success', 'Publicación creada exitosamente.');
     }
 
     public function show(Publicacion $publicacion)
@@ -35,11 +45,23 @@ class PublicacionController extends Controller
 
     public function update(Request $request, Publicacion $publicacion)
     {
-        // Se programará en la tarea de edición
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'tipo' => 'required|in:Donacion,Venta',
+            'precio' => 'nullable|numeric|min:0',
+            'estado_articulo' => 'required|string|max:100',
+        ]);
+
+        $publicacion->update($request->all());
+
+        return redirect()->route('publicaciones.index')->with('success', 'Publicación actualizada exitosamente.');
     }
 
     public function destroy(Publicacion $publicacion)
     {
-        // Se programará en la tarea de eliminación
+        $publicacion->delete();
+
+        return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada exitosamente.');
     }
 }
