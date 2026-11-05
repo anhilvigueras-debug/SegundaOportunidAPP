@@ -97,3 +97,39 @@ Esta rama implementa un **CRUD completo de publicaciones** que simula el backend
 ### 4. Formulario Editar (`edit`)
 
 ![Formulario Editar](public/img/edit.png)
+
+---
+
+## Estructura del Proyecto (archivos del módulo)
+
+```text
+SegundaOportunidAPP/
+├── app/Http/Controllers/
+│   └── PublicacionController.php      # Lógica CRUD con sesión
+├── resources/views/
+│   ├── layouts/
+│   │   └── app.blade.php              # Layout maestro (Bootstrap + CSS)
+│   └── publicaciones/
+│       ├── index.blade.php            # Catálogo
+│       ├── create.blade.php           # Formulario de creación
+│       ├── show.blade.php             # Detalle y eliminación
+│       └── edit.blade.php             # Formulario de edición
+├── public/img/                        # Capturas de pantalla del README
+└── routes/web.php                     # Resource route de publicaciones
+```
+
+---
+
+## Flujo de Trabajo con Git
+
+Cada integrante trabajó en su propia rama `feature/*`, para que quede registro de los commits de todo el equipo:
+
+| Rama                         | Responsable  |
+| :--------------------------- | :----------- |
+| `feature/controlador-sesion` | Luis         |
+| `feature/vista-crear`        | Angel Daniel |
+| `feature/vista-editar`       | Marco        |
+| `feature/vista-detalle`      | Zayra        |
+| `feature/documentacion`      | Diego        |
+
+Los Pull Requests individuales se integran en `laravel-crud`. Una vez probadas todas las vistas, se crea el Pull Request final de `laravel-crud` hacia `main`.
