@@ -1,108 +1,58 @@
-# SegundaOportunidAPP 🐾
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-**Asignatura:** Aplicaciones Web  
-**Práctica:** Interacciones con selectores, eventos y funciones en nuestra aplicación web (Bootstrap)  
-**Equipo:**
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-- Anhil Vigueras Mendoza(Líder Técnico)
-- Luis Uriel Azpetia Escamilla
-- Marco Antonio Zarco Espinoza
-- Angel Daniel Martinez Rendon
-- Diego Cervantes Perez
-- Zayra OLvera Hernandez
+## About Laravel
 
----
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## Sitio Publicado
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-El sitio web se encuentra desplegado en GitHub Pages:  
- [https://anhilvigueras-debug.github.io/SegundaOportunidAPP/](https://anhilvigueras-debug.github.io/SegundaOportunidAPP/)
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
----
+## Learning Laravel
 
-## Tabla de Interacciones JavaScript
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-## Evidencias de Interacciones y Tablero Kanban
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-![tablaInteracciones](tablaInteracciones.png)
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-### Tablero Kanban (GitHub Projects)
+## Agentic Development
 
-![TableroK](TableroK.png)
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
-### Capturas de Pantalla de las Interacciones
+```bash
+composer require laravel/boost --dev
 
-1. **Validación de Formulario:**
-   ![validacion1](validacion1.png)
-   ![validacion2](validacion2.png)
-   ![validacion3](validacion3.png)
+php artisan boost:install
+```
 
-2. **Modales Dinámicos:**
-   ![modal](modal.png)
-   ![modal1](modal1.png)
-   ![modal3](modal3.png)
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-3. **Notificaciones Toast:**
+## Contributing
 
-4. **Filtrado / Búsqueda:**
-   ![fil1](fil1.png)
-   ![fil2](fil2.png)
-   ![fil3](fil3.png)
-5. **Agregar y Eliminar Elementos:**
-   ![ae1](ae1.png)
-   ![ae2](ae2.png)
-   ![ae3](ae3.png)
-6. **Cambio de Tema Claro/Oscuro:**
-   ![os1](os1.png)
-   ![os2](os2.png)
-   ![os3](os3.png)
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
----
+## Code of Conduct
 
-## Reflexión del Equipo
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-### Anhil Vigueras Mendoza
+## Security Vulnerabilities
 
-> Trabajar en los modales dinámicos fue un reto técnico bastante completo y por momentos un poco difícil.
-> Lo complicado fue lograr que un solo modal reutilizable capturara los datos dinámicos mediante `dataset`.
-> Necesitábamos pintar la información en pantalla en tres vistas distintas sin recurrir al típico `onclick`.
-> Al inicio nos costó coordinar la lectura limpia del DOM con `querySelectorAll` y organizar las fusiones en Git.
-> También tuvimos que lidiar con algunos detalles en el flujo de trabajo antes de dejar la rama estable.
-> Sin embargo, aplicando `addEventListener` y funciones con nombre bien estructuradas, logramos resolverlo todo.
-> Al final el código quedó limpio, los modales respondieron perfecto y la experiencia nos sirvió muchísimo.
-> Comprendí en la práctica el verdadero valor de manipular el DOM de forma eficiente y desacoplada del HTML.
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-### Luis Uiriel
+## License
 
-> Con esta tarea aprendí a usar JavaScript para modificar el contenido de una página sin recargarla.
-> En `perfil.html`, `admin.html` y `mensajes.html` agregué elementos nuevos con `createElement` y `appendChild`, y los eliminé con `remove()`.
-> Algo importante fue usar delegación de eventos: en lugar de un `onclick` en cada botón, coloqué un solo `addEventListener` en el contenedor padre.
-> Así los botones creados dinámicamente también funcionan sin código adicional y el HTML queda limpio.
-> En la tabla de administración los totales se recalculan automáticamente gracias a los atributos `data-` de cada fila.
-> Organizar todo en funciones con nombre dentro de `delegacion.js` hizo el código más ordenado y fácil de mantener.
-
-### Angel Daniel
-
-> Se corrigieron los buscadores duplicados y se unificó su funcionamiento mediante un archivo JavaScript.
-> Esto facilitó las búsquedas en las páginas de inicio (`index.html`) y servicios (`servicios.html`).
-> Aprendí a actualizar el proyecto y subir los cambios a Git correctamente para mantener un buen trabajo colaborativo.
-
-### Marco Antonio
-
-> Durante el desarrollo de la práctica, la interacción más difícil fue implementar las validaciones en tiempo real de los formularios.
-> Esto se debió a que necesitábamos verificar los datos mientras el usuario escribía y al salir de cada campo.
-> También fue importante evitar que los formularios se enviaran cuando existieran errores.
-> Aprendimos que la delegación de eventos permite administrar varios elementos desde un mismo contenedor, reduciendo código repetitivo.
-> Además, facilita el mantenimiento y permite trabajar con elementos que se agreguen dinámicamente.
-> Al combinar JavaScript con Bootstrap, logramos mostrar mensajes de error y confirmación de manera más clara.
-> Utilizamos las clases `is-valid` e `is-invalid` para identificar visualmente los campos correctos e incorrectos.
-> También comprendimos la importancia de utilizar `addEventListener` para separar los eventos del código HTML.
-> Esta práctica nos ayudó a mejorar la experiencia del usuario y la organización de nuestro código.
-> Como equipo, reforzamos nuestros conocimientos sobre validación de formularios, eventos y diseño de interfaces web.
-
-### Zayra Olvera
-
-> Desarrollar esta aplicación web ha sido una experiencia muy importante para mí, porque aprendí cosas nuevas y pude ver cómo nuestras ideas se convirtieron en un proyecto real.
-> Me di cuenta de que no solo se trata de hacer la página sino también de pensar en las personas que la utilizarán, como agregar la función de cambiar el tema.
-> Además, aprendí que trabajar en equipo, compartir ideas y ayudarnos a resolver errores es necesario para lograr buenos resultados.
-> Aunque hubo errores, aprendimos y con esfuerzo logramos terminar nuestro trabajo.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
