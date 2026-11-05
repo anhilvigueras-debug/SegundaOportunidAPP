@@ -77,3 +77,23 @@ Esta rama implementa un **CRUD completo de publicaciones** que simula el backend
 | **GET** | `/publicaciones/{id}/edit` | `edit` | Muestra el formulario precargado para editar. |
 | **PUT/PATCH** | `/publicaciones/{id}` | `update` | Actualiza la información en sesión. |
 | **DELETE** | `/publicaciones/{id}` | `destroy` | Elimina la publicación de la sesión. |
+
+---
+
+## Capturas de Pantalla
+
+### 1. Vista Catálogo (`index`)
+
+![Vista Catálogo](public/img/index.png)
+
+### 2. Formulario Crear (`create`)
+
+![Formulario Crear](public/img/create.png)
+
+### 3. Detalle de Publicación (`show`)
+
+![Detalle de Publicación](public/img/show.png)
+
+### 4. Formulario Editar (`edit`)
+
+![Formulario Editar](public/img/edit.png)
