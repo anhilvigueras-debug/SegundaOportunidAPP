@@ -16,7 +16,7 @@
                     </div>
 
                     <p class="fs-4 fw-bold text-primary mb-3">
-                        {{ publicacion['precio']>0?'' . number_format($publicacion['precio'], 2) . ' MXN' : 'Gratis / Donación' }}
+                        {{ $publicacion['precio']>0?'' . number_format($publicacion['precio'], 2) . ' MXN' : 'Gratis / Donación' }}
                     </p>
 
                     <div class="mb-4">
