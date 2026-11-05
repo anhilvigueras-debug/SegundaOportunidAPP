@@ -64,3 +64,16 @@ Esta rama implementa un **CRUD completo de publicaciones** que simula el backend
     ```
 
 6. **Abrir en el navegador:** `http://127.0.0.1:8000/publicaciones`
+
+---
+
+## Tabla de Rutas HTTP (RESTful)
+
+| Método HTTP | Ruta / URL | Acción del Controlador | Descripción |
+| **GET** | `/publicaciones` | `index` | Muestra el catálogo de publicaciones en sesión. |
+| **GET** | `/publicaciones/create` | `create` | Muestra el formulario para crear una publicación. |
+| **POST** | `/publicaciones` | `store` | Procesa y guarda una nueva publicación en sesión. |
+| **GET** | `/publicaciones/{id}` | `show` | Muestra el detalle de una publicación. |
+| **GET** | `/publicaciones/{id}/edit` | `edit` | Muestra el formulario precargado para editar. |
+| **PUT/PATCH** | `/publicaciones/{id}` | `update` | Actualiza la información en sesión. |
+| **DELETE** | `/publicaciones/{id}` | `destroy` | Elimina la publicación de la sesión. |
