@@ -1,0 +1,9 @@
+@csrf
+@if($publicacion->exists) @method('PUT') @endif
+<p>Los campos marcados con * son obligatorios.</p>
+@foreach(['titulo'=>'Título','categoria'=>'Categoría','estado_articulo'=>'Estado del artículo'] as $campo=>$etiqueta)
+<div class="mb-3"><label class="form-label" for="{{ $campo }}">{{ $etiqueta }} *</label><input class="form-control @error($campo) is-invalid @enderror" name="{{ $campo }}" id="{{ $campo }}" value="{{ old($campo,$publicacion->$campo) }}" maxlength="255" required>@error($campo)<div class="invalid-feedback">{{ $message }}</div>@enderror</div>@endforeach
+<div class="mb-3"><label class="form-label" for="descripcion">Descripción *</label><textarea class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" id="descripcion" required>{{ old('descripcion',$publicacion->descripcion) }}</textarea>@error('descripcion')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+<div class="mb-3"><label class="form-label" for="tipo">Tipo *</label><select class="form-select @error('tipo') is-invalid @enderror" name="tipo" id="tipo" required><option value="">Selecciona</option>@foreach(['Venta'=>'Venta','Donacion'=>'Donación'] as $valor=>$etiqueta)<option value="{{ $valor }}" @selected(old('tipo',$publicacion->tipo)===$valor)>{{ $etiqueta }}</option>@endforeach</select>@error('tipo')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+<div class="mb-3"><label class="form-label" for="precio">Precio en MXN * (0 para donación)</label><input type="number" class="form-control @error('precio') is-invalid @enderror" name="precio" id="precio" min="0" max="999999.99" step="0.01" value="{{ old('precio',$publicacion->precio ?? '0.00') }}" required>@error('precio')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+<a href="{{ route('publicaciones.index') }}" class="btn btn-outline-secondary">Cancelar</a> <button class="btn btn-primary">Guardar</button>
