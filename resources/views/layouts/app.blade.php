@@ -12,4 +12,4 @@
 </div></div></div></nav><main class="container py-4">
 @if(session('success')) <div class="alert alert-success" role="status">{{ session('success') }}</div> @endif
 @if(session('error')) <div class="alert alert-danger" role="alert">{{ session('error') }}</div> @endif
-@yield('content')</main><footer class="border-top bg-white py-3"><div class="container text-muted">SegundaOportunidAPP · Proyecto académico</div></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script></body></html>
+@yield('content')</main>@include('partials.footer')<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script></body></html>
