@@ -1,66 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Problema - SegundaOportunidAPP</title>
+@section('titulo', 'Reportar Problema - SegundaOportunidAPP')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css">
-    <script src="js/app.js"></script>
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-
-    <header class="sticky-top shadow-sm" style="background-color: var(--color-menu);">
-        <nav class="navbar navbar-expand-lg navbar-dark container py-2">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html">
-                <img src="img/logo.jpeg" alt="Logo de SegundaOportunidAPP" height="40" class="rounded-circle">
-                <span>SegundaOportunidAPP</span>
-            </a>
-
-            <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3" type="button">🌙 Tema Oscuro</button>
-
-            <button class="navbar-toggler border-0"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Abrir menú">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-lg-center gap-1 mt-3 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="nosotros.html">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="donaciones.html">Donaciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active fw-bold" aria-current="page" href="reporte.html">Reportar problema</a>
-                    </li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-outline-light btn-sm px-3 rounded-pill texto-secundario" href="login.html">Iniciar sesión</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main class="container my-5 flex-grow-1" style="max-width: 700px;">
+@section('contenido')
+    <div class="container my-4" style="max-width: 700px;">
 
         <div class="p-4 p-md-5 bg-white border-0 rounded-4 shadow-sm text-center mb-4">
             <h1 class="titulo-principal mb-2">Formulario de Ayuda y Reportes</h1>
@@ -72,7 +15,19 @@
         <div class="card border-0 shadow-sm rounded-4 bg-white">
             <div class="card-body p-4 p-md-5">
 
-                <form id="formReporte" class="form-validado" novalidate>
+                @if ($errors->any())
+                    <div class="alert alert-danger rounded-3" role="alert">
+                        <strong>Completa correctamente los siguientes campos:</strong>
+                        <ul class="mb-0 mt-2">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form id="formReporte" action="" method="POST" class="form-validado" novalidate>
+                    @csrf
 
                     <div id="alertaReporte"
                          class="alert alert-danger d-none rounded-3"
@@ -92,6 +47,7 @@
                                class="form-control rounded-3 p-2"
                                id="nombreReporte"
                                name="nombre"
+                               value="{{ old('nombre') }}"
                                data-nombre="Nombre"
                                placeholder="Escribe tu nombre"
                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{3,60}"
@@ -109,6 +65,7 @@
                                class="form-control rounded-3 p-2"
                                id="correoReporte"
                                name="correo"
+                               value="{{ old('correo') }}"
                                data-nombre="Correo electrónico"
                                placeholder="Escribe tu correo"
                                required>
@@ -127,9 +84,9 @@
                                 data-nombre="Tipo de reporte"
                                 required>
                             <option value="" selected disabled>Selecciona un motivo</option>
-                            <option value="fallo">Fallo en la página</option>
-                            <option value="duda">Duda sobre una donación</option>
-                            <option value="otro">Otro motivo</option>
+                            <option value="fallo" {{ old('asunto') == 'fallo' ? 'selected' : '' }}>Fallo en la página</option>
+                            <option value="duda" {{ old('asunto') == 'duda' ? 'selected' : '' }}>Duda sobre una donación</option>
+                            <option value="otro" {{ old('asunto') == 'otro' ? 'selected' : '' }}>Otro motivo</option>
                         </select>
                         <div class="invalid-feedback">
                             Selecciona un tipo de reporte.
@@ -148,7 +105,7 @@
                                   minlength="10"
                                   maxlength="500"
                                   placeholder="Explica qué sucedió..."
-                                  required></textarea>
+                                  required>{{ old('mensaje') }}</textarea>
                         <div class="invalid-feedback">
                             Describe el problema utilizando entre 10 y 500 caracteres.
                         </div>
@@ -168,25 +125,7 @@
             </div>
         </div>
 
-    </main>
-
-    <footer class="text-white py-4 mt-auto shadow-sm" style="background-color: var(--color-menu);">
-        <div class="container text-center text-md-start">
-            <div class="row gy-3 align-items-center">
-                <div class="col-md-6">
-                    <h5 class="encabezado text-white mb-1">SegundaOportunidAPP</h5>
-                    <p class="texto-secundario text-white-50 mb-0">
-                        Dándole una segunda vida a los objetos y apoyando a la comunidad.
-                    </p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="texto-secundario text-white mb-0">
-                        &copy; 2026 SegundaOportunidAPP. Todos los derechos reservados.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="toastReporte" class="toast border-0 shadow rounded-3" role="alert" aria-live="assertive" aria-atomic="true">
@@ -199,11 +138,8 @@
             </div>
         </div>
     </div>
+@endsection
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/validaciones.js"></script>
-    <script src="js/toad.js"></script>
-
-</body>
-</html>
+@push('scripts')
+    <script src="{{ asset('js/toad.js') }}"></script>
+@endpush

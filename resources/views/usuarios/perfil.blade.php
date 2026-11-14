@@ -1,57 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SegundaOportunidAPP - Perfil</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css">
-    <script src="js/app.js"></script>
-</head>
-<body class="d-flex flex-column min-vh-100">
+@extends('layouts.app')
 
-    <header class="sticky-top shadow-sm" style="background-color: var(--color-menu);">
-        <nav class="navbar navbar-expand-lg navbar-dark container py-2">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html">
-                <img src="img/logo.jpeg" alt="Logo de SegundaOportunidAPP" height="40" class="rounded-circle">
-                <span>SegundaOportunidAPP</span>
-            </a>
+@section('titulo', 'SegundaOportunidAPP - Perfil')
 
-           <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3" type="button">🌙 Tema Oscuro</button>
-
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Abrir menú">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarPrincipal">
-                <ul class="navbar-nav align-items-lg-center gap-1 mt-3 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="nosotros.html">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="donaciones.html">Donaciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active fw-bold" aria-current="page" href="perfil.html">Mi Perfil</a>
-                    </li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-outline-light btn-sm px-3 rounded-pill texto-secundario" href="login.html">Iniciar sesión</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main class="container my-4 flex-grow-1">
+@section('contenido')
+    <div class="container my-4">
         <h1 class="titulo-principal mb-4">Mi perfil</h1>
 
         <section class="mb-5" aria-label="Datos del usuario">
@@ -83,21 +35,22 @@
         <section class="mb-5" aria-label="Historial de publicaciones">
             <h2 class="subtitulo mb-3">Mis publicaciones</h2>
 
-            <form id="formPublicacion" class="row g-2 align-items-end mb-4 bg-white p-3 border-0 shadow-sm rounded-4">
+            <form id="formPublicacion" action="" method="POST" class="row g-2 align-items-end mb-4 bg-white p-3 border-0 shadow-sm rounded-4">
+                @csrf
                 <div class="col-12 col-md-4">
                     <label for="articuloPublicacion" class="form-label texto-normal fw-bold">Artículo</label>
-                    <input type="text" class="form-control rounded-3" id="articuloPublicacion" maxlength="60" placeholder="Ej. Mesa de madera" required>
+                    <input type="text" class="form-control rounded-3" id="articuloPublicacion" name="articulo" maxlength="60" placeholder="Ej. Mesa de madera" required>
                 </div>
                 <div class="col-6 col-md-3">
                     <label for="tipoPublicacion" class="form-label texto-normal fw-bold">Tipo</label>
-                    <select class="form-select rounded-3" id="tipoPublicacion">
+                    <select class="form-select rounded-3" id="tipoPublicacion" name="tipo">
                         <option value="Venta">Venta</option>
                         <option value="Donación">Donación</option>
                     </select>
                 </div>
                 <div class="col-6 col-md-2">
                     <label for="precioPublicacion" class="form-label texto-normal fw-bold">Precio</label>
-                    <input type="number" class="form-control rounded-3" id="precioPublicacion" min="1" step="0.01" placeholder="0.00" required>
+                    <input type="number" class="form-control rounded-3" id="precioPublicacion" name="precio" min="1" step="0.01" placeholder="0.00" required>
                 </div>
                 <div class="col-12 col-md-3">
                     <button type="submit" class="btn btn-success w-100 rounded-pill texto-normal">Agregar publicación</button>
@@ -153,12 +106,15 @@
                 </table>
             </div>
         </section>
-    </main>
+    </div>
 
+    <!-- Modal Editar Perfil -->
     <div class="modal fade" id="modalEditarPerfil" tabindex="-1" aria-labelledby="tituloModalEditar" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
-                <form>
+                <form action="" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="modal-header border-0 pb-0">
                         <h3 class="modal-title encabezado" id="tituloModalEditar">Editar mis datos</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -166,20 +122,20 @@
                     <div class="modal-body p-4">
                         <div class="mb-3">
                             <label for="nombre" class="form-label texto-normal fw-bold">Nombre completo</label>
-                            <input type="text" class="form-control rounded-3 p-2" id="nombre" value="Luis Uriel Azpeitia Escamilla" required>
+                            <input type="text" class="form-control rounded-3 p-2" id="nombre" name="nombre" value="Luis Uriel Azpeitia Escamilla" required>
                         </div>
                         <div class="mb-3">
                             <label for="correo" class="form-label texto-normal fw-bold">Correo electrónico</label>
-                            <input type="email" class="form-control rounded-3 p-2" id="correo" value="luis@example.com" required>
+                            <input type="email" class="form-control rounded-3 p-2" id="correo" name="correo" value="luis@example.com" required>
                         </div>
                         <div class="mb-3">
                             <label for="telefono" class="form-label texto-normal fw-bold">Teléfono</label>
-                            <input type="tel" class="form-control rounded-3 p-2" id="telefono" value="7710000000" pattern="[0-9]{10}" required>
+                            <input type="tel" class="form-control rounded-3 p-2" id="telefono" name="telefono" value="7710000000" pattern="[0-9]{10}" required>
                             <div class="form-text texto-secundario">10 dígitos, sin espacios.</div>
                         </div>
                         <div class="mb-0">
                             <label for="ciudad" class="form-label texto-normal fw-bold">Ciudad</label>
-                            <input type="text" class="form-control rounded-3 p-2" id="ciudad" value="Pachuca de Soto, Hidalgo" required>
+                            <input type="text" class="form-control rounded-3 p-2" id="ciudad" name="ciudad" value="Pachuca de Soto, Hidalgo" required>
                         </div>
                     </div>
                     <div class="modal-footer border-0 pt-0">
@@ -190,22 +146,8 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <footer class="text-white py-4 mt-auto shadow-sm" style="background-color: var(--color-menu);">
-        <div class="container text-center text-md-start">
-            <div class="row gy-3 align-items-center">
-                <div class="col-md-6">
-                    <h5 class="encabezado text-white mb-1">SegundaOportunidAPP</h5>
-                    <p class="texto-secundario text-white-50 mb-0">Dándole una segunda vida a los objetos y apoyando a la comunidad.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="texto-secundario text-white mb-0">&copy; 2026 SegundaOportunidAPP. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/delegacion.js"></script>
-</body>
-</html>
+@push('scripts')
+    <script src="{{ asset('js/delegacion.js') }}"></script>
+@endpush

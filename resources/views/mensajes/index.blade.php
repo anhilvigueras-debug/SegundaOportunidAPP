@@ -1,59 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mensajes - SegundaOportunidAPP</title>
+@section('titulo', 'Mensajes - SegundaOportunidAPP')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilos.css">
-    <script src="js/app.js"></script>
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-    <header class="sticky-top shadow-sm" style="background-color: var(--color-menu);">
-        <nav class="navbar navbar-expand-lg navbar-dark container py-2">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html">
-                <img src="img/logo.jpeg" alt="Logo de SegundaOportunidAPP" height="40" class="rounded-circle">
-                <span>SegundaOportunidAPP</span>
-            </a>
-
-            <button id="btn-tema" class="btn btn-outline-light btn-sm ms-3" type="button">🌙 Tema Oscuro</button>
-
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Abrir menú">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarPrincipal">
-                <ul class="navbar-nav align-items-lg-center gap-1 mt-3 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="nosotros.html">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="donaciones.html">Donaciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reporte.html">Reportar problema</a>
-                    </li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-outline-light btn-sm px-3 rounded-pill texto-secundario" href="login.html">Iniciar sesión</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main class="container py-4 flex-grow-1">
+@section('contenido')
+    <div class="container py-2">
         <div class="p-4 bg-white border-0 rounded-4 shadow-sm mb-4">
             <h1 class="titulo-principal mb-2">Centro de mensajes</h1>
             <p class="texto-normal text-muted mb-0">
@@ -153,7 +103,8 @@
                     </div>
 
                     <div class="card-footer bg-white border-top p-3 p-md-4">
-                        <form id="formMensaje">
+                        <form id="formMensaje" action="" method="POST">
+                            @csrf
                             <label for="mensaje" class="form-label texto-normal fw-bold">Escribe un mensaje</label>
                             <div class="d-flex flex-column flex-md-row gap-2">
                                 <textarea id="mensaje" name="mensaje" class="form-control rounded-3" rows="2" maxlength="500" placeholder="Escribe tu mensaje aquí..." required></textarea>
@@ -167,24 +118,9 @@
                 </section>
             </div>
         </div>
-    </main>
+    </div>
+@endsection
 
-    <footer class="text-white py-4 mt-auto shadow-sm" style="background-color: var(--color-menu);">
-        <div class="container text-center text-md-start">
-            <div class="row gy-3 align-items-center">
-                <div class="col-md-6">
-                    <h5 class="encabezado text-white mb-1">SegundaOportunidAPP</h5>
-                    <p class="texto-secundario text-white-50 mb-0">Dándole una segunda vida a los objetos y apoyando a la comunidad.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="texto-secundario text-white mb-0">&copy; 2026 SegundaOportunidAPP. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/busqueda.js"></script>
-    <script src="js/delegacion.js"></script>
-</body>
-</html>
+@push('scripts')
+    <script src="{{ asset('js/delegacion.js') }}"></script>
+@endpush
