@@ -16,16 +16,6 @@
 
                             @include('publicaciones._form')
 
-                            <div class="mb-4">
-                                <label for="foto" class="form-label">Foto del artículo *</label>
-                                <input type="file" name="foto" id="foto" accept="image/*"
-                                    class="form-control @error('foto') is-invalid @enderror">
-                                <div class="form-text">Formatos JPG, PNG o WEBP. Máximo 2 MB.</div>
-                                @error('foto')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-
                             <div class="d-flex justify-content-end gap-2">
                                 <a href="{{ route('publicaciones.index') }}"
                                     class="btn btn-outline-secondary rounded-pill px-4">Cancelar</a>

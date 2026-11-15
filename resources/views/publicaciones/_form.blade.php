@@ -77,3 +77,24 @@
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>
+
+
+<div class="mb-4">
+    <label for="foto" class="form-label">Foto del artículo {{ $p ? '' : '*' }}</label>
+
+    @if ($p && $p->foto)
+        <div class="mb-2">
+            <img src="{{ asset($p->foto) }}" alt="Foto actual de {{ $p->titulo }}" class="img-thumbnail"
+                style="max-height: 160px;">
+        </div>
+    @endif
+
+    <input type="file" name="foto" id="foto" accept="image/*"
+        class="form-control @error('foto') is-invalid @enderror">
+    <div class="form-text">
+        {{ $p ? 'Déjalo vacío para conservar la foto actual. ' : '' }}Formatos JPG, PNG o WEBP. Máximo 2 MB.
+    </div>
+    @error('foto')
+        <div class="invalid-feedback d-block">{{ $message }}</div>
+    @enderror
+</div>

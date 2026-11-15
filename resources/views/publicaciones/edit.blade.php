@@ -23,7 +23,8 @@
                         <h2 class="edicion-subtitulo">Datos del artículo</h2>
                         <p class="texto-secundario edicion-ayuda">Los campos marcados con * son obligatorios.</p>
 
-                        <form action="{{ route('publicaciones.update', $publicacion->id) }}" method="POST">
+                        <form action="{{ route('publicaciones.update', $publicacion->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
