@@ -10,8 +10,18 @@
                     <div class="card-body p-4">
                         <h2 class="titulo mb-4">Nueva Publicación</h2>
 
-                        <form action="{{ route('publicaciones.store') }}" method="POST">
+                        <form action="{{ route('publicaciones.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
                             <div class="mb-3">
                                 <label for="titulo" class="form-label fw-bold">Título del artículo</label>
@@ -62,6 +72,13 @@
                                     <option value="Bueno">Bueno</option>
                                     <option value="Usado">Usado</option>
                                 </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="foto" class="form-label fw-bold">Foto del artículo</label>
+                                <input type="file" name="foto" id="foto" class="form-control" accept="image/*"
+                                    required>
+                                <div class="form-text">Formatos JPG, PNG o WEBP. Máximo 2 MB.</div>
                             </div>
 
                             <div class="d-flex justify-content-end gap-2">
