@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Publicacion;
 
 class PublicacionController extends Controller
 {
@@ -41,22 +42,33 @@ class PublicacionController extends Controller
 
     public function store(Request $request)
     {
-        $publicaciones = $this->getPublicaciones($request);
-        $id = count($publicaciones) > 0 ? max(array_keys($publicaciones)) + 1 : 1;
+        $datos = $request->validate([
+            'titulo'          => 'required|string|max:255',
+            'descripcion'     => 'required|string',
+            'tipo'            => 'required|in:Donacion,Venta',
+            'precio'          => 'required_if:tipo,Venta|nullable|numeric|min:0',
+            'categoria'       => 'required|string|max:255',
+            'estado_articulo' => 'required|string|max:255',
+        ], [
+            'titulo.required'          => 'El título es obligatorio.',
+            'descripcion.required'     => 'La descripción es obligatoria.',
+            'tipo.required'            => 'Elige si es donación o venta.',
+            'precio.required_if'       => 'Indica el precio si es una venta.',
+            'categoria.required'       => 'Elige una categoría.',
+            'estado_articulo.required' => 'Elige el estado del artículo.',
+        ]);
 
-        $nueva = [
-            'id' => $id,
-            'titulo' => $request->input('titulo'),
-            'descripcion' => $request->input('descripcion'),
-            'tipo' => $request->input('tipo'),
-            'precio' => $request->input('precio', 0),
-            'estado_articulo' => $request->input('estado_articulo'),
-        ];
+        // Si es donación el precio siempre es 0
+        if ($datos['tipo'] === 'Donacion') {
+            $datos['precio'] = 0;
+        } else {
+            $datos['precio'] = $datos['precio'] ?? 0;
+        }
 
-        $publicaciones[$id] = $nueva;
-        $request->session()->put('publicaciones', $publicaciones);
+        Publicacion::create($datos);
 
-        return redirect()->route('publicaciones.index')->with('success', 'Publicación creada en sesión correctamente.');
+        return redirect()->route('publicaciones.index')
+            ->with('success', 'Publicación creada correctamente.');
     }
 
     public function show(Request $request, $id)
