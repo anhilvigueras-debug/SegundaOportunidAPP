@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Publicacion;
+use App\Http\Requests\StorePublicacionRequest;
+use App\Http\Requests\UpdatePublicacionRequest;
+use Illuminate\Http\UploadedFile;
 
 class PublicacionController extends Controller
 {
@@ -40,39 +43,14 @@ class PublicacionController extends Controller
         return view('publicaciones.create');
     }
 
-    public function store(Request $request)
+    public function store(StorePublicacionRequest $request)
     {
-        $datos = $request->validate([
-            'titulo'          => 'required|string|max:255',
-            'descripcion'     => 'required|string',
-            'tipo'            => 'required|in:Donacion,Venta',
-            'precio'          => 'required_if:tipo,Venta|nullable|numeric|min:0',
-            'categoria'       => 'required|string|max:255',
-            'estado_articulo' => 'required|string|max:255',
-            'foto'            => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-        ], [
-            'titulo.required'          => 'El título es obligatorio.',
-            'descripcion.required'     => 'La descripción es obligatoria.',
-            'tipo.required'            => 'Elige si es donación o venta.',
-            'precio.required_if'       => 'Indica el precio si es una venta.',
-            'categoria.required'       => 'Elige una categoría.',
-            'estado_articulo.required' => 'Elige el estado del artículo.',
-            'foto.required'            => 'Sube una foto del artículo.',
-            'foto.image'               => 'El archivo debe ser una imagen.',
-            'foto.mimes'               => 'La foto debe ser JPG, PNG o WEBP.',
-            'foto.max'                 => 'La foto no debe pesar más de 2 MB.',
-        ]);
+        $datos = $request->validated();
 
-        if ($datos['tipo'] === 'Donacion') {
-            $datos['precio'] = 0;
-        } else {
-            $datos['precio'] = $datos['precio'] ?? 0;
-        }
+        // Si es donación el precio siempre es 0
+        $datos['precio'] = $datos['tipo'] === 'Donacion' ? 0 : ($datos['precio'] ?? 0);
 
-        $archivo = $request->file('foto');
-        $nombre  = time() . '_' . uniqid() . '.' . $archivo->getClientOriginalExtension();
-        $archivo->move(public_path('img/publicaciones'), $nombre);
-        $datos['foto'] = 'img/publicaciones/' . $nombre;
+        $datos['foto'] = $this->guardarFoto($request->file('foto'));
 
         Publicacion::create($datos);
 
@@ -99,31 +77,14 @@ class PublicacionController extends Controller
         return view('publicaciones.edit', compact('publicacion'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdatePublicacionRequest $request, $id)
     {
         $publicacion = Publicacion::findOrFail($id);
 
-        $datos = $request->validate([
-            'titulo'          => 'required|string|max:255',
-            'descripcion'     => 'required|string',
-            'tipo'            => 'required|in:Donacion,Venta',
-            'precio'          => 'required_if:tipo,Venta|nullable|numeric|min:0',
-            'categoria'       => 'required|string|max:255',
-            'estado_articulo' => 'required|string|max:255',
-        ], [
-            'titulo.required'          => 'El título es obligatorio.',
-            'descripcion.required'     => 'La descripción es obligatoria.',
-            'tipo.required'            => 'Elige si es donación o venta.',
-            'precio.required_if'       => 'Indica el precio si es una venta.',
-            'categoria.required'       => 'Elige una categoría.',
-            'estado_articulo.required' => 'Elige el estado del artículo.',
-        ]);
+        $datos = $request->validated();
 
-        if ($datos['tipo'] === 'Donacion') {
-            $datos['precio'] = 0;
-        } else {
-            $datos['precio'] = $datos['precio'] ?? 0;
-        }
+        // Si es donación el precio siempre es 0
+        $datos['precio'] = $datos['tipo'] === 'Donacion' ? 0 : ($datos['precio'] ?? 0);
 
         $publicacion->update($datos);
 
@@ -138,5 +99,13 @@ class PublicacionController extends Controller
         $request->session()->put('publicaciones', $publicaciones);
 
         return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada de la sesión.');
+    }
+
+    private function guardarFoto(UploadedFile $archivo): string
+    {
+        $nombre = time() . '_' . uniqid() . '.' . $archivo->getClientOriginalExtension();
+        $archivo->move(public_path('img/publicaciones'), $nombre);
+
+        return 'img/publicaciones/' . $nombre;
     }
 }
