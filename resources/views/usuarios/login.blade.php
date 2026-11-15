@@ -33,7 +33,7 @@
                 </div>
             @endif
 
-            <form id="formularioLogin" action="{{ route('login.post') }}" method="POST" class="form-validado" novalidate>
+            <form action="{{ route('login.post') }}" method="POST">
                 @csrf
 
                 <div id="alertaLogin"

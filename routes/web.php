@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicacionController;
+use App\Http\Controllers\UsuarioController;
 
-// Vista principal 
+// Vista principal
 Route::view('/', 'inicio')->name('inicio');
 
 // Vistas públicas e informativas
@@ -11,17 +12,23 @@ Route::view('/nosotros', 'nosotros')->name('nosotros');
 Route::view('/servicios', 'servicios')->name('servicios');
 Route::view('/contacto', 'contacto')->name('contacto');
 
-//  (Usuarios)
-Route::view('/login', 'usuarios.login')->name('login');
-Route::post('/login', function () {
-    // Zayra conectará aquí su AuthController@login
-})->name('login.post');
-Route::view('/perfil', 'usuarios.perfil')->name('perfil');
+// Zayra (Usuarios y Perfil)
+Route::get('/registro', [UsuarioController::class, 'mostrarRegistro'])->name('registro');
+Route::post('/registro', [UsuarioController::class, 'registrar'])->name('registro.post');
 
-//  Luis y Anhil (CRUD Publicaciones dinámico en BD)
+Route::get('/login', [UsuarioController::class, 'mostrarLogin'])->name('login');
+Route::post('/login', [UsuarioController::class, 'login'])->name('login.post');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/perfil', [UsuarioController::class, 'mostrarPerfil'])->name('perfil');
+    Route::put('/perfil', [UsuarioController::class, 'actualizarPerfil'])->name('perfil.actualizar');
+    Route::post('/logout', [UsuarioController::class, 'logout'])->name('logout');
+});
+
+// Luis y Anhil (CRUD Publicaciones dinámico en BD)
 Route::resource('publicaciones', PublicacionController::class);
 
-//  Angel Daniel (Mensajería)
+// Angel Daniel (Mensajería)
 Route::view('/mensajes', 'mensajes.index')->name('mensajes');
 
 // (Transacciones y Donaciones)
