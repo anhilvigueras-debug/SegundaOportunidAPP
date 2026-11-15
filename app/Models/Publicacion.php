@@ -16,5 +16,7 @@ class Publicacion extends Model
         'precio',
         'categoria',
         'estado_articulo',
+        'foto',
+        'user_id',
     ];
 }
