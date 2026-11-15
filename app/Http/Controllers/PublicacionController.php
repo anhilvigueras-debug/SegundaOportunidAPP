@@ -7,9 +7,20 @@ use App\Models\Publicacion;
 use App\Http\Requests\StorePublicacionRequest;
 use App\Http\Requests\UpdatePublicacionRequest;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 
-class PublicacionController extends Controller
+class PublicacionController extends Controller implements HasMiddleware
 {
+
+        public static function middleware(): array
+    {
+        return [
+            new Middleware('auth', only: ['create', 'store', 'edit', 'update']),
+        ];
+    }
+
     private function getPublicaciones(Request $request)
     {
         return $request->session()->get('publicaciones', [
@@ -51,6 +62,8 @@ class PublicacionController extends Controller
         $datos['precio'] = $datos['tipo'] === 'Donacion' ? 0 : ($datos['precio'] ?? 0);
 
         $datos['foto'] = $this->guardarFoto($request->file('foto'));
+
+        $datos['user_id'] = Auth::id();
 
         Publicacion::create($datos);
 
