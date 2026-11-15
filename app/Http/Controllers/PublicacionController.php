@@ -86,6 +86,13 @@ class PublicacionController extends Controller
         // Si es donación el precio siempre es 0
         $datos['precio'] = $datos['tipo'] === 'Donacion' ? 0 : ($datos['precio'] ?? 0);
 
+        if ($request->hasFile('foto')) {
+            $this->borrarFoto($publicacion->foto);
+            $datos['foto'] = $this->guardarFoto($request->file('foto'));
+        } else {
+            unset($datos['foto']);
+        }
+
         $publicacion->update($datos);
 
         return redirect()->route('publicaciones.index')
@@ -107,5 +114,12 @@ class PublicacionController extends Controller
         $archivo->move(public_path('img/publicaciones'), $nombre);
 
         return 'img/publicaciones/' . $nombre;
+    }
+
+    private function borrarFoto(?string $ruta): void
+    {
+        if ($ruta && file_exists(public_path($ruta))) {
+            unlink(public_path($ruta));
+        }
     }
 }
