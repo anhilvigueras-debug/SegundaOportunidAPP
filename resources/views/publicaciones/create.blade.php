@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Nueva Publicación - SegundaOportunidAPP')
+@section('titulo', 'Nueva Publicación - SegundaOportunidAPP')
 
-@section('content')
+@section('contenido')
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-8">

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Editar Publicación - SegundaOportunidAPP')
+@section('titulo', 'Editar Publicación - SegundaOportunidAPP')
 
 @section('body-class', 'pagina-editar-publicacion')
 
-@push('styles')
+@push('estilos')
     <link rel="stylesheet" href="{{ asset('css/editar-publicacion.css') }}">
 @endpush
 
-@section('content')
+@section('contenido')
     <div class="edicion-contenedor">
         <div class="row justify-content-center">
             <div class="col-12">
