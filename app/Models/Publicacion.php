@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,4 +20,16 @@ class Publicacion extends Model
         'foto',
         'user_id',
     ];
+
+        protected function casts(): array
+        {
+            return [
+                'precio' => 'decimal:2',
+            ];
+        }
+
+        public function user(): BelongsTo
+        {
+            return $this->belongsTo(User::class);
+        }
 }
