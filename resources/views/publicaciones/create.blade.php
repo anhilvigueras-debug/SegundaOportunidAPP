@@ -40,6 +40,20 @@
                                 </div>
                             </div>
 
+                            <div class="mb-3">
+                                <label for="categoria" class="form-label fw-bold">Categoría</label>
+                                <select name="categoria" id="categoria" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona una categoría</option>
+                                    <option value="Ropa">Ropa</option>
+                                    <option value="Electrónica">Electrónica</option>
+                                    <option value="Hogar">Hogar</option>
+                                    <option value="Juguetes">Juguetes</option>
+                                    <option value="Libros">Libros</option>
+                                    <option value="Muebles">Muebles</option>
+                                    <option value="Otros">Otros</option>
+                                </select>
+                            </div>
+
                             <div class="mb-4">
                                 <label for="estado_articulo" class="form-label fw-bold">Estado del artículo</label>
                                 <select name="estado_articulo" id="estado_articulo" class="form-select" required>
