@@ -83,14 +83,9 @@ class PublicacionController extends Controller
         return view('publicaciones.show', compact('publicacion'));
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        $publicaciones = $this->getPublicaciones($request);
-        $publicacion = $publicaciones[$id] ?? null;
-
-        if (!$publicacion) {
-            return redirect()->route('publicaciones.index');
-        }
+        $publicacion = Publicacion::findOrFail($id);
 
         return view('publicaciones.edit', compact('publicacion'));
     }
