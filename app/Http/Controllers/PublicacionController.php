@@ -3,9 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Publicacion;
+use App\Http\Requests\StorePublicacionRequest;
+use App\Http\Requests\UpdatePublicacionRequest;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 
-class PublicacionController extends Controller
+class PublicacionController extends Controller implements HasMiddleware
 {
+
+        public static function middleware(): array
+    {
+        return [
+            new Middleware('auth', only: ['create', 'store', 'edit', 'update']),
+        ];
+    }
+
     private function getPublicaciones(Request $request)
     {
         return $request->session()->get('publicaciones', [
@@ -39,24 +54,21 @@ class PublicacionController extends Controller
         return view('publicaciones.create');
     }
 
-    public function store(Request $request)
+    public function store(StorePublicacionRequest $request)
     {
-        $publicaciones = $this->getPublicaciones($request);
-        $id = count($publicaciones) > 0 ? max(array_keys($publicaciones)) + 1 : 1;
+        $datos = $request->validated();
 
-        $nueva = [
-            'id' => $id,
-            'titulo' => $request->input('titulo'),
-            'descripcion' => $request->input('descripcion'),
-            'tipo' => $request->input('tipo'),
-            'precio' => $request->input('precio', 0),
-            'estado_articulo' => $request->input('estado_articulo'),
-        ];
+        // Si es donación el precio siempre es 0
+        $datos['precio'] = $datos['tipo'] === 'Donacion' ? 0 : ($datos['precio'] ?? 0);
 
-        $publicaciones[$id] = $nueva;
-        $request->session()->put('publicaciones', $publicaciones);
+        $datos['foto'] = $this->guardarFoto($request->file('foto'));
 
-        return redirect()->route('publicaciones.index')->with('success', 'Publicación creada en sesión correctamente.');
+        $datos['user_id'] = Auth::id();
+
+        Publicacion::create($datos);
+
+        return redirect()->route('publicaciones.index')
+            ->with('success', 'Publicación creada correctamente.');
     }
 
     public function show(Request $request, $id)
@@ -71,35 +83,33 @@ class PublicacionController extends Controller
         return view('publicaciones.show', compact('publicacion'));
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        $publicaciones = $this->getPublicaciones($request);
-        $publicacion = $publicaciones[$id] ?? null;
-
-        if (!$publicacion) {
-            return redirect()->route('publicaciones.index');
-        }
+        $publicacion = Publicacion::findOrFail($id);
 
         return view('publicaciones.edit', compact('publicacion'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdatePublicacionRequest $request, $id)
     {
-        $publicaciones = $this->getPublicaciones($request);
+        $publicacion = Publicacion::findOrFail($id);
 
-        if (isset($publicaciones[$id])) {
-            $publicaciones[$id] = [
-                'id' => $id,
-                'titulo' => $request->input('titulo'),
-                'descripcion' => $request->input('descripcion'),
-                'tipo' => $request->input('tipo'),
-                'precio' => $request->input('precio', 0),
-                'estado_articulo' => $request->input('estado_articulo'),
-            ];
-            $request->session()->put('publicaciones', $publicaciones);
+        $datos = $request->validated();
+
+        // Si es donación el precio siempre es 0
+        $datos['precio'] = $datos['tipo'] === 'Donacion' ? 0 : ($datos['precio'] ?? 0);
+
+        if ($request->hasFile('foto')) {
+            $this->borrarFoto($publicacion->foto);
+            $datos['foto'] = $this->guardarFoto($request->file('foto'));
+        } else {
+            unset($datos['foto']);
         }
 
-        return redirect()->route('publicaciones.index')->with('success', 'Publicación actualizada en sesión.');
+        $publicacion->update($datos);
+
+        return redirect()->route('publicaciones.index')
+            ->with('success', 'Publicación actualizada correctamente.');
     }
 
     public function destroy(Request $request, $id)
@@ -109,5 +119,20 @@ class PublicacionController extends Controller
         $request->session()->put('publicaciones', $publicaciones);
 
         return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada de la sesión.');
+    }
+
+    private function guardarFoto(UploadedFile $archivo): string
+    {
+        $nombre = time() . '_' . uniqid() . '.' . $archivo->getClientOriginalExtension();
+        $archivo->move(public_path('img/publicaciones'), $nombre);
+
+        return 'img/publicaciones/' . $nombre;
+    }
+
+    private function borrarFoto(?string $ruta): void
+    {
+        if ($ruta && file_exists(public_path($ruta))) {
+            unlink(public_path($ruta));
+        }
     }
 }
