@@ -49,6 +49,7 @@ class PublicacionController extends Controller
             'precio'          => 'required_if:tipo,Venta|nullable|numeric|min:0',
             'categoria'       => 'required|string|max:255',
             'estado_articulo' => 'required|string|max:255',
+            'foto'            => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         ], [
             'titulo.required'          => 'El título es obligatorio.',
             'descripcion.required'     => 'La descripción es obligatoria.',
@@ -56,14 +57,22 @@ class PublicacionController extends Controller
             'precio.required_if'       => 'Indica el precio si es una venta.',
             'categoria.required'       => 'Elige una categoría.',
             'estado_articulo.required' => 'Elige el estado del artículo.',
+            'foto.required'            => 'Sube una foto del artículo.',
+            'foto.image'               => 'El archivo debe ser una imagen.',
+            'foto.mimes'               => 'La foto debe ser JPG, PNG o WEBP.',
+            'foto.max'                 => 'La foto no debe pesar más de 2 MB.',
         ]);
 
-        // Si es donación el precio siempre es 0
         if ($datos['tipo'] === 'Donacion') {
             $datos['precio'] = 0;
         } else {
             $datos['precio'] = $datos['precio'] ?? 0;
         }
+
+        $archivo = $request->file('foto');
+        $nombre  = time() . '_' . uniqid() . '.' . $archivo->getClientOriginalExtension();
+        $archivo->move(public_path('img/publicaciones'), $nombre);
+        $datos['foto'] = 'img/publicaciones/' . $nombre;
 
         Publicacion::create($datos);
 
@@ -110,7 +119,6 @@ class PublicacionController extends Controller
             'estado_articulo.required' => 'Elige el estado del artículo.',
         ]);
 
-        // Si es donación el precio siempre es 0
         if ($datos['tipo'] === 'Donacion') {
             $datos['precio'] = 0;
         } else {
