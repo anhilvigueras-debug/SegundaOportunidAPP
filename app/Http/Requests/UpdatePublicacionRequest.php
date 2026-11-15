@@ -20,6 +20,7 @@ class UpdatePublicacionRequest extends FormRequest
             'precio'          => ['required_if:tipo,Venta', 'nullable', 'numeric', 'min:0', 'max:999999.99'],
             'categoria'       => ['required', 'string', 'max:255'],
             'estado_articulo' => ['required', 'string', 'max:255'],
+            'foto'            => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ];
     }
 
@@ -37,6 +38,9 @@ class UpdatePublicacionRequest extends FormRequest
             'precio.min'               => 'El precio no puede ser negativo.',
             'categoria.required'       => 'Elige una categoría.',
             'estado_articulo.required' => 'Elige el estado del artículo.',
+            'foto.image'               => 'El archivo debe ser una imagen.',
+            'foto.mimes'               => 'La foto debe ser JPG, PNG o WEBP.',
+            'foto.max'                 => 'La foto no debe pesar más de 2 MB.',
         ];
     }
 }
