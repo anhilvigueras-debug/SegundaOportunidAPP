@@ -30,9 +30,16 @@ Route::resource('publicaciones', PublicacionController::class);
 Route::patch('/publicaciones/{publicacion}/finalizar', [PublicacionController::class, 'finalizar'])
     ->middleware('auth')
     ->name('publicaciones.finalizar');
-    
+
 // Angel Daniel (Mensajería)
-Route::view('/mensajes', 'mensajes.index')->name('mensajes');
+Route::middleware('auth')->group(function () {
+    Route::get('/mensajes', [App\Http\Controllers\MensajeController::class, 'index'])->name('mensajes.index');
+    Route::get('/mensajes/iniciar/{publicacion_id}', [App\Http\Controllers\MensajeController::class, 'iniciar'])->name('mensajes.iniciar');
+    Route::get('/mensajes/{conversacion_id}', [App\Http\Controllers\MensajeController::class, 'show'])->name('mensajes.show');
+    Route::post('/mensajes/{conversacion_id}/enviar', [App\Http\Controllers\MensajeController::class, 'enviar'])->name('mensajes.enviar');
+Route::delete('/mensajes/mensaje/{id}', [App\Http\Controllers\MensajeController::class, 'eliminarMensaje'])->name('mensajes.eliminar');
+    Route::patch('/mensajes/{conversacion_id}/ocultar', [App\Http\Controllers\MensajeController::class, 'ocultar'])->name('mensajes.ocultar');
+});
 
 // (Transacciones y Donaciones)
 Route::view('/donaciones', 'transacciones.donaciones')->name('donaciones');
