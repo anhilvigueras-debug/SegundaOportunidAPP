@@ -19,12 +19,14 @@ class Publicacion extends Model
         'estado_articulo',
         'foto',
         'user_id',
+        'disponible',
     ];
 
         protected function casts(): array
         {
             return [
                 'precio' => 'decimal:2',
+                'disponible' => 'boolean',
             ];
         }
 
