@@ -1,6 +1,6 @@
 # SegundaOportunidAPP · Laravel
 
-Proyecto académico de publicaciones, ventas y aportaciones. Las ventas se registran manualmente y se calcula la comisión; las aportaciones guardan su comprobante en la base de datos para revisión. **No hay pasarela de pagos, cobro real ni verificación automática**. Esta versión tampoco tiene autenticación ni permisos; utilízala solo con datos de prueba en un entorno local, no con comprobantes reales ni en producción.
+Proyecto académico de publicaciones, ventas y aportaciones. Las ventas se registran manualmente y se calcula la comisión; las aportaciones guardan su comprobante en la base de datos para revisión. **No hay pasarela de pagos, cobro real ni verificación automática**. La aplicación incluye inicio de sesión para usuarios, pero el módulo de transacciones todavía necesita controles de autorización. Utiliza solo datos de prueba y no lo despliegues con comprobantes reales.
 
 ## Requisitos
 
@@ -36,3 +36,31 @@ Desde Aportar se registran nombre, correo, monto, referencia única y comprobant
 `COMISION_PUNTOS_BASE=500` en `.env` representa un **5% de ejemplo**, no una tarifa aprobada: 100 puntos base equivalen a 1%. El equipo puede cambiar el valor de 0 a 10000 antes de registrar nuevas ventas. Cada venta conserva la tasa vigente en el momento de su registro; editar el comprador no altera sus importes. La comisión se redondea al centavo más cercano.
 
 Las pruebas usan SQLite en memoria para no tocar la base PostgreSQL configurada: `php artisan test`. Debe probarse también `migrate` y `migrate:fresh --seed` en una base PostgreSQL independiente.
+
+
+## Integrantes del equipo
+
+- Anhil
+- Luis
+- Angel Daniel
+- Marco
+- Zayra
+- Diego
+
+## Capturas del módulo de publicaciones
+
+### Catálogo
+
+![Vista del catálogo](public/img/index.png)
+
+### Crear publicación
+
+![Formulario de creación](public/img/create.png)
+
+### Detalle de publicación
+
+![Detalle de publicación](public/img/show.png)
+
+### Editar publicación
+
+![Formulario de edición](public/img/edit.png)

@@ -2,6 +2,7 @@
 namespace Tests\Feature;
 use App\Models\Aportacion;
 use App\Models\Publicacion;
+use App\Models\User;
 use App\Models\Venta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -11,7 +12,7 @@ class TransaccionesTest extends TestCase
     use RefreshDatabase;
     private function publicacion(string $tipo = 'Venta', string $precio = '100.10'): Publicacion
     {
-        return Publicacion::create(['titulo'=>'Artículo','descripcion'=>'Descripción','categoria'=>'Hogar','estado_articulo'=>'Usado','tipo'=>$tipo,'precio'=>$precio]);
+        return Publicacion::create(['titulo'=>'Artículo','descripcion'=>'Descripción','categoria'=>'Hogar','estado_articulo'=>'Usado','tipo'=>$tipo,'precio'=>$precio,'user_id'=>User::factory()->create()->id]);
     }
     public function test_registra_venta_y_calcula_comision_redondeada_sin_duplicar(): void
     {
@@ -27,7 +28,14 @@ class TransaccionesTest extends TestCase
         $this->assertDatabaseCount('ventas',1);
         $this->put(route('ventas.update',$venta),['publicacion_id'=>$publicacion->id,'comprador'=>'Otro nombre','confirmacion'=>'1'])->assertRedirect();
         $this->assertSame('5.01',$venta->fresh()->comision);
-        $this->delete(route('publicaciones.destroy',$publicacion))->assertSessionHas('error');
+        $this->delete(route('publicaciones.destroy',$publicacion))->assertRedirect(route('login'));
+        $this->actingAs(User::factory()->create())
+            ->delete(route('publicaciones.destroy',$publicacion))
+            ->assertForbidden();
+        $this->actingAs($publicacion->user)
+            ->delete(route('publicaciones.destroy',$publicacion))
+            ->assertSessionHas('error');
+        $this->assertDatabaseHas('publicacions', ['id' => $publicacion->id]);
         $this->delete(route('ventas.destroy',$venta))->assertRedirect(route('ventas.index'));
     }
     public function test_venta_rechaza_campos_faltantes_y_publicaciones_de_donacion(): void
@@ -64,6 +72,8 @@ class TransaccionesTest extends TestCase
     public function test_paginas_de_crud_responden(): void
     {
         $p=$this->publicacion();
+        $this->get(route('publicaciones.create'))->assertRedirect(route('login'));
+        $this->actingAs($p->user);
         foreach (['publicaciones.index','publicaciones.create','ventas.index','ventas.create','aportaciones.index','aportaciones.create'] as $ruta) { $this->get(route($ruta))->assertOk(); }
         $this->get(route('publicaciones.show',$p))->assertOk();
         $this->get(route('publicaciones.edit',$p))->assertOk();
