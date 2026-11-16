@@ -31,6 +31,9 @@
                         <a class="nav-link {{ request()->routeIs('inicio') ? 'active fw-bold' : '' }}" href="{{ route('inicio') }}">Inicio</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('publicaciones.*') ? 'active fw-bold' : '' }}" href="{{ route('publicaciones.index') }}">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('nosotros') ? 'active fw-bold' : '' }}" href="{{ route('nosotros') }}">Nosotros</a>
                     </li>
                     <li class="nav-item">
@@ -45,9 +48,31 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('reporte') ? 'active fw-bold' : '' }}" href="{{ route('reporte') }}">Reportar problema</a>
                     </li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-outline-light btn-sm px-3 rounded-pill texto-secundario" href="{{ route('login') }}">Iniciar sesión</a>
-                    </li>
+
+                    @guest
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-outline-light btn-sm px-3 rounded-pill texto-secundario" href="{{ route('login') }}">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item ms-lg-1 mt-2 mt-lg-0">
+                            <a class="btn btn-light btn-sm px-3 rounded-pill texto-secundario fw-bold" href="{{ route('registro') }}">Registrarse</a>
+                        </li>
+                    @endguest
+
+                    @auth
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-outline-light btn-sm px-3 rounded-pill texto-secundario {{ request()->routeIs('perfil') ? 'active fw-bold' : '' }}" href="{{ route('perfil') }}">
+                                Mi Perfil
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-1 mt-2 mt-lg-0">
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-light btn-sm px-3 rounded-pill texto-secundario">
+                                    Salir
+                                </button>
+                            </form>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </nav>

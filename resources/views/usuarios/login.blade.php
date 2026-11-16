@@ -90,7 +90,12 @@
                     Ingresar
                 </button>
 
+
             </form>
+            <p class="text-center mt-3 mb-0 texto-normal">
+                ¿Aún no tienes cuenta? 
+                <a href="{{ route('registro') }}" class="fw-bold text-primary text-decoration-none">Regístrate aquí</a>
+            </p>
 
             <hr style="border-color: var(--color-bordes);" class="my-4">
 

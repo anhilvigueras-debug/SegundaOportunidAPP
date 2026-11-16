@@ -113,6 +113,50 @@
                 </button>
             </form>
         </section>
+        <!-- Historial de publicaciones del usuario -->
+        <section class="card border-0 shadow-sm p-4 mt-4 rounded-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="encabezado mb-0 text-dark">Mis publicaciones</h3>
+                <a href="{{ route('publicaciones.create') }}" class="btn btn-sm btn-primary rounded-pill px-3">
+                    + Nueva
+                </a>
+            </div>
+
+            @forelse($publicaciones as $item)
+                <div class="border rounded-3 p-3 mb-2 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <strong>{{ $item->titulo }}</strong>
+                            @if($item->disponible)
+                                <span class="badge bg-success">Activa</span>
+                            @else
+                                <span class="badge bg-secondary">Finalizada</span>
+                            @endif
+                        </div>
+                        <small class="text-muted">
+                            {{ $item->tipo }} · {{ $item->precio > 0 ? '$' . number_format($item->precio, 2) : 'Gratis' }}
+                        </small>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="{{ route('publicaciones.show', $item) }}" class="btn btn-sm btn-outline-primary rounded-pill">Ver</a>
+                        <a href="{{ route('publicaciones.edit', $item) }}" class="btn btn-sm btn-outline-secondary rounded-pill">Editar</a>
+
+                        @if($item->disponible)
+                            <form action="{{ route('publicaciones.finalizar', $item) }}" method="POST" onsubmit="return confirm('¿Marcar este artículo como vendido/entregado y retirarlo del catálogo público?');">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-sm btn-success rounded-pill">
+                                    Marcar finalizada
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            @empty
+                <p class="text-muted mb-0">Aún no has publicado ningún artículo.</p>
+            @endforelse
+        </section>
 
     </div>
 @endsection

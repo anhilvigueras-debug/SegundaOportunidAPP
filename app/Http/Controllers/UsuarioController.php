@@ -73,8 +73,11 @@ class UsuarioController extends Controller
 
     public function mostrarPerfil()
     {
+        /** @var \App\Models\User $usuario */
         $usuario = Auth::user();
-        return view('usuarios.perfil', compact('usuario'));
+        $publicaciones = $usuario->publicaciones()->latest()->get();
+
+        return view('usuarios.perfil', compact('usuario', 'publicaciones'));
     }
 
     public function actualizarPerfil(Request $request)
