@@ -13,39 +13,33 @@ use Illuminate\Support\Facades\Auth;
 
 class PublicacionController extends Controller implements HasMiddleware
 {
-
-        public static function middleware(): array
+    public static function middleware(): array
     {
         return [
-            new Middleware('auth', only: ['create', 'store', 'edit', 'update']),
+            new Middleware('auth', only: ['create', 'store', 'edit', 'update', 'destroy', 'finalizar']),
         ];
-    }
-
-    private function getPublicaciones(Request $request)
-    {
-        return $request->session()->get('publicaciones', [
-            1 => [
-                'id' => 1,
-                'titulo' => 'Bicicleta de montaña',
-                'descripcion' => 'Rodada 26, en buen estado.',
-                'tipo' => 'Venta',
-                'precio' => 1500.00,
-                'estado_articulo' => 'Usado'
-            ],
-            2 => [
-                'id' => 2,
-                'titulo' => 'Colección de libros',
-                'descripcion' => '10 libros de literatura variada.',
-                'tipo' => 'Donacion',
-                'precio' => 0,
-                'estado_articulo' => 'Bueno'
-            ]
-        ]);
     }
 
     public function index(Request $request)
     {
-        $publicaciones = $this->getPublicaciones($request);
+        $query = Publicacion::with('user')
+            ->where('disponible', true)
+            ->latest();
+
+        if ($request->filled('buscar')) {
+            $termino = $request->buscar;
+            $query->where(function ($q) use ($termino) {
+                $q->where('titulo', 'ilike', "%{$termino}%")
+                  ->orWhere('descripcion', 'ilike', "%{$termino}%");
+            });
+        }
+
+        if ($request->filled('tipo') && in_array($request->tipo, ['Venta', 'Donacion'])) {
+            $query->where('tipo', $request->tipo);
+        }
+
+        $publicaciones = $query->get();
+
         return view('publicaciones.index', compact('publicaciones'));
     }
 
@@ -64,6 +58,7 @@ class PublicacionController extends Controller implements HasMiddleware
         $datos['foto'] = $this->guardarFoto($request->file('foto'));
 
         $datos['user_id'] = Auth::id();
+        $datos['disponible'] = true;
 
         Publicacion::create($datos);
 
@@ -71,14 +66,9 @@ class PublicacionController extends Controller implements HasMiddleware
             ->with('success', 'Publicación creada correctamente.');
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $publicaciones = $this->getPublicaciones($request);
-        $publicacion = $publicaciones[$id] ?? null;
-
-        if (!$publicacion) {
-            return redirect()->route('publicaciones.index');
-        }
+        $publicacion = Publicacion::with('user')->findOrFail($id);
 
         return view('publicaciones.show', compact('publicacion'));
     }
@@ -87,12 +77,20 @@ class PublicacionController extends Controller implements HasMiddleware
     {
         $publicacion = Publicacion::findOrFail($id);
 
+        if ($publicacion->user_id !== Auth::id()) {
+            abort(403);
+        }
+
         return view('publicaciones.edit', compact('publicacion'));
     }
 
     public function update(UpdatePublicacionRequest $request, $id)
     {
         $publicacion = Publicacion::findOrFail($id);
+
+        if ($publicacion->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         $datos = $request->validated();
 
@@ -112,13 +110,30 @@ class PublicacionController extends Controller implements HasMiddleware
             ->with('success', 'Publicación actualizada correctamente.');
     }
 
-    public function destroy(Request $request, $id)
+    public function finalizar(Publicacion $publicacion)
     {
-        $publicaciones = $this->getPublicaciones($request);
-        unset($publicaciones[$id]);
-        $request->session()->put('publicaciones', $publicaciones);
+        if ($publicacion->user_id !== Auth::id()) {
+            abort(403);
+        }
 
-        return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada de la sesión.');
+        $publicacion->update(['disponible' => false]);
+
+        return back()->with('success', 'Publicación marcada como finalizada.');
+    }
+
+    public function destroy($id)
+    {
+        $publicacion = Publicacion::findOrFail($id);
+
+        if ($publicacion->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $this->borrarFoto($publicacion->foto);
+        $publicacion->delete();
+
+        return redirect()->route('publicaciones.index')
+            ->with('success', 'Publicación eliminada correctamente.');
     }
 
     private function guardarFoto(UploadedFile $archivo): string

@@ -27,7 +27,10 @@ Route::middleware('auth')->group(function () {
 
 // Luis y Anhil (CRUD Publicaciones dinámico en BD)
 Route::resource('publicaciones', PublicacionController::class);
-
+Route::patch('/publicaciones/{publicacion}/finalizar', [PublicacionController::class, 'finalizar'])
+    ->middleware('auth')
+    ->name('publicaciones.finalizar');
+    
 // Angel Daniel (Mensajería)
 Route::view('/mensajes', 'mensajes.index')->name('mensajes');
 
