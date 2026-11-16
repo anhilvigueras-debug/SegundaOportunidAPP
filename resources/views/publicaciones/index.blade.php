@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Catálogo de Publicaciones - SegundaOportunidAPP')
+@section('titulo', 'Catálogo de Publicaciones - SegundaOportunidAPP')
 
-@section('content')
+@section('contenido')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -13,6 +13,26 @@
             + Nueva Publicación
         </a>
     </div>
+    
+    
+<form method="GET" action="{{ route('publicaciones.index') }}" class="row g-2 mb-4">
+    <div class="col-md-6">
+        <input type="text" name="buscar" value="{{ request('buscar') }}" class="form-control rounded-pill px-3" placeholder="Buscar artículos por título o descripción...">
+    </div>
+    <div class="col-md-3">
+        <select name="tipo" class="form-select rounded-pill px-3">
+            <option value="">Todos los tipos</option>
+            <option value="Venta" {{ request('tipo') === 'Venta' ? 'selected' : '' }}>Venta</option>
+            <option value="Donacion" {{ request('tipo') === 'Donacion' ? 'selected' : '' }}>Donación</option>
+        </select>
+    </div>
+    <div class="col-md-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary rounded-pill w-100">Buscar</button>
+        @if(request()->filled('buscar') || request()->filled('tipo'))
+            <a href="{{ route('publicaciones.index') }}" class="btn btn-outline-secondary rounded-pill">Limpiar</a>
+        @endif
+    </div>
+</form>
 
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
@@ -25,6 +45,9 @@
         @forelse($publicaciones as $publicacion)
             <div class="col">
                 <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
+                    @if($publicacion->foto)
+                        <img src="{{ asset($publicacion->foto) }}" class="card-img-top" alt="{{ $publicacion->titulo }}" style="height: 180px; object-fit: cover;">
+                    @endif
                     <div class="card-body d-flex flex-column p-3">
                         <h3 class="encabezado mb-2">{{ $publicacion['titulo'] }}</h3>
                         <p class="texto-secundario text-muted flex-grow-1">{{ Str::limit($publicacion['descripcion'], 80) }}</p>
