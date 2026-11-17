@@ -1,25 +1,12 @@
 <?php
-
 namespace Database\Seeders;
-
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Publicacion;
 use Illuminate\Database\Seeder;
-
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        Publicacion::create(['titulo'=>'Bicicleta de montaña','descripcion'=>'Rodada 26 en buen estado.','tipo'=>'Venta','precio'=>'1500.00','categoria'=>'Deportes','estado_articulo'=>'Usado']);
+        Publicacion::create(['titulo'=>'Colección de libros','descripcion'=>'Libros de literatura variada.','tipo'=>'Donacion','precio'=>'0.00','categoria'=>'Libros','estado_articulo'=>'Bueno']);
     }
 }

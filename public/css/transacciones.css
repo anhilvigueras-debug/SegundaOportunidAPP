@@ -1,0 +1,13 @@
+/* Componentes del módulo con los colores y la escala de la guía institucional. */
+.navbar-principal { background-color: var(--color-menu); }
+.navbar-principal .nav-link, .navbar-principal .navbar-brand { color: #fff; }
+body { min-height: 100vh; display: flex; flex-direction: column; }
+main.container { flex: 1 0 auto; width: 100%; }
+.card { border: 1px solid var(--color-bordes); border-radius: 8px; box-shadow: 0 4px 16px rgb(0 0 0 / 6%); }
+.form-control, .form-select { min-height: 48px; border: 1px solid var(--color-bordes); border-radius: 8px; }
+.form-control:focus, .form-select:focus { border-color: var(--color-menu); box-shadow: 0 0 0 3px rgb(73 158 191 / 20%); }
+.btn-outline-secondary, .btn-outline-primary { border-color: var(--color-menu); color: var(--texto-principal); border-radius: 20px; }
+.btn-outline-secondary:hover, .btn-outline-primary:hover { background-color: var(--color-menu); border-color: var(--color-menu); color: #fff; }
+.table { --bs-table-bg: var(--superficie); }
+a { color: #286c86; }
+@media (max-width: 575px) { .navbar-brand { font-size: 16px !important; } .navbar-brand img { width: 32px; height: 32px; } main.container { padding-left: 16px; padding-right: 16px; } }
