@@ -47,3 +47,15 @@ Route::view('/donaciones', 'transacciones.donaciones')->name('donaciones');
 // Diego (Reportes y Admin)
 Route::view('/reporte', 'reportes.create')->name('reporte');
 Route::view('/admin', 'reportes.admin')->name('admin');
+
+
+// Ventas y aportaciones económicas
+Route::resource('ventas', \App\Http\Controllers\VentaController::class);
+
+Route::get(
+    'aportaciones/{aportacion}/comprobante',
+    [\App\Http\Controllers\AportacionController::class, 'comprobante']
+)->name('aportaciones.comprobante');
+
+Route::resource('aportaciones', \App\Http\Controllers\AportacionController::class)
+    ->parameters(['aportaciones' => 'aportacion']);

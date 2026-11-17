@@ -64,6 +64,16 @@
                             href="{{ route('mensajes.index') }}">mensajes</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('ventas.index') }}">Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('aportaciones.create') }}">Aportar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('aportaciones.index') }}">Aportaciones</a>
+                    </li>
+
                     @guest
                         <li class="nav-item ms-lg-2">
                             <a class="btn btn-outline-light btn-sm px-3 rounded-pill texto-secundario"
@@ -97,7 +107,18 @@
     </header>
 
     <main class="py-4 flex-grow-1">
+        <div class="container">
+            @if(session('success'))
+                <div class="alert alert-success" role="status">{{ session('success') }}</div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger" role="alert">{{ session('error') }}</div>
+            @endif
+        </div>
         @yield('contenido')
+        <div class="container">
+            @yield('content')
+        </div>
     </main>
 
     <footer class="text-white py-4 mt-auto shadow-sm" style="background-color: var(--color-menu);">

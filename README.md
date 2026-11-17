@@ -1,135 +1,66 @@
-# SegundaOportunidAPP - Módulo Frontend CRUD (Laravel)
+# SegundaOportunidAPP · Laravel
 
-Plataforma web desarrollada en **Laravel** para la donación y venta de artículos de segunda mano, enfocada en darle una segunda vida a los objetos y apoyar a la comunidad.
+Proyecto académico de publicaciones, ventas y aportaciones. Las ventas se registran manualmente y se calcula la comisión; las aportaciones guardan su comprobante en la base de datos para revisión. **No hay pasarela de pagos, cobro real ni verificación automática**. La aplicación incluye inicio de sesión para usuarios, pero el módulo de transacciones todavía necesita controles de autorización. Utiliza solo datos de prueba y no lo despliegues con comprobantes reales.
 
-Esta rama implementa un **CRUD completo de publicaciones** que simula el backend mediante arreglos guardados en sesión (`$request->session()`), sin necesidad de base de datos.
+## Requisitos
 
----
+PHP 8.3 o superior con las extensiones `pdo_pgsql` y `pgsql`, Composer y PostgreSQL. Bootstrap se carga desde CDN.
 
-## Integrantes del Equipo
+## Instalación desde cero (PowerShell)
 
-| Integrante | Rol | Archivo asignado |
-| **Anhil** | Líder de proyecto y Layout Maestro | `layouts/app.blade.php`, `publicaciones/index.blade.php` |
-| **Luis** | Lógica del controlador y manejo de sesiones | `PublicacionController.php` |
-| **Angel** | Vista de creación de publicaciones | `create.blade.php` |
-| **Marco** | Vista de edición de publicaciones | `edit.blade.php` |
-| **Zayra** | Vista de detalle y eliminación | `show.blade.php` |
-| **Diego** | Documentación, pruebas y presentación | `README.md` |
+1. Crear una base de datos vacía en PostgreSQL, por ejemplo `segunda_oportunidad`, usando pgAdmin o `createdb`.
+2. En la carpeta del proyecto:
 
----
-
-## Tecnologías
-
-- **Laravel** (PHP) con motor de plantillas **Blade**
-- **Bootstrap 5** y CSS personalizado
-- **Sesiones de Laravel** como persistencia temporal
-- **Git / GitHub** con flujo de ramas `feature/*`
-
----
-
-## Requisitos e Instalación
-
-**Requisitos previos:** PHP 8.1 o superior, Composer y Git.
-
-1. **Clonar el repositorio:**
-
-    ```bash
-    git clone https://github.com/anhilvigueras-debug/SegundaOportunidAPP.git
-    cd SegundaOportunidAPP
-    ```
-
-2. **Cambiarse a la rama de trabajo:**
-
-    ```bash
-    git checkout laravel-crud
-    ```
-
-3. **Instalar dependencias de PHP:**
-
-    ```bash
-    composer install
-    ```
-
-4. **Configurar el archivo de entorno:**
-
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
-
-5. **Iniciar el servidor local de desarrollo:**
-
-    ```bash
-    php artisan serve
-    ```
-
-6. **Abrir en el navegador:** `http://127.0.0.1:8000/publicaciones`
-
----
-
-## Tabla de Rutas HTTP (RESTful)
-
-| Método HTTP | Ruta / URL | Acción del Controlador | Descripción |
-| **GET** | `/publicaciones` | `index` | Muestra el catálogo de publicaciones en sesión. |
-| **GET** | `/publicaciones/create` | `create` | Muestra el formulario para crear una publicación. |
-| **POST** | `/publicaciones` | `store` | Procesa y guarda una nueva publicación en sesión. |
-| **GET** | `/publicaciones/{id}` | `show` | Muestra el detalle de una publicación. |
-| **GET** | `/publicaciones/{id}/edit` | `edit` | Muestra el formulario precargado para editar. |
-| **PUT/PATCH** | `/publicaciones/{id}` | `update` | Actualiza la información en sesión. |
-| **DELETE** | `/publicaciones/{id}` | `destroy` | Elimina la publicación de la sesión. |
-
----
-
-## Capturas de Pantalla
-
-### 1. Vista Catálogo (`index`)
-
-![Vista Catálogo](public/img/index.png)
-
-### 2. Formulario Crear (`create`)
-
-![Formulario Crear](public/img/create.png)
-
-### 3. Detalle de Publicación (`show`)
-
-![Detalle de Publicación](public/img/show.png)
-
-### 4. Formulario Editar (`edit`)
-
-![Formulario Editar](public/img/edit.png)
-
----
-
-## Estructura del Proyecto (archivos del módulo)
-
-```text
-SegundaOportunidAPP/
-├── app/Http/Controllers/
-│   └── PublicacionController.php      # Lógica CRUD con sesión
-├── resources/views/
-│   ├── layouts/
-│   │   └── app.blade.php              # Layout maestro (Bootstrap + CSS)
-│   └── publicaciones/
-│       ├── index.blade.php            # Catálogo
-│       ├── create.blade.php           # Formulario de creación
-│       ├── show.blade.php             # Detalle y eliminación
-│       └── edit.blade.php             # Formulario de edición
-├── public/img/                        # Capturas de pantalla del README
-└── routes/web.php                     # Resource route de publicaciones
+```powershell
+composer install
+Copy-Item .env.example .env
 ```
 
----
+3. Editar `.env`: completar `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME` y `DB_PASSWORD` con los datos locales. No compartir ni subir `.env`.
+4. Ejecutar:
 
-## Flujo de Trabajo con Git
+```powershell
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve
+```
 
-Cada integrante trabajó en su propia rama `feature/*`, para que quede registro de los commits de todo el equipo:
+Abrir la dirección que muestre Artisan. Para comenzar de nuevo con datos de ejemplo, usar `php artisan migrate:fresh --seed`. **Este último comando elimina todas las tablas y sus datos**; úsalo únicamente en una base de pruebas.
 
-| Rama                         | Responsable  |
-| :--------------------------- | :----------- |
-| `feature/controlador-sesion` | Luis         |
-| `feature/vista-crear`        | Angel Daniel |
-| `feature/vista-editar`       | Marco        |
-| `feature/vista-detalle`      | Zayra        |
-| `feature/documentacion`      | Diego        |
+## Flujo de ejemplo
 
-Los Pull Requests individuales se integran en `laravel-crud`. Una vez probadas todas las vistas, se crea el Pull Request final de `laravel-crud` hacia `main`.
+Crear una publicación de tipo venta con precio mayor que cero, abrir Ventas y registrar el comprador. El importe se toma del precio de la publicación y se guarda junto con la comisión y el saldo del vendedor. Una publicación admite una sola venta; para conservar la integridad, no puede borrarse mientras exista el registro de venta.
+
+Desde Aportar se registran nombre, correo, monto, referencia única y comprobante PDF/JPG/PNG (máximo 2 MB). El archivo se guarda en la base como texto codificado y puede descargarse. Registrar un comprobante no demuestra que la operación se haya realizado. Se pueden consultar, editar y eliminar los registros.
+
+`COMISION_PUNTOS_BASE=500` en `.env` representa un **5% de ejemplo**, no una tarifa aprobada: 100 puntos base equivalen a 1%. El equipo puede cambiar el valor de 0 a 10000 antes de registrar nuevas ventas. Cada venta conserva la tasa vigente en el momento de su registro; editar el comprador no altera sus importes. La comisión se redondea al centavo más cercano.
+
+Las pruebas usan SQLite en memoria para no tocar la base PostgreSQL configurada: `php artisan test`. Debe probarse también `migrate` y `migrate:fresh --seed` en una base PostgreSQL independiente.
+
+
+## Integrantes del equipo
+
+- Anhil
+- Luis
+- Angel Daniel
+- Marco
+- Zayra
+- Diego
+
+## Capturas del módulo de publicaciones
+
+### Catálogo
+
+![Vista del catálogo](public/img/index.png)
+
+### Crear publicación
+
+![Formulario de creación](public/img/create.png)
+
+### Detalle de publicación
+
+![Detalle de publicación](public/img/show.png)
+
+### Editar publicación
+
+![Formulario de edición](public/img/edit.png)

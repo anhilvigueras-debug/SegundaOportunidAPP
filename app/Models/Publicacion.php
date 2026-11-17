@@ -34,4 +34,8 @@ class Publicacion extends Model
         {
             return $this->belongsTo(User::class);
         }
-}
+
+    public function venta(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Venta::class);
+    }}

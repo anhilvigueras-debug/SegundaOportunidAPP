@@ -129,6 +129,10 @@ class PublicacionController extends Controller implements HasMiddleware
             abort(403);
         }
 
+        if ($publicacion->venta()->exists()) {
+            return back()->with('error', 'No se puede eliminar una publicación con una venta registrada.');
+        }
+
         $this->borrarFoto($publicacion->foto);
         $publicacion->delete();
 
