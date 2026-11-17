@@ -50,37 +50,7 @@
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
 
-            {{-- TARJETA DE PRUEBA FORZADA PARA QUE VEAS EL BOTÓN DE INMEDIATO --}}
-            <div class="col">
-                <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden border border-primary">
-                    <div class="card-body d-flex flex-column p-3">
-                        <span class="badge bg-primary mb-2 align-self-start">Artículo de Prueba</span>
-                        <h3 class="encabezado mb-2">Bicicleta de montaña</h3>
-                        <p class="texto-secundario text-muted flex-grow-1">Rodada 26, en buen estado. Ideal para pruebas de
-                            mensajería directa.</p>
-
-                        <div class="d-flex gap-1 mb-3">
-                            <span class="badge badge-comprador">Venta</span>
-                            <span class="badge bg-light text-dark border">Excelente</span>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center pt-2 border-top mb-2">
-                            <span class="fw-bold text-primary fs-5">$1,500.00</span>
-                            <div class="btn-group">
-                                <a href="#" class="btn btn-sm btn-outline-primary rounded-start-pill">Ver</a>
-                                <a href="#" class="btn btn-sm btn-outline-secondary">Editar</a>
-                            </div>
-                        </div>
-
-                        {{-- Botón directo para iniciar chat (usando ID 1 o el que tengas en BD) --}}
-                        @auth
-                            <a href="{{ route('mensajes.iniciar', 1) }}" class="btn btn-sm btn-primary rounded-pill w-100 mt-1">
-                                <i class="bi bi-chat-dots"></i> Contactar Vendedor
-                            </a>
-                        @endauth
-                    </div>
-                </div>
-            </div>
+           
 
             {{-- TUS PUBLICACIONES REALES DE LA BASE DE DATOS --}}
             @forelse($publicaciones as $publicacion)
@@ -127,7 +97,12 @@
                     </div>
                 </div>
             @empty
-                {{-- El bucle está cubierto por la tarjeta de prueba arriba --}}
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted fs-5 mb-3">No se encontraron publicaciones disponibles con esos criterios.</p>
+                    <a href="{{ route('publicaciones.create') }}" class="btn btn-primary rounded-pill px-4">
+                        Publicar el primer artículo
+                    </a>
+                </div>
             @endforelse
         </div>
     </div>
