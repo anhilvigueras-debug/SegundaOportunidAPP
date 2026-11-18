@@ -230,3 +230,10 @@ En este módulo me encargué de desarrollar el flujo completo para reportar publ
 También trabajé en el panel de administración para integrar la vista de seguimiento y moderación de reportes. En esta interfaz programé el listado dinámico de todas las incidencias registradas, añadiendo controles para actualizar en tiempo real el estado de cada reporte (`Pendiente`, `En revisión` o `Resuelto`) y la opción de eliminar registros con confirmación previa y notificaciones visuales de éxito.
 
 Por último, configuré las validaciones del formulario y el manejo de errores en las vistas para asegurar que no se envíen reportes incompletos o inválidos, además de contemplar avisos informativos cuando aún no existen reportes registrados y mantener la compatibilidad visual con la plantilla general y el resumen administrativo de ventas del sistema.
+
+### Módulo: Usuarios y Perfil Zayra Olvera Hernandezdocsd
+
+Implementación del sistema de autenticación, gestión de cuentas y edición de perfil de usuario conectado a PostgreSQL
+En este módulo me encargué de crear las vistas y funciones para el registro, acceso y gestión de las cuentas de usuario dentro de la plataforma conectada a PostgreSQL. Programé el formulario de creación de cuentas con validaciones para asegurar que los datos estén completos y que la contraseña cumpla con los requisitos de seguridad antes de guardarse en la base de datos, además de conectar el inicio de sesión para que cada persona pueda entrar con su correo y contraseña registrados
+
+También trabajé en la vista del perfil de usuario para que, al iniciar sesión, cada persona pueda consultar sus datos personales y actualizar su nombre, teléfono y ciudad directamente en la plataforma. Por último, configuré el botón de cierre de sesión para que al salir se limpie la sesión de forma segura y se proteja el acceso a las cuentas
