@@ -50,7 +50,7 @@
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
 
-           
+
 
             {{-- TUS PUBLICACIONES REALES DE LA BASE DE DATOS --}}
             @forelse($publicaciones as $publicacion)

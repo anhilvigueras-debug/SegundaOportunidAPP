@@ -1,8 +1,44 @@
 @extends('layouts.app')
-@section('content')<div class="col-lg-7 mx-auto"><h1>{{ $venta->exists ? 'Editar venta' : 'Registrar venta' }}</h1><p>Registra una venta acordada fuera de la aplicación. Este formulario no realiza cobros.</p>
-@if(!$venta->exists)<p>Comisión configurada: {{ config('transacciones.comision_puntos_base') / 100 }}% del precio publicado.</p>@endif
-<form method="POST" action="{{ $venta->exists ? route('ventas.update',$venta) : route('ventas.store') }}">@csrf @if($venta->exists) @method('PUT') @endif
-<div class="mb-3"><label class="form-label" for="publicacion_id">Artículo *</label><select class="form-select @error('publicacion_id') is-invalid @enderror" id="publicacion_id" name="publicacion_id" required @if($venta->exists) disabled @endif><option value="">Selecciona una publicación</option>@foreach($publicaciones as $publicacion)<option value="{{ $publicacion->id }}" @selected(old('publicacion_id',$venta->publicacion_id)==$publicacion->id)>{{ $publicacion->titulo }} — ${{ $publicacion->precio }} MXN</option>@endforeach</select>@if($venta->exists)<input type="hidden" name="publicacion_id" value="{{ $venta->publicacion_id }}">@endif @error('publicacion_id')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
-@if(!$venta->exists && $publicaciones->isEmpty())<div class="alert alert-info">No hay publicaciones de venta disponibles con precio mayor a cero. <a href="{{ route('publicaciones.create') }}">Crear publicación</a>.</div>@endif
-<div class="mb-3"><label class="form-label" for="comprador">Nombre del comprador *</label><input class="form-control @error('comprador') is-invalid @enderror" id="comprador" name="comprador" maxlength="120" value="{{ old('comprador',$venta->comprador) }}" required>@error('comprador')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
-<div class="form-check mb-3"><input class="form-check-input @error('confirmacion') is-invalid @enderror" type="checkbox" id="confirmacion" name="confirmacion" value="1" @checked(old('confirmacion')) required><label class="form-check-label" for="confirmacion">Confirmo que quiero registrar estos datos *</label>@error('confirmacion')<div class="invalid-feedback">{{ $message }}</div>@enderror</div><a class="btn btn-outline-secondary" href="{{ route('ventas.index') }}">Cancelar</a> <button class="btn btn-primary">Guardar</button></form></div>@endsection
+@include('transacciones._recursos')
+@section('titulo', ($venta->exists ? 'Editar venta' : 'Registrar venta') . ' - SegundaOportunidAPP')
+@section('content')
+<div class="transacciones">
+    <header class="transacciones__cabecera"><div><h1>{{ $venta->exists ? 'Editar venta' : 'Registrar venta' }}</h1><p>Registra los datos de una venta de segunda mano.</p></div></header>
+    <div class="transacciones__grid"><section class="transacciones__contenido transacciones__contenido--estrecho transacciones__tarjeta">
+        <h2>Datos de la venta</h2>
+        <p class="transacciones__ayuda">Los campos marcados con * son obligatorios.</p>
+        <div class="transacciones__aviso">Registra una venta acordada fuera de la aplicación. Este formulario no realiza cobros.
+            @if(!$venta->exists)<br>Comisión configurada: {{ config('transacciones.comision_puntos_base') / 100 }}% del precio publicado.@endif
+        </div>
+        <form method="POST" action="{{ $venta->exists ? route('ventas.update', $venta) : route('ventas.store') }}">
+            @csrf
+            @if($venta->exists) @method('PUT') @endif
+            <div class="transacciones__grupo">
+                <label class="form-label" for="publicacion_id">Artículo *</label>
+                <select class="form-select @error('publicacion_id') is-invalid @enderror" id="publicacion_id" name="publicacion_id" required @if($venta->exists) disabled @endif @error('publicacion_id') aria-invalid="true" aria-describedby="error-publicacion" @enderror>
+                    <option value="">Selecciona una publicación</option>
+                    @foreach($publicaciones as $publicacion)
+                        <option value="{{ $publicacion->id }}" @selected(old('publicacion_id', $venta->publicacion_id) == $publicacion->id)>{{ $publicacion->titulo }} — ${{ $publicacion->precio }} MXN</option>
+                    @endforeach
+                </select>
+                @if($venta->exists)<input type="hidden" name="publicacion_id" value="{{ $venta->publicacion_id }}">@endif
+                @error('publicacion_id')<div class="invalid-feedback" id="error-publicacion">{{ $message }}</div>@enderror
+            </div>
+            @if(!$venta->exists && $publicaciones->isEmpty())
+                <div class="transacciones__aviso">No hay publicaciones disponibles con precio mayor a cero. <a class="transacciones__enlace" href="{{ route('publicaciones.create') }}">Crear publicación</a>.</div>
+            @endif
+            <div class="transacciones__grupo">
+                <label class="form-label" for="comprador">Nombre del comprador *</label>
+                <input class="form-control @error('comprador') is-invalid @enderror" id="comprador" name="comprador" maxlength="120" value="{{ old('comprador', $venta->comprador) }}" required @error('comprador') aria-invalid="true" aria-describedby="error-comprador" @enderror>
+                @error('comprador')<div class="invalid-feedback" id="error-comprador">{{ $message }}</div>@enderror
+            </div>
+            <div class="form-check transacciones__grupo">
+                <input class="form-check-input @error('confirmacion') is-invalid @enderror" type="checkbox" id="confirmacion" name="confirmacion" value="1" @checked(old('confirmacion')) required @error('confirmacion') aria-invalid="true" aria-describedby="error-confirmacion" @enderror>
+                <label class="form-check-label" for="confirmacion">Confirmo que quiero registrar estos datos *</label>
+                @error('confirmacion')<div class="invalid-feedback" id="error-confirmacion">{{ $message }}</div>@enderror
+            </div>
+            <div class="transacciones__acciones"><a class="btn btn-outline-secondary" href="{{ route('ventas.index') }}">Cancelar</a><button class="btn btn-primary" type="submit">{{ $venta->exists ? 'Guardar cambios' : 'Guardar venta' }}</button></div>
+        </form>
+    </section></div>
+</div>
+@endsection
