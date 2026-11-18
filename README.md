@@ -39,6 +39,8 @@ Desde Aportar se registran nombre, correo, monto, referencia única y comprobant
 
 Las pruebas utilizan SQLite en memoria por defecto al ejecutar `php artisan test`.
 
+Después de adaptar las vistas de ventas y aportaciones a la guía de diseño, se ejecutaron 8 pruebas con SQLite en memoria y pasaron 90 verificaciones. Estas pruebas incluyeron que las pantallas del módulo cargaran sus estilos y acciones.
+
 El 16 de noviembre de 2026 se probó el commit `0c6adcd` con PostgreSQL en una base de datos creada exclusivamente para pruebas. Se ejecutaron `php artisan migrate` y `php artisan migrate:fresh --seed` sin errores; después, las 7 pruebas pasaron con 62 verificaciones. Las pruebas abarcaron el cálculo de comisión, validaciones, comprobantes y acceso a las pantallas.
 
 La rama recibió posteriormente un ajuste en `composer.lock` para compatibilidad con PHP 8.3. Se recomienda repetir las pruebas con PostgreSQL tras instalar las dependencias de la versión actual. El comando `migrate:fresh` elimina todas las tablas de la base configurada: úsalo solo en una base de pruebas independiente.
@@ -60,6 +62,8 @@ La rama recibió posteriormente un ajuste en `composer.lock` para compatibilidad
 En este módulo me encargué de desarrollar el registro de ventas de artículos de segunda mano y el cálculo automático de la comisión correspondiente a SegundaOportunidAPP. Integré las ventas con las publicaciones para guardar en la base de datos el monto de la operación, el porcentaje aplicado, la comisión y el importe restante para el vendedor. También agregué una validación para evitar registrar dos ventas de la misma publicación y una protección para impedir que se elimine una publicación mientras tenga una venta registrada.
 
 Además, elaboré un formulario para registrar aportaciones económicas con el nombre, correo, monto y referencia de la operación. Incorporé la carga y descarga de comprobantes en formato PDF, JPG o PNG, así como validaciones y mensajes de error en español. Implementé opciones para consultar, editar y eliminar los registros, y adapté las vistas al diseño y al footer del proyecto.
+
+Para mantener la identidad visual de SegundaOportunidAPP, adapté los formularios, listados y detalles de ventas y aportaciones a la guía de diseño del equipo. Utilicé la paleta y tipografía del proyecto, espaciados consistentes y una distribución adaptable a computadoras y celulares. Conservé la navegación y el footer compartidos, e integré la confirmación de eliminación mediante eventos de JavaScript.
 
 Por último, participé en la integración de los cambios recientes de `main` con la rama del módulo y en las pruebas de migraciones y funcionalidades con PostgreSQL. El registro de ventas y aportaciones es manual: todavía no realiza cobros ni verifica pagos automáticamente, y el módulo necesita controles de autorización antes de utilizar datos reales.
 
