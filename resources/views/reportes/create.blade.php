@@ -26,13 +26,11 @@
                     </div>
                 @endif
 
-                <form id="formReporte" action="" method="POST" class="form-validado" novalidate>
+                <form id="formReporte" action="{{ route('reportes.store') }}" method="POST" class="form-validado"
+                    novalidate>
                     @csrf
 
-                    <div id="alertaReporte"
-                         class="alert alert-danger d-none rounded-3"
-                         role="alert"
-                         aria-live="polite">
+                    <div id="alertaReporte" class="alert alert-danger d-none rounded-3" role="alert" aria-live="polite">
                         <strong id="mensajeAlertaReporte">
                             Completa correctamente los siguientes campos:
                         </strong>
@@ -40,18 +38,35 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="publicacionReporte" class="form-label texto-normal fw-bold">
+                            Publicación reportada:
+                        </label>
+                        @if (isset($publicacion) && $publicacion)
+                            <input type="hidden" name="publicacion_id" value="{{ $publicacion->id }}">
+                            <input type="text" class="form-control rounded-3 p-2 bg-light"
+                                value="{{ $publicacion->titulo ?? 'Publicación #' . $publicacion->id }}" readonly>
+                        @else
+                            <select class="form-select rounded-3 p-2" id="publicacionReporte" name="publicacion_id"
+                                data-nombre="Publicación reportada" required>
+                                <option value="" selected disabled>Selecciona la publicación</option>
+                                @foreach ($publicaciones ?? [] as $pub)
+                                    <option value="{{ $pub->id }}"
+                                        {{ old('publicacion_id') == $pub->id ? 'selected' : '' }}>
+                                        {{ $pub->titulo ?? 'Publicación #' . $pub->id }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">Selecciona la publicación que deseas reportar.</div>
+                        @endif
+                    </div>
+
+                    <div class="mb-4">
                         <label for="nombreReporte" class="form-label texto-normal fw-bold">
                             Nombre:
                         </label>
-                        <input type="text"
-                               class="form-control rounded-3 p-2"
-                               id="nombreReporte"
-                               name="nombre"
-                               value="{{ old('nombre') }}"
-                               data-nombre="Nombre"
-                               placeholder="Escribe tu nombre"
-                               pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{3,60}"
-                               required>
+                        <input type="text" class="form-control rounded-3 p-2" id="nombreReporte" name="nombre"
+                            value="{{ old('nombre') }}" data-nombre="Nombre" placeholder="Escribe tu nombre"
+                            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{3,60}" required>
                         <div class="invalid-feedback">
                             Ingresa un nombre válido de 3 a 60 caracteres, utilizando solamente letras.
                         </div>
@@ -61,14 +76,9 @@
                         <label for="correoReporte" class="form-label texto-normal fw-bold">
                             Correo electrónico:
                         </label>
-                        <input type="email"
-                               class="form-control rounded-3 p-2"
-                               id="correoReporte"
-                               name="correo"
-                               value="{{ old('correo') }}"
-                               data-nombre="Correo electrónico"
-                               placeholder="Escribe tu correo"
-                               required>
+                        <input type="email" class="form-control rounded-3 p-2" id="correoReporte" name="correo"
+                            value="{{ old('correo') }}" data-nombre="Correo electrónico" placeholder="Escribe tu correo"
+                            required>
                         <div class="invalid-feedback">
                             Ingresa un correo electrónico válido.
                         </div>
@@ -78,15 +88,14 @@
                         <label for="asuntoReporte" class="form-label texto-normal fw-bold">
                             Tipo de reporte:
                         </label>
-                        <select class="form-select rounded-3 p-2"
-                                id="asuntoReporte"
-                                name="asunto"
-                                data-nombre="Tipo de reporte"
-                                required>
+                        <select class="form-select rounded-3 p-2" id="asuntoReporte" name="motivo"
+                            data-nombre="Tipo de reporte" required>
                             <option value="" selected disabled>Selecciona un motivo</option>
-                            <option value="fallo" {{ old('asunto') == 'fallo' ? 'selected' : '' }}>Fallo en la página</option>
-                            <option value="duda" {{ old('asunto') == 'duda' ? 'selected' : '' }}>Duda sobre una donación</option>
-                            <option value="otro" {{ old('asunto') == 'otro' ? 'selected' : '' }}>Otro motivo</option>
+                            <option value="fallo" {{ old('motivo') == 'fallo' ? 'selected' : '' }}>Fallo en la página
+                            </option>
+                            <option value="duda" {{ old('motivo') == 'duda' ? 'selected' : '' }}>Duda sobre una donación
+                            </option>
+                            <option value="otro" {{ old('motivo') == 'otro' ? 'selected' : '' }}>Otro motivo</option>
                         </select>
                         <div class="invalid-feedback">
                             Selecciona un tipo de reporte.
@@ -97,15 +106,8 @@
                         <label for="mensajeReporte" class="form-label texto-normal fw-bold">
                             Detalle del problema:
                         </label>
-                        <textarea class="form-control rounded-3 p-2"
-                                  id="mensajeReporte"
-                                  name="mensaje"
-                                  data-nombre="Detalle del problema"
-                                  rows="5"
-                                  minlength="10"
-                                  maxlength="500"
-                                  placeholder="Explica qué sucedió..."
-                                  required>{{ old('mensaje') }}</textarea>
+                        <textarea class="form-control rounded-3 p-2" id="mensajeReporte" name="descripcion" data-nombre="Detalle del problema"
+                            rows="5" minlength="10" maxlength="500" placeholder="Explica qué sucedió..." required>{{ old('descripcion') }}</textarea>
                         <div class="invalid-feedback">
                             Describe el problema utilizando entre 10 y 500 caracteres.
                         </div>
@@ -128,10 +130,12 @@
     </div>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="toastReporte" class="toast border-0 shadow rounded-3" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="toastReporte" class="toast border-0 shadow rounded-3" role="alert" aria-live="assertive"
+            aria-atomic="true">
             <div class="toast-header text-white" style="background-color: var(--color-menu);">
                 <strong class="me-auto">SegundaOportunidAPP</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
+                    aria-label="Cerrar"></button>
             </div>
             <div class="toast-body bg-white text-dark rounded-bottom-3" id="mensajeToastReporte">
                 Tu reporte se ha enviado correctamente.

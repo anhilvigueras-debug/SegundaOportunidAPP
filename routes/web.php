@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ReporteController;
 
 // Vista principal
 Route::view('/', 'inicio')->name('inicio');
@@ -45,9 +46,14 @@ Route::delete('/mensajes/mensaje/{id}', [App\Http\Controllers\MensajeController:
 Route::view('/donaciones', 'transacciones.donaciones')->name('donaciones');
 
 // Diego (Reportes y Admin)
-Route::view('/reporte', 'reportes.create')->name('reporte');
-Route::view('/admin', 'reportes.admin')->name('admin');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/reporte/{publicacion_id?}', [\App\Http\Controllers\ReporteController::class, 'create'])->name('reporte');
+    Route::post('/reportes', [\App\Http\Controllers\ReporteController::class, 'store'])->name('reportes.store');
 
+    Route::get('/admin', [\App\Http\Controllers\ReporteController::class, 'admin'])->name('admin');
+    Route::post('/admin/reportes/{id}/resolver', [\App\Http\Controllers\ReporteController::class, 'resolver'])->name('reportes.resolver');
+    Route::post('/admin/reportes/{id}/descartar', [\App\Http\Controllers\ReporteController::class, 'descartar'])->name('reportes.descartar');
+});
 
 // Ventas y aportaciones económicas
 Route::resource('ventas', \App\Http\Controllers\VentaController::class);
