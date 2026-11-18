@@ -222,3 +222,11 @@ Las capturas muestran la interfaz de la aplicación con datos ficticios.
 ### Detalle y comprobante de una aportación
 
 ![Detalle de una aportación](public/img/capturas-actuales/detalle-aportacion.png)
+
+#### Diego [Tus Apellidos] – Gestión y Administración de Reportes de Publicaciones
+
+En este módulo me encargué de desarrollar el flujo completo para reportar publicaciones y administrar dichos reportes dentro de la plataforma. Implementé el modelo, el controlador, la migración y las rutas necesarias para que cualquier usuario pueda levantar un reporte sobre una publicación específica seleccionando un motivo y detallando la incidencia, almacenando la información en la base de datos junto con el registro del usuario y la publicación asociada.
+
+También trabajé en el panel de administración para integrar la vista de seguimiento y moderación de reportes. En esta interfaz programé el listado dinámico de todas las incidencias registradas, añadiendo controles para actualizar en tiempo real el estado de cada reporte (`Pendiente`, `En revisión` o `Resuelto`) y la opción de eliminar registros con confirmación previa y notificaciones visuales de éxito.
+
+Por último, configuré las validaciones del formulario y el manejo de errores en las vistas para asegurar que no se envíen reportes incompletos o inválidos, además de contemplar avisos informativos cuando aún no existen reportes registrados y mantener la compatibilidad visual con la plantilla general y el resumen administrativo de ventas del sistema.
