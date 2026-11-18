@@ -1,112 +1,146 @@
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SegundaOportunidAPP
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web desarrollada con **Laravel** y **PostgreSQL** para la compra, venta e intercambio de artículos de segunda mano, incluyendo gestión de publicaciones, transacciones, mensajería interna y reportes.
 
-## About Laravel
+- **Institución:** Universidad Politécnica de Pachuca
+- **Programa Educativo:** Tecnologías de la Información e Innovación Digital
+- **Asignatura:** Aplicaciones Web (Septiembre–Diciembre 2026)
+- **Docente:** Maestra Yeniza Sarahi Montoya Martínez
+- **Repositorio:** `https://github.com/anhilvigueras-debug/SegundaOportunidAPP`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-=======
-# SegundaOportunidAPP · Laravel
-
-Proyecto académico de publicaciones, ventas y aportaciones. Las ventas se registran manualmente y se calcula la comisión; las aportaciones guardan su comprobante en la base de datos para revisión. **No hay pasarela de pagos, cobro real ni verificación automática**. La aplicación incluye inicio de sesión para usuarios, pero el módulo de transacciones todavía necesita controles de autorización. Utiliza solo datos de prueba y no lo despliegues con comprobantes reales.
-
-## Requisitos
-
-PHP 8.3 o superior con las extensiones `pdo_pgsql` y `pgsql`, Composer y PostgreSQL. Bootstrap se carga desde CDN.
-
-## Instalación desde cero (PowerShell)
-
-1. Crear una base de datos vacía en PostgreSQL, por ejemplo `segunda_oportunidad`, usando pgAdmin o `createdb`.
-2. En la carpeta del proyecto:
-
-```powershell
-composer install
-Copy-Item .env.example .env
->>>>>>> bef5656943fd3c12a54aed6dbb0598a3aa448368
-```
-
-3. Editar `.env`: completar `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME` y `DB_PASSWORD` con los datos locales. No compartir ni subir `.env`.
-4. Ejecutar:
-
-```powershell
-php artisan key:generate
-php artisan migrate --seed
-php artisan serve
-```
-
-Abrir la dirección que muestre Artisan. Para comenzar de nuevo con datos de ejemplo, usar `php artisan migrate:fresh --seed`. **Este último comando elimina todas las tablas y sus datos**; úsalo únicamente en una base de pruebas.
-
-## Flujo de ejemplo
-
-Crear una publicación de tipo venta con precio mayor que cero, abrir Ventas y registrar el comprador. El importe se toma del precio de la publicación y se guarda junto con la comisión y el saldo del vendedor. Una publicación admite una sola venta; para conservar la integridad, no puede borrarse mientras exista el registro de venta.
-
-Desde Aportar se registran nombre, correo, monto, referencia única y comprobante PDF/JPG/PNG (máximo 2 MB). El archivo se guarda en la base como texto codificado y puede descargarse. Registrar un comprobante no demuestra que la operación se haya realizado. Se pueden consultar, editar y eliminar los registros.
-
-`COMISION_PUNTOS_BASE=500` en `.env` representa un **5% de ejemplo**, no una tarifa aprobada: 100 puntos base equivalen a 1%. El equipo puede cambiar el valor de 0 a 10000 antes de registrar nuevas ventas. Cada venta conserva la tasa vigente en el momento de su registro; editar el comprador no altera sus importes. La comisión se redondea al centavo más cercano.
-
-Las pruebas usan SQLite en memoria para no tocar la base PostgreSQL configurada: `php artisan test`. Debe probarse también `migrate` y `migrate:fresh --seed` en una base PostgreSQL independiente.
-
-<<<<<<< HEAD
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
+---
 
 ## Integrantes del equipo
 
-- Anhil
-- Luis
-- Angel Daniel
-- Marco
-- Zayra
-- Diego
+- **Anhil Vigueras Mendoza**
+- **Zayra Olvera Hernández**
+- **Luis Uriel Azpeitia Escamilla**
+- **Ángel Daniel Martínez Rendón**
+- **Marco Antonio Zarco Espinoza**
+- **Diego Pérez Cervantes**
 
-## Capturas del módulo de publicaciones
+---
 
-### Catálogo
+## Estructura de directorios del proyecto
 
-![Vista del catálogo](public/img/index.png)
+Arquitectura **MVC** de Laravel organizada por módulos:
 
-### Crear publicación
+```text
+SegundaOportunidAPP/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/          # Lógica de controladores RESTful (ReporteController, etc.)
+│   ├── Models/                   # Modelos Eloquent con $fillable y relaciones (User, Publicacion, Transaccion, Conversacion, Mensaje, Reporte)
+│   └── Providers/                # Proveedores de servicios de la aplicación
+├── bootstrap/                    # Arranque y caché del framework
+├── config/                       # Configuración de base de datos (pgsql), sesiones y app
+├── database/
+│   ├── factories/                # Fábricas de datos de prueba
+│   ├── migrations/               # Esquema relacional en PostgreSQL (users, publicacions, transacciones, conversaciones, mensajes, reportes)
+│   └── seeders/                  # Poblado inicial de datos (DatabaseSeeder)
+├── docs/                         # Documentación técnica complementaria
+├── public/                       # Punto de entrada (index.php) y recursos públicos compilados
+├── resources/
+│   ├── css/                      # Hojas de estilo fuente
+│   ├── js/                       # Scripts frontend
+│   └── views/                    # Plantillas Blade organizadas por módulo con layout compartido
+│       ├── layouts/              # Plantilla base (@extends / @section)
+│       ├── publicacions/         # Vistas CRUD de publicaciones
+│       ├── transacciones/        # Vistas CRUD de transacciones
+│       ├── conversaciones/       # Vistas de mensajería y chat
+│       └── reportes/             # Vistas CRUD de reportes
+├── routes/
+│   └── web.php                   # Definición de rutas RESTful (Route::resource)
+├── .env.example                  # Plantilla de variables de entorno sin credenciales reales
+├── composer.json                 # Dependencias de PHP / Laravel
+└── package.json                  # Dependencias frontend (Vite / Tailwind)
+```
 
-![Formulario de creación](public/img/create.png)
+---
 
-### Detalle de publicación
+## Requisitos previos
 
-![Detalle de publicación](public/img/show.png)
+Para ejecutar este proyecto en un entorno local es necesario contar con:
 
-### Editar publicación
+- **PHP >= 8.2** (con las extensiones `pdo_pgsql` y `pgsql` habilitadas en `php.ini`).
+- **Composer** (gestor de dependencias de PHP).
+- **PostgreSQL >= 14** en ejecución.
+- **Node.js y NPM** (para compilar los estilos y recursos con Vite).
 
-![Formulario de edición](public/img/edit.png)
->>>>>>> bef5656943fd3c12a54aed6dbb0598a3aa448368
+---
+
+## Instalación y ejecución desde cero
+
+Sigue estos pasos después de clonar el repositorio:
+
+### 1. Clonar el proyecto e ingresar a la carpeta
+
+```bash
+git clone https://github.com/anhilvigueras-debug/SegundaOportunidAPP.git
+```
+
+### 2. Instalar dependencias de backend y frontend
+
+```bash
+composer install
+npm install
+npm run build
+```
+
+### 3. Configurar el archivo de entorno (`.env`)
+
+Crea tu archivo `.env` a partir de la plantilla `.env.example` y genera la clave de aplicación de Laravel:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Configurar la conexión a PostgreSQL
+
+Crea una base de datos vacía en PostgreSQL llamada `segunda_oportunidad` y edita las siguientes variables dentro de tu archivo `.env`:
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=segunda_oportunidad
+DB_USERNAME=postgres
+DB_PASSWORD=tu_contraseña_local
+```
+
+### 5. Ejecutar migraciones y seeders
+
+Construye toda la estructura de tablas relacionales y carga los datos iniciales desde cero:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 6. Levantar el servidor local
+
+```bash
+php artisan serve
+```
+
+Accede desde tu navegador a: **`http://127.0.0.1:8000`**
+
+---
+
+## Módulos CRUD y Arquitectura del Sistema
+
+El sistema implementa rutas RESTful (`Route::resource`), plantillas **Blade** con layout compartido y persistencia relacional en **PostgreSQL**:
+
+1. **Publicaciones (`publicacions`):** Creación, listado con filtros/búsqueda, edición con precarga de datos y eliminación controlada de artículos.
+2. **Transacciones (`transacciones`):** Registro y seguimiento completo de operaciones entre compradores y vendedores.
+3. **Mensajería (`conversaciones` y `mensajes`):** Hilos de comunicación directa asociados a publicaciones y usuarios.
+4. **Reportes (`reportes`):** Gestión completa (CRUD) de reportes sobre publicaciones con estados y trazabilidad.
+5. **Usuarios (`users`):** Registro, autenticación y administración de perfiles de usuario.
+
+### Aportaciones individuales por integrante
+
+#### Anhil Vigueras Mendoza — Catálogo, Búsqueda, Detalle y Estado de Publicaciones
+
+En este módulo me encargué de crear las vistas y funciones para consultar y gestionar las publicaciones dentro de la plataforma. Programé el catálogo público para que mostrara únicamente los artículos disponibles, añadiendo un buscador por palabras clave (sin importar mayúsculas o minúsculas) y un filtro para separar entre ventas y donaciones, manteniendo siempre visibles las opciones que el usuario seleccionó.
+
+También trabajé en la vista de detalle de cada artículo para que, al entrar a una publicación, cualquier persona interesada pueda ver toda su información junto con el nombre, ciudad y teléfono del dueño para ponerse de acuerdo en la entrega. Por último, integré dentro del perfil del usuario el historial completo de sus publicaciones y añadí el botón para marcar un artículo como finalizado; al usarlo, el sistema verifica que sea el dueño real, pide confirmación y oculta automáticamente la publicación del catálogo público sin borrar su registro de la base de datos.
