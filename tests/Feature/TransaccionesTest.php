@@ -78,4 +78,35 @@ class TransaccionesTest extends TestCase
         $this->get(route('publicaciones.show',$p))->assertOk();
         $this->get(route('publicaciones.edit',$p))->assertOk();
     }
+
+    public function test_las_vistas_de_transacciones_cargan_estilos_y_acciones(): void
+    {
+        $publicacion = $this->publicacion();
+        $venta = Venta::create([
+            'publicacion_id' => $publicacion->id,
+            'comprador' => 'Marco',
+            'monto' => '100.10',
+            'comision_puntos_base' => 500,
+            'comision' => '5.01',
+            'monto_vendedor' => '95.09',
+        ]);
+        $aportacion = Aportacion::create([
+            'nombre' => 'Marco',
+            'correo' => 'marco@example.test',
+            'monto' => '25.50',
+            'referencia' => 'REF-DISENO',
+            'comprobante_nombre' => 'comprobante.pdf',
+            'comprobante_tipo' => 'application/pdf',
+            'comprobante_contenido' => base64_encode('Comprobante de prueba'),
+        ]);
+        $rutas = [
+            route('ventas.index'), route('ventas.create'), route('ventas.show', $venta), route('ventas.edit', $venta),
+            route('aportaciones.index'), route('aportaciones.create'), route('aportaciones.show', $aportacion), route('aportaciones.edit', $aportacion),
+        ];
+        foreach ($rutas as $ruta) {
+            $this->get($ruta)->assertOk()->assertSee('css/transacciones.css')->assertSee('js/transacciones.js');
+        }
+        $this->get(route('ventas.show', $venta))->assertSee('data-confirmar=')->assertSee('100.10');
+        $this->get(route('aportaciones.show', $aportacion))->assertSee('data-confirmar=')->assertSee('REF-DISENO');
+    }
 }

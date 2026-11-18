@@ -116,9 +116,7 @@
             @endif
         </div>
         @yield('contenido')
-        <div class="container">
-            @yield('content')
-        </div>
+        @yield('content')
     </main>
 
     <footer class="text-white py-4 mt-auto shadow-sm" style="background-color: var(--color-menu);">
