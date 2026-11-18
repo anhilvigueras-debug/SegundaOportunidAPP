@@ -71,16 +71,44 @@ Por último, participé en la integración de los cambios recientes de `main` co
 
 ### Catálogo
 
-![Vista del catálogo](public/img/index.png)
+![Vista del catálogo](public/img/capturas-actuales/catalogo.png)
 
 ### Crear publicación
 
-![Formulario de creación](public/img/create.png)
+![Formulario de creación](public/img/capturas-actuales/crear-publicacion.png)
 
 ### Detalle de publicación
 
-![Detalle de publicación](public/img/show.png)
+![Detalle de publicación](public/img/capturas-actuales/detalle-publicacion.png)
 
 ### Editar publicación
 
-![Formulario de edición](public/img/edit.png)
+![Formulario de edición](public/img/capturas-actuales/editar-publicacion.png)
+
+## Capturas del módulo de ventas y aportaciones
+
+Las capturas muestran la interfaz de la aplicación con datos ficticios.
+
+### Listado de ventas
+
+![Listado de ventas](public/img/capturas-actuales/ventas.png)
+
+### Registrar una venta
+
+![Formulario para registrar una venta](public/img/capturas-actuales/registrar-venta.png)
+
+### Detalle de una venta y su comisión
+
+![Detalle de venta y comisión](public/img/capturas-actuales/detalle-venta.png)
+
+### Listado de aportaciones
+
+![Listado de aportaciones](public/img/capturas-actuales/aportaciones.png)
+
+### Registrar una aportación
+
+![Formulario para registrar una aportación](public/img/capturas-actuales/registrar-aportacion.png)
+
+### Detalle y comprobante de una aportación
+
+![Detalle de una aportación](public/img/capturas-actuales/detalle-aportacion.png)
